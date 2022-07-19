@@ -5,41 +5,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Cell, Section, TableView } from 'react-native-tableview-simple';
 import React, { useState, useRef, useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import * as SQLite from 'expo-sqlite';
 
+// Import screens
 import HomeScreen from './screens/HomeScreen';
+import AddItemScreen from './screens/AddItemScreen';
+import SearchScreen from './screens/AddItemScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
-
-function SearchScreen({navigation}) {
-  return (
-    <SafeAreaView styles={styles.container}>
-      <Text> Search screen </Text>
-      <ScrollView>
-        <TableView>
-          <Section header='' hideSeparator={true} sectionTintColor={'#ccc'}>
-            <Text> Fabric one </Text>
-            <Text> Fabric two </Text>
-          </Section>
-        </TableView>
-      </ScrollView>
-    </SafeAreaView>
-  )
-}
-
-function AddItemScreen({navigation}) {
-  return (
-    <SafeAreaView styles={styles.container}>
-      <View>
-        <TextInput
-          placeholder="Enter fabric name"
-        />
-      </View>
-    </SafeAreaView>
-  )
-}
 
 function BottomTabs() {
   return (

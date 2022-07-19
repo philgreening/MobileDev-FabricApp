@@ -7,15 +7,16 @@ import React, { useState, useRef, useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as SQLite from 'expo-sqlite';
 
+const db = SQLite.openDatabase('fabricDB.db')
 
-const db = SQLite.openDatabase(
-    {
-      name: 'fabricDB',
-      location: 'default',
-    },
-    () => { },
-    error => { console.log(error) }
-);
+//https://openbase.com/js/react-native-sqlite-2/documentation
+db.transaction((txn) => {
+  txn.executeSql('DROP TABLE IF EXISTS fabrics', [])
+  txn.executeSql(
+    'CREATE TABLE IF NOT EXISTS fabrics(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(30))',
+    []
+  )
+})
 
 export default function HomeScreen({navigation}) {
   React.useLayoutEffect(() => {
@@ -32,46 +33,27 @@ export default function HomeScreen({navigation}) {
  const [name, setName] = useState('');
 
  useEffect(() => {
-   createTable();
-   setData();
-   getData();
+   addFabric();
+   getFabric();
  }, []);
 
- const createTable = () => {
-   db.transaction((tx)=> {
-     tx.executeSql(
-       "CREATE TABLE IF NOT EXISTS "
-       + "Fabrics "
-       + "(Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);",
-       []
-     )
-   })
- };
+const addFabric = () => {
+  db.transaction((txn) => {
+    txn.executeSql('INSERT INTO fabrics (name) VALUES (?)', ['fab1'])
+    txn.executeSql('INSERT INTO fabrics (name) VALUES (?)', ['fab2'])
+  })
+};
 
- const setData = async () => {
-   await db.transaction(async (tx) => {
-     await tx.executeSql(
-       "INSERT INTO Fabrics (Name) VALUES ('New fabric')"
-       ,  console.log("Set Data Called")
-     )
-   })
- };
-
- const getData = () => {
-   try {
-     db.transaction((tx) => {
-       tx.executeSql(
-         "SELECT * FROM Fabrics",
-         [],
-         (_, { rows: {_array } }) => setName(_array),
-         () => console.log("called")
-      )
-     });
-   } catch (error) {
-     console.log(error);
-   }
- };
-
+const getFabric = () => {
+  db.transaction((txn) => {
+    txn.executeSql('SELECT * FROM `fabrics`', [], (tx, res) => {
+      for (let i = 0; i < res.rows.length; ++i) {
+        setName(res.rows.item(0).name)
+        console.log('Fabric: ', res.rows.item(i))
+      }
+    })
+  })
+};
   return (
     <SafeAreaView styles={styles.container}>
       <ScrollView>
