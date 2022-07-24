@@ -9,16 +9,20 @@ import * as SQLite from 'expo-sqlite';
 
 const db = SQLite.openDatabase('fabricDB.db')
 
+
+// let data = [];
+
+
 //https://openbase.com/js/react-native-sqlite-2/documentation
 db.transaction((txn) => {
-  txn.executeSql('DROP TABLE IF EXISTS fabrics', [])
+  //txn.executeSql('DROP TABLE IF EXISTS fabrics', [])
   txn.executeSql(
     'CREATE TABLE IF NOT EXISTS fabrics(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(30))',
     []
   )
 })
 
-export default function HomeScreen({navigation}) {
+export default function HomeScreen({navigation, route}) {
   React.useLayoutEffect(() => {
    navigation.setOptions({
      headerRight: () => (
@@ -30,37 +34,55 @@ export default function HomeScreen({navigation}) {
    });
  });
 
- const [name, setName] = useState('');
+
+ // const [name, setName] = useState([]);
+ const [nameArray, setNameArray] = useState([]);
+
+ // const [id, setId] = useState([]);
+ // const [forceUpdate, forceUpdateId] = useForceUpdate();
+
 
  useEffect(() => {
-   addFabric();
-   getFabric();
- }, []);
+   // addFabric();
+   getFabric()
+ }, [route]);
 
-const addFabric = () => {
-  db.transaction((txn) => {
-    txn.executeSql('INSERT INTO fabrics (name) VALUES (?)', ['fab1'])
-    txn.executeSql('INSERT INTO fabrics (name) VALUES (?)', ['fab2'])
-  })
-};
+// const addFabric = (item) => {
+//   db.transaction((txn) => {
+//     txn.executeSql('INSERT INTO fabrics (name) VALUES (?)', [item])
+//     txn.executeSql('INSERT INTO fabrics (name) VALUES (?)', ['fab2'])
+//   })
+// };
+  // const data = getFabric()
+  // console.log(data);
+  // setNameArray(data);
+let fabData = [];
 
 const getFabric = () => {
   db.transaction((txn) => {
     txn.executeSql('SELECT * FROM `fabrics`', [], (tx, res) => {
       for (let i = 0; i < res.rows.length; ++i) {
-        setName(res.rows.item(0).name)
-        console.log('Fabric: ', res.rows.item(i))
+        fabData.push(res.rows.item(i));
+
+        // setNameArray([...nameArray, fabData])
+        // setName(Prevname => [...Prevname, res.rows.item(i)])
+         // setName([...name, data])
+        // array([...array, res.rows.item(i)])
+        // console.log('Fabric: ', res.rows.item(i))
       }
+      // setName(data);
+      setNameArray(fabData);
     })
   })
 };
+console.log(nameArray);
   return (
     <SafeAreaView styles={styles.container}>
       <ScrollView>
         <TableView>
           <Section header='' hideSeparator={true} sectionTintColor={'#ccc'}>
             <Text> Fabric one </Text>
-            <Text> {name} </Text>
+            {nameArray.map(i => <Text key={i.id}> {i.name} </Text>)}
           </Section>
         </TableView>
       </ScrollView>

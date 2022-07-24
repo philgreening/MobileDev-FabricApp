@@ -24,6 +24,7 @@ function BottomTabs() {
 }
 
 export default function App() {
+
   return (
     <NavigationContainer style={styles.container}>
       <Stack.Navigator>
