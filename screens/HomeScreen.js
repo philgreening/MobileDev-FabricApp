@@ -1,13 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Button, TextInput } from 'react-native';
+import { StyleSheet,
+         Text,
+         View,
+         SafeAreaView,
+         ScrollView,
+         Button,
+         TextInput,
+         TouchableOpacity
+        } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Cell, Section, TableView } from 'react-native-tableview-simple';
 import React, { useState, useRef, useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import * as SQLite from 'expo-sqlite';
-
-const db = SQLite.openDatabase('fabricDB.db')
+// import * as SQLite from 'expo-sqlite';
+//
+// const db = SQLite.openDatabase('fabricDB.db')
 
 
 // let data = [];
@@ -82,7 +90,12 @@ console.log(nameArray);
         <TableView>
           <Section header='' hideSeparator={true} sectionTintColor={'#ccc'}>
             <Text> Fabric one </Text>
-            {nameArray.map(i => <Text key={i.id}> {i.name} </Text>)}
+              {nameArray.map(i =>
+                <TouchableOpacity key={i.id}
+                onPress={() => navigation.navigate('Details', {i})}>
+                <Text> {i.name} </Text>
+                </TouchableOpacity>
+              )}
           </Section>
         </TableView>
       </ScrollView>

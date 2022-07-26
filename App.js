@@ -9,7 +9,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // Import screens
 import HomeScreen from './screens/HomeScreen';
 import AddItemScreen from './screens/AddItemScreen';
-import SearchScreen from './screens/AddItemScreen';
+import SearchScreen from './screens/SearchScreen';
+import DetailsScreen from './screens/DetailsScreen';
+
+import * as SQLite from 'expo-sqlite';
+
+const db = SQLite.openDatabase('fabricDB.db')
+global.db = db
+
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,6 +42,7 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="Add fabric" component={AddItemScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
