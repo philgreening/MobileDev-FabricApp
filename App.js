@@ -12,6 +12,8 @@ import AddItemScreen from './screens/AddItemScreen';
 import SearchScreen from './screens/SearchScreen';
 import DetailsScreen from './screens/DetailsScreen';
 import EditScreen from './screens/EditScreen';
+import CameraScreen from './screens/CameraScreen';
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -38,6 +40,7 @@ export default function App() {
         <Stack.Screen name="Add fabric" component={AddItemScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
         <Stack.Screen name="Edit fabric" component={EditScreen} />
+        <Stack.Screen name="Camera" component={CameraScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

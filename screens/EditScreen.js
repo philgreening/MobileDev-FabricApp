@@ -45,7 +45,9 @@ const deleteAlert = () =>
       { text: "OK",
         onPress: () => {deleteFabric(fabArray.id),
                         navigation.navigate('Home', { name: fabArray.name} ) }
-    }]
+    }
+  ],
+  { cancelable: false }
   );
 
   // Deletes item from database

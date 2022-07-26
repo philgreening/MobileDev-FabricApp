@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, Button, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Cell, Section, TableView } from 'react-native-tableview-simple';
 import React, { useState, useRef, useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Camera } from 'expo-camera'
+
 
 import * as SQLite from 'expo-sqlite';
 
@@ -13,6 +15,7 @@ import HomeScreen from './HomeScreen';
 
 
 const db = SQLite.openDatabase('fabricDB.db')
+
 
 
 export default function AddItemScreen({navigation}) {
@@ -25,18 +28,6 @@ export default function AddItemScreen({navigation}) {
 
   };
 
-  //
-  // const getFabric = () => {
-  //   db.transaction((txn) => {
-  //     txn.executeSql('SELECT * FROM `fabrics`', [], (tx, res) => {
-  //       for (let i = 0; i < res.rows.length; ++i) {
-  //         console.log('Fabric: ', res.rows.item(i))
-  //       }
-  //     })
-  //   })
-  // };
-
-
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -47,6 +38,29 @@ export default function AddItemScreen({navigation}) {
 
         />
         <Text> {fabName} </Text>
+
+        <TouchableOpacity
+          style={{
+            width: 130,
+            borderRadius: 4,
+            backgroundColor: '#14274e',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: 40
+          }}
+          onPress={()=>{navigation.navigate('Camera')}}
+        >
+          <Text
+            style={{
+              color: '#fff',
+              fontWeight: 'bold',
+              textAlign: 'center'
+            }}
+          >
+            Take picture
+          </Text>
+        </TouchableOpacity>
       </View>
       <Button
         title='Add Fabric'
