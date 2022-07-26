@@ -11,13 +11,7 @@ import HomeScreen from './screens/HomeScreen';
 import AddItemScreen from './screens/AddItemScreen';
 import SearchScreen from './screens/SearchScreen';
 import DetailsScreen from './screens/DetailsScreen';
-
-import * as SQLite from 'expo-sqlite';
-
-const db = SQLite.openDatabase('fabricDB.db')
-global.db = db
-
-
+import EditScreen from './screens/EditScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -43,6 +37,7 @@ export default function App() {
         />
         <Stack.Screen name="Add fabric" component={AddItemScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Edit fabric" component={EditScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

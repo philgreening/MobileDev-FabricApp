@@ -13,9 +13,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Cell, Section, TableView } from 'react-native-tableview-simple';
 import React, { useState, useRef, useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import * as SQLite from 'expo-sqlite';
-//
-// const db = SQLite.openDatabase('fabricDB.db')
+import * as SQLite from 'expo-sqlite';
+
+const db = SQLite.openDatabase('fabricDB.db')
 
 
 // let data = [];
@@ -92,7 +92,7 @@ console.log(nameArray);
             <Text> Fabric one </Text>
               {nameArray.map(i =>
                 <TouchableOpacity key={i.id}
-                onPress={() => navigation.navigate('Details', {i})}>
+                onPress={() => navigation.navigate('Details', { data: i })}>
                 <Text> {i.name} </Text>
                 </TouchableOpacity>
               )}

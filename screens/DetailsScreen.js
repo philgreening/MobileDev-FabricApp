@@ -7,49 +7,25 @@ import { Cell, Section, TableView } from 'react-native-tableview-simple';
 import React, { useState, useRef, useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-// import * as SQLite from 'expo-sqlite';
-//
-// const db = SQLite.openDatabase('fabricDB.db')
+import * as SQLite from 'expo-sqlite';
+
+const db = SQLite.openDatabase('fabricDB.db')
 
 export default function DetailsScreen({navigation, route}) {
 
-  const fabArray = route.params.i;
+  const fabArray = route.params.data;
+  console.log(fabArray);
 
     React.useLayoutEffect(() => {
      navigation.setOptions({
        headerRight: () => (
          <Button
-         title="Delete fabric"
-         onPress={() => deleteAlert()}
+         title="Edit fabric"
+         onPress={() => navigation.navigate('Edit fabric', { data: fabArray} ) }
          />
        ),
      });
    });
-
- // ALert to confirm delete
-const deleteAlert = () =>
-  Alert.alert(
-    "Delete Fabric",
-    `Do you wish to remove ${fabArray.name} ?`,
-    [
-      {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel"
-      },
-      { text: "OK",
-        onPress: () => {deleteFabric(fabArray.id),
-                        navigation.navigate('Home', { name: fabArray.name} ) }
-    }]
-  );
-
-  // Deletes item from database
-   const deleteFabric = (item) => {
-     db.transaction((txn) => {
-       txn.executeSql(`DELETE FROM fabrics WHERE id = ?`, [item])
-     })
-
-   };
 
   return (
     <SafeAreaView styles={styles.container}>

@@ -6,15 +6,14 @@ import { Cell, Section, TableView } from 'react-native-tableview-simple';
 import React, { useState, useRef, useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-// import * as SQLite from 'expo-sqlite';
+import * as SQLite from 'expo-sqlite';
 
 import HomeScreen from './HomeScreen';
 // import * as FB from '../modules/getData';
 
 
-// const db = SQLite.openDatabase('fabricDB.db')
+const db = SQLite.openDatabase('fabricDB.db')
 
-// const gtf = Home.getFabric();
 
 export default function AddItemScreen({navigation}) {
   const [fabName, setFabName] = useState('');
