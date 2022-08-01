@@ -21,7 +21,8 @@ export const getFabric = () => {
       }
       // setName(data);
       // setNameArray(fabData);
-      return fabData;
     })
+    console.log(fabData);
+    return fabData;
   })
 };
