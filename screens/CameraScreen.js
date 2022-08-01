@@ -28,7 +28,7 @@ export default function CameraScreen({ navigation }) {
   const [preview, setPreview] = useState(false);
   const [photo, setPhoto] = useState(null);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
-  const [savedPhoto, setSavedPhoto] = useState(null);
+  const [savedPhoto, setSavedPhoto] = useState({});
 
   let camera = useRef(null);
 
@@ -41,8 +41,8 @@ export default function CameraScreen({ navigation }) {
       setHasMediaPermission(mediaLibraryPermission.status === "granted")
     })();
   }, []);
-  console.log('media permisssion? '+ hasMediaPermission);
-  console.log('camera permisssion? '+ hasPermission);
+  // console.log('media permisssion? '+ hasMediaPermission);
+  // console.log('camera permisssion? '+ hasPermission);
 
   const denyAlert = (msg) => {
 
@@ -80,7 +80,7 @@ export default function CameraScreen({ navigation }) {
       const photoData = await camera.current.takePictureAsync();
       setPreview(true);
       setPhoto(photoData);
-      console.log(setPhoto);
+    //  console.log(setPhoto);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -93,8 +93,11 @@ export default function CameraScreen({ navigation }) {
 
   const savePhoto = async() => {
       const asset = await MediaLibrary.createAssetAsync(photo.uri);
-      setSavedPhoto(asset);
-      console.log('savePhoto called');
+//      console.log('saved: ', asset );
+      navigation.navigate({
+        name: "Add fabric",
+        params: { photoUri: asset.uri }
+      });
   };
 
   const CameraPreview = ({ photo }: any) => {
@@ -137,7 +140,7 @@ export default function CameraScreen({ navigation }) {
             </Text>
           </TouchableOpacity>
             {hasMediaPermission ?
-              <TouchableOpacity style={styles.saveButton} onPress={() => { savePhoto(), navigation.navigate("Add fabric", { photoUri: savedPhoto}); }}>
+              <TouchableOpacity style={styles.saveButton} onPress={() => savePhoto()}>
               <Text
                 style={styles.saveButtonText}
               >

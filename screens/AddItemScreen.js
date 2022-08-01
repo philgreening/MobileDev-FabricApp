@@ -26,10 +26,15 @@ const db = SQLite.openDatabase("fabricDB.db");
 
 export default function AddItemScreen({ navigation, route }) {
   const [fabName, setFabName] = useState("");
+  const [imageUri, setImageUri] = useState("");
 
   useEffect(() => {
-      console.log(route);
-  }, [route]);
+      if (route.params?.photoUri) {
+        console.log('succes: ', route);
+        setImageUri(route.params.photoUri);
+        console.log('imageUri: ', imageUri);
+      }
+  }, [route.params?.photoUri]);
 
   const addFabric = (item) => {
     db.transaction((txn) => {
