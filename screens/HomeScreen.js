@@ -8,6 +8,7 @@ import {
   Button,
   TextInput,
   TouchableOpacity,
+  Image
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -24,9 +25,9 @@ const db = SQLite.openDatabase("fabricDB.db");
 
 //https://openbase.com/js/react-native-sqlite-2/documentation
 db.transaction((txn) => {
-  //txn.executeSql('DROP TABLE IF EXISTS fabrics', [])
+  txn.executeSql('DROP TABLE IF EXISTS fabrics', [])
   txn.executeSql(
-    "CREATE TABLE IF NOT EXISTS fabrics(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(30))",
+    "CREATE TABLE IF NOT EXISTS fabrics(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(30) NOT NULL, image_uri TEXT)",
     []
   );
 });
@@ -95,6 +96,10 @@ export default function HomeScreen({ navigation, route }) {
                 key={i.id}
                 onPress={() => navigation.navigate("Details", { data: i })}
               >
+              <Image
+                style={styles.imageThumb}
+                source={{uri: i.image_uri}}
+              />
                 <Text> {i.name} </Text>
               </TouchableOpacity>
             ))}
@@ -112,4 +117,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  imageThumb: {
+    width: 50,
+    height: 50
+  }
 });

@@ -9,6 +9,7 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  Image
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -26,32 +27,45 @@ const db = SQLite.openDatabase("fabricDB.db");
 
 export default function AddItemScreen({ navigation, route }) {
   const [fabName, setFabName] = useState("");
-  const [imageUri, setImageUri] = useState("");
+  const [fabricObj, setFabricObj] = useState({
+    name: '',
+    imageUri: 'null',
+  });
+  const [imageUri, setImageUri] = useState("null");
+  console.log(fabricObj);
 
   useEffect(() => {
       if (route.params?.photoUri) {
         console.log('succes: ', route);
-        setImageUri(route.params.photoUri);
-        console.log('imageUri: ', imageUri);
+        setFabricObj({ imageUri: route.params.photoUri });
       }
   }, [route.params?.photoUri]);
+  console.log('imageUri: ', fabricObj.imageUri);
+
 
   const addFabric = (item) => {
     db.transaction((txn) => {
-      txn.executeSql("INSERT INTO fabrics (name) VALUES (?)", [item]);
+      txn.executeSql("INSERT INTO fabrics (name, image_uri) VALUES (?,?)", [item.name, item.imageUri]);
     });
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View>
+        <Image
+          style={styles.imageThumb}
+          source={{
+            uri: fabricObj.imageUri
+          }}
+        />
+
         <TextInput
           style={styles.inputBar}
           placeholder="Enter fabric name"
-          onChangeText={setFabName}
-          value={fabName}
+          onChangeText={(value)=> setFabricObj({...fabricObj, name: value})}
+          value={fabricObj.name}
         />
-        <Text> {fabName} </Text>
+        <Text> {fabricObj.name} </Text>
 
         <TouchableOpacity
           style={{
@@ -81,7 +95,7 @@ export default function AddItemScreen({ navigation, route }) {
       <Button
         title="Add Fabric"
         onPress={() => {
-          addFabric(fabName), navigation.navigate("Home", { name: fabName });
+          addFabric(fabricObj), navigation.navigate("Home", { name: fabricObj.name });
         }}
       />
     </SafeAreaView>
@@ -102,4 +116,9 @@ const styles = StyleSheet.create({
     margin: "5%",
     padding: "3%",
   },
+  imageThumb: {
+    width: '40%',
+    height: '40%',
+    borderRadius: 10
+  }
 });

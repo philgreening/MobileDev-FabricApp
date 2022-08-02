@@ -4,168 +4,148 @@ import {
   Text,
   View,
   SafeAreaView,
-  ScrollView,
-  Button,
-  TextInput,
   TouchableOpacity,
   Alert,
   ImageBackground,
   Image,
 } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { Cell, Section, TableView } from "react-native-tableview-simple";
 import React, { useState, useRef, useEffect } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Camera } from "expo-camera";
-import * as MediaLibrary from 'expo-media-library';
+import * as MediaLibrary from "expo-media-library";
 
 export default function CameraScreen({ navigation }) {
+  // Variables to handle camera & media library permissions
   const [hasPermission, setHasPermission] = useState(null);
   const [hasMediaPermission, setHasMediaPermission] = useState(null);
+  // Variable to set front or back camera
   const [type, setType] = useState(Camera.Constants.Type.back);
-
+  // variable to set photo and photo preview image
   const [preview, setPreview] = useState(false);
   const [photo, setPhoto] = useState(null);
+  // Variable to set flash on/off
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
-  const [savedPhoto, setSavedPhoto] = useState({});
+  // variables to get previous screen
+  const routes = navigation.getState()?.routes;
+  const prevRoute = routes[routes.length - 2];
+  // console.log('routes: ', routes);
+  // console.log('prev route: ', prevRoute);
 
   let camera = useRef(null);
 
   useEffect(() => {
+    // requests camera and media library permissions
     (async () => {
       const cameraPermission = await Camera.requestCameraPermissionsAsync();
       setHasPermission(cameraPermission.status === "granted");
 
       const mediaLibraryPermission = await MediaLibrary.requestPermissionsAsync();
-      setHasMediaPermission(mediaLibraryPermission.status === "granted")
+      setHasMediaPermission(mediaLibraryPermission.status === "granted");
     })();
   }, []);
   // console.log('media permisssion? '+ hasMediaPermission);
   // console.log('camera permisssion? '+ hasPermission);
 
+  // Function to display alert if permissions denied. takes a message as input
   const denyAlert = (msg) => {
-
-  if (msg === 'cameraDeny') {
-    Alert.alert(
-      "Alert",
-      "Access denied to camera",
-      [
-        {
-          text: "OK",
-          onPress: () => navigation.navigate("Add fabric"),
-        },
-      ],
-      { cancelable: false }
-    );
-  }else if (msg === 'mediaDeny') {
-    Alert.alert(
-      "Alert",
-      "Access denied to media",
-      [
-        {
-          text: "OK",
-          onPress: () => navigation.navigate("Camera"),
-        },
-      ],
-      { cancelable: false }
-    );
-  }
-}
-
-
+    if (msg === "cameraDeny") {
+      Alert.alert(
+        "Alert",
+        "Access denied to camera",
+        [
+          {
+            text: "OK",
+            onPress: () => navigation.goBack(),
+          },
+        ],
+        { cancelable: false }
+      );
+    } else if (msg === "mediaDeny") {
+      Alert.alert(
+        "Alert",
+        "Access denied to media",
+        [
+          {
+            text: "OK",
+            onPress: () => navigation.navigate("Camera"),
+          },
+        ],
+        { cancelable: false }
+      );
+    }
+  };
+  //function to take photo and set preview image
   const takePhoto = async () => {
     try {
       if (!camera) return;
       const photoData = await camera.current.takePictureAsync();
       setPreview(true);
       setPhoto(photoData);
-    //  console.log(setPhoto);
     } catch (error) {
-      console.log("Error: ", error);
+      console.log("Error: " + error);
     }
   };
-
+  // function to clear photo variables to retake picture
   const retakePicture = () => {
     setPhoto(null);
     setPreview(false);
   };
 
-  const savePhoto = async() => {
+  // Save photo to Camera Roll
+  const savePhoto = async () => {
+    try {
       const asset = await MediaLibrary.createAssetAsync(photo.uri);
-//      console.log('saved: ', asset );
+      //sends image uri to previous page as param
       navigation.navigate({
-        name: "Add fabric",
-        params: { photoUri: asset.uri }
+        key: prevRoute.key,
+        params: { photoUri: asset.uri },
       });
+    } catch (error) {
+      console.log('Error: ' + error);
+    }
   };
 
+
+  // Camera preview component view
   const CameraPreview = ({ photo }: any) => {
-    console.log("sdsfds", photo);
+    // console.log("sdsfds", photo);
     return (
-      <View
-        style={{
-          backgroundColor: "transparent",
-          flex: 1,
-        }}
-      >
+      <View style={styles.container}>
         <ImageBackground
+          style={styles.imageBackground}
           source={{ uri: photo && photo.uri }}
-          style={{ flex: 5 }}
         />
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <TouchableOpacity
-            onPress={retakePicture}
-            style={{
-              width: 130,
-              height: 40,
-              alignItems: "center",
-              borderRadius: 4,
-            }}
-          >
-            <Text
-              style={{
-                color: "black",
-                fontSize: 20,
-              }}
-            >
-              Re-take
-            </Text>
+        <View style={styles.previewContainer}>
+          <TouchableOpacity onPress={retakePicture} style={styles.retakeButton}>
+            <Text style={styles.retakeButtonText}>Re-take</Text>
           </TouchableOpacity>
-            {hasMediaPermission ?
-              <TouchableOpacity style={styles.saveButton} onPress={() => savePhoto()}>
-              <Text
-                style={styles.saveButtonText}
-              >
-                Save photo
-              </Text>
+          {hasMediaPermission ? (
+            <TouchableOpacity
+              style={styles.saveButton}
+              onPress={() => savePhoto()}
+            >
+              <Text style={styles.saveButtonText}>Save photo</Text>
             </TouchableOpacity>
-               : <TouchableOpacity style={styles.saveButton} onPress={() => denyAlert('mediaDeny')}>
-               <Text
-                 style={styles.saveButtonText}
-               >
-                 Save photo2
-               </Text>
-             </TouchableOpacity>}
+          ) : (
+            <TouchableOpacity
+              style={styles.saveButton}
+              onPress={() => denyAlert("mediaDeny")}
+            >
+              <Text style={styles.saveButtonText}>Save photo</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );
   };
 
+  // if camera permissions are granted display camera or preview imaghe
   if (hasPermission === null) {
     return <View />;
   } else if (hasPermission === false) {
-    return <View {...denyAlert('cameraDeny')}></View>;
+    return <View {...denyAlert("cameraDeny")}></View>;
   } else {
     return (
-      <View style={[styles.container]}>
+      <SafeAreaView style={[styles.container]}>
         {preview && photo ? (
           <CameraPreview
             photo={photo}
@@ -213,17 +193,11 @@ export default function CameraScreen({ navigation }) {
                 );
               }}
             >
-              <Text
-                style={{
-                  fontSize: 20,
-                }}
-              >
-                ⚡️
-              </Text>
+              <Text style={{ fontSize: 20 }}>⚡️</Text>
             </TouchableOpacity>
           </Camera>
         )}
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -231,9 +205,18 @@ export default function CameraScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "transparent",
     // alignItems: 'center',
     // justifyContent: 'center',
+  },
+  previewContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  imageBackground: {
+    flex: 5,
   },
   camera: {
     flex: 1,
@@ -266,14 +249,24 @@ const styles = StyleSheet.create({
     height: 70,
     borderRadius: 50,
   },
-  saveButton:{
+  saveButton: {
     width: 130,
     height: 40,
     alignItems: "center",
-    borderRadius: 4
+    borderRadius: 4,
   },
-  saveButtonText:{
+  saveButtonText: {
     color: "black",
     fontSize: 20,
-  }
+  },
+  retakeButton: {
+    width: 130,
+    height: 40,
+    alignItems: "center",
+    borderRadius: 4,
+  },
+  retakeButtonText: {
+    color: "black",
+    fontSize: 20,
+  },
 });
