@@ -13,27 +13,29 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Cell, Section, TableView } from "react-native-tableview-simple";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as SQLite from "expo-sqlite";
 
-// import { getFabric } from '../modules/getData';
-
 const db = SQLite.openDatabase("fabricDB.db");
-
-// let data = [];
 
 //https://openbase.com/js/react-native-sqlite-2/documentation
 db.transaction((txn) => {
   txn.executeSql('DROP TABLE IF EXISTS fabrics', [])
   txn.executeSql(
-    "CREATE TABLE IF NOT EXISTS fabrics(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(30) NOT NULL, image_uri TEXT)",
+    "CREATE TABLE IF NOT EXISTS fabrics(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(30) NOT NULL, image_uri TEXT, colour VARCHAR(30), woven_knit BOOLEAN, type VARCHAR(30), width FLOAT, length_pur FLOAT, length_rem FLOAT, date_pur TEXT, cost FLOAT, project VARCHAR(255))",
     []
   );
 });
 
 export default function HomeScreen({ navigation, route }) {
-  React.useLayoutEffect(() => {
+
+  const [fabricData, setFabricData] = useState([]);
+
+  let dataArray = [];
+
+
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <Button
@@ -44,54 +46,32 @@ export default function HomeScreen({ navigation, route }) {
     });
   });
 
-  // const [name, setName] = useState([]);
-  const [nameArray, setNameArray] = useState([]);
-
-  // const [id, setId] = useState([]);
-  // const [forceUpdate, forceUpdateId] = useForceUpdate();
-  console.log(getFabric);
+  console.log('fabric db data: ' + getFabric);
 
   useEffect(() => {
-    // addFabric();
     getFabric();
   }, [route]);
 
-  // const addFabric = (item) => {
-  //   db.transaction((txn) => {
-  //     txn.executeSql('INSERT INTO fabrics (name) VALUES (?)', [item])
-  //     txn.executeSql('INSERT INTO fabrics (name) VALUES (?)', ['fab2'])
-  //   })
-  // };
-  // const data = getFabric()
-  // console.log(data);
-  // setNameArray(data);
-  let fabData = [];
 
   const getFabric = () => {
     db.transaction((txn) => {
       txn.executeSql("SELECT * FROM `fabrics`", [], (tx, res) => {
         for (let i = 0; i < res.rows.length; ++i) {
-          fabData.push(res.rows.item(i));
-
-          // setNameArray([...nameArray, fabData])
-          // setName(Prevname => [...Prevname, res.rows.item(i)])
-          // setName([...name, data])
-          // array([...array, res.rows.item(i)])
-          // console.log('Fabric: ', res.rows.item(i))
+          dataArray.push(res.rows.item(i));
         }
-        // setName(data);
-        setNameArray(fabData);
+        setFabricData(dataArray);
       });
     });
   };
-  console.log(nameArray);
+  console.log('data: ' + fabricData);
+
   return (
     <SafeAreaView styles={styles.container}>
       <ScrollView>
         <TableView>
           <Section header="" hideSeparator={true} sectionTintColor={"#ccc"}>
             <Text> Fabric one </Text>
-            {nameArray.map((i) => (
+            {fabricData.map((i) => (
               <TouchableOpacity
                 key={i.id}
                 onPress={() => navigation.navigate("Details", { data: i })}
