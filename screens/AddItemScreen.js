@@ -11,7 +11,7 @@ import {
   Alert,
   Image,
   Switch,
-  ListView
+  Dimensions
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -29,6 +29,11 @@ import * as SQLite from "expo-sqlite";
 import HomeScreen from "./HomeScreen";
 // import * as FB from '../modules/getData';
 
+const screen = Dimensions.get('window');
+const screenHeight = screen.height;
+const screenWidth = screen.width;
+
+
 const db = SQLite.openDatabase("fabricDB.db");
 
 export default function AddItemScreen({ navigation, route }) {
@@ -42,7 +47,7 @@ export default function AddItemScreen({ navigation, route }) {
     imageUri: "null",
     colour: "",
     wovenOrKnit: 0,
-    type: "",
+    type: "Cotton",
     fabricWidth: null,
     lengthPurchased: null,
     lengthRemaining: null,
@@ -101,6 +106,8 @@ export default function AddItemScreen({ navigation, route }) {
   return (
 
     <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.scrollContainer}>
+
       <View style={styles.imageContainer}>
         <Image
           style={styles.imageThumb}
@@ -111,7 +118,7 @@ export default function AddItemScreen({ navigation, route }) {
         <TouchableOpacity
           style={styles.takePictureButton}
           onPress={() => {
-            navigation.navigate("Camera");
+            navigation.navigate("Camera", { data: fabricObj} );
           }}
         >
           <Text style={styles.takePictureButtonText}>
@@ -120,7 +127,6 @@ export default function AddItemScreen({ navigation, route }) {
         </TouchableOpacity>
       </View>
 
-      <ScrollView style={styles.scrollContainer}>
         <View style={styles.row}>
         <Text style={styles.label}> Name:  </Text>
           <TextInput
@@ -147,6 +153,7 @@ export default function AddItemScreen({ navigation, route }) {
             style={styles.switch}
             options={switchOptions}
             initial = {0}
+            value = {0}
             onPress={value => setFabricObj({...fabricObj, wovenOrKnit: value})}
           >
           </SwitchSelector>
@@ -176,8 +183,8 @@ export default function AddItemScreen({ navigation, route }) {
           value={fabricObj.fabricWidth}
           onChange={value => setFabricObj({...fabricObj, fabricWidth: value})}
           minValue={0}
-          totalWidth={180}
-          totalHeight={40}
+          totalWidth={screenWidth/3}
+          totalHeight={screenHeight/15}
           step={0.5}
           valueType='real'
           rounded
@@ -193,8 +200,8 @@ export default function AddItemScreen({ navigation, route }) {
           value={fabricObj.lengthPurchased}
           onChange={value => setFabricObj({...fabricObj, lengthPurchased: value})}
           minValue={0}
-          totalWidth={180}
-          totalHeight={40}
+          totalWidth={screenWidth/3}
+          totalHeight={screenHeight/15}
           step={0.5}
           valueType='real'
           rounded
@@ -210,8 +217,8 @@ export default function AddItemScreen({ navigation, route }) {
           value={fabricObj.lengthRemaining}
           onChange={value => setFabricObj({...fabricObj, lengthRemaining: value})}
           minValue={0}
-          totalWidth={180}
-          totalHeight={40}
+          totalWidth={screenWidth/3}
+          totalHeight={screenHeight/15}
           step={0.5}
           valueType='real'
           rounded
@@ -222,7 +229,7 @@ export default function AddItemScreen({ navigation, route }) {
         </View>
 
         <View style={styles.row}>
-          <Text style={styles.label}>Date Purchased: {date.toDateString()}</Text>
+          <Text style={styles.label}>Date Purchased:{"\n"}{date.toDateString()}</Text>
              <Button
                 title="Show Date Picker"
                 color="green" onPress={showDatePicker} />
@@ -237,8 +244,8 @@ export default function AddItemScreen({ navigation, route }) {
           value={fabricObj.cost}
           onChange={value => setFabricObj({...fabricObj, cost: value})}
           minValue={0}
-          totalWidth={180}
-          totalHeight={40}
+          totalWidth={screenWidth/3}
+          totalHeight={screenHeight/15}
           step={0.5}
           valueType='real'
           rounded
@@ -285,10 +292,11 @@ const styles = StyleSheet.create({
     padding: '5%'
   },
   imageContainer:{
-    flex: 0.25,
+    //flex: 0.25,
+    height: screenHeight/5,
     flexDirection: 'row',
     marginBottom: '5%',
-    padding: '5%'
+  //  padding: '5%'
 
   //  flexWrap: 'wrap',
   },

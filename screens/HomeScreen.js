@@ -50,6 +50,8 @@ export default function HomeScreen({ navigation, route }) {
 
   useEffect(() => {
     getFabric();
+    console.log('len: ' + fabricData.length)
+
   }, [route]);
 
 
@@ -65,12 +67,22 @@ export default function HomeScreen({ navigation, route }) {
   };
   console.log('data: ' + fabricData);
 
+  if (fabricData.length < 1){
+    return (
+      <SafeAreaView styles={styles.container}>
+        <Text>No fabric</Text>
+        <Button
+          title="Add fabric"
+          onPress={() => navigation.navigate("Add fabric")}
+        />
+      </SafeAreaView>
+    )
+  }else {
   return (
     <SafeAreaView styles={styles.container}>
       <ScrollView>
         <TableView>
           <Section header="" hideSeparator={true} sectionTintColor={"#ccc"}>
-            <Text> Fabric one </Text>
             {fabricData.map((i) => (
               <TouchableOpacity
                 key={i.id}
@@ -88,6 +100,7 @@ export default function HomeScreen({ navigation, route }) {
       </ScrollView>
     </SafeAreaView>
   );
+}
 }
 
 const styles = StyleSheet.create({

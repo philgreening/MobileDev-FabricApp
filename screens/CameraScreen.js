@@ -13,7 +13,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 
-export default function CameraScreen({ navigation }) {
+export default function CameraScreen({ navigation, route }) {
   // Variables to handle camera & media library permissions
   const [hasPermission, setHasPermission] = useState(null);
   const [hasMediaPermission, setHasMediaPermission] = useState(null);
@@ -29,6 +29,8 @@ export default function CameraScreen({ navigation }) {
   const prevRoute = routes[routes.length - 2];
   // console.log('routes: ', routes);
   // console.log('prev route: ', prevRoute);
+  const fabricData = route.params.data;
+  console.log('fabric data from add item: ' , fabricData);
 
   let camera = useRef(null);
 
