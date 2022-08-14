@@ -44,14 +44,14 @@ export default function AddItemScreen({ navigation, route }) {
   const [fabName, setFabName] = useState("");
   const [fabricObj, setFabricObj] = useState({
     name: "",
-    imageUri: "null",
+    image_uri: "null",
     colour: "",
-    wovenOrKnit: 0,
+    woven_knit: 0,
     type: "Cotton",
-    fabricWidth: null,
-    lengthPurchased: null,
-    lengthRemaining: null,
-    datePurchased: dateString,
+    width: null,
+    length_pur: null,
+    length_rem: null,
+    date_pur: dateString,
     cost: null,
     project: "",
   });
@@ -66,25 +66,38 @@ export default function AddItemScreen({ navigation, route }) {
   useEffect(() => {
     if (route.params?.photoUri) {
       console.log("succes: ", route);
-      setFabricObj({imageUri: route.params.photoUri });
+      setFabricObj({
+        name: route.params.data.name,
+        image_uri: route.params.photoUri,
+        colour: route.params.data.colour,
+        woven_knit: route.params.data.woven_knit,
+        type: route.params.data.type,
+        width: route.params.data.width,
+        length_pur: route.params.data.length_pur,
+        length_rem: route.params.data.length_rem,
+        date_pur: route.params.data.date_pur,
+        cost: route.params.data.cost,
+        project: route.params.data.project
+//      setFabricObj({image_uri: route.params.photoUri,
+       });
     }
   }, [route.params?.photoUri]);
-  console.log("imageUri: ", fabricObj.imageUri);
+  console.log("imageUri: ", fabricObj.image_uri);
 
   const addFabric = (item) => {
     db.transaction((txn) => {
       txn.executeSql(
-        "INSERT INTO fabrics (name, image_uri, colour, woven_knit, type, width, length_pur, length_rem, date_pur, cost, project ) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO fabrics (name, image_uri, colour, woven_knit, type, width, length_pur , length_rem, date_pur, cost, project ) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
         [
           item.name,
-          item.imageUri,
+          item.image_uri,
           item.colour,
-          item.wovenOrKnit,
+          item.woven_knit,
           item.type,
-          item.fabricWidth,
-          item.lengthPurchased,
-          item.lengthRemaining,
-          item.datePurchased,
+          item.width,
+          item.length_pur,
+          item.length_rem,
+          item.date_pur,
           item.cost,
           item.project,
         ]
@@ -94,7 +107,7 @@ export default function AddItemScreen({ navigation, route }) {
 
   const onDateSelected = (event, value) => {
     setDateString(value.toJSON());
-    setFabricObj({...fabricObj, datePurchased: dateString})
+    setFabricObj({...fabricObj, date_pur: dateString})
     setDate(new Date(dateString));
     setDatePicker(false);
  };
@@ -112,7 +125,7 @@ export default function AddItemScreen({ navigation, route }) {
         <Image
           style={styles.imageThumb}
           source={{
-            uri: fabricObj.imageUri,
+            uri: fabricObj.image_uri,
           }}
         />
         <TouchableOpacity
@@ -154,7 +167,7 @@ export default function AddItemScreen({ navigation, route }) {
             options={switchOptions}
             initial = {0}
             value = {0}
-            onPress={value => setFabricObj({...fabricObj, wovenOrKnit: value})}
+            onPress={value => setFabricObj({...fabricObj, woven_knit: value})}
           >
           </SwitchSelector>
 
@@ -180,8 +193,8 @@ export default function AddItemScreen({ navigation, route }) {
         <View style={styles.row}>
           <Text style={styles.label}>Fabric Width (in m): </Text>
           <NumericInput
-          value={fabricObj.fabricWidth}
-          onChange={value => setFabricObj({...fabricObj, fabricWidth: value})}
+          value={fabricObj.width}
+          onChange={value => setFabricObj({...fabricObj, width: value})}
           minValue={0}
           totalWidth={screenWidth/3}
           totalHeight={screenHeight/15}
@@ -197,8 +210,8 @@ export default function AddItemScreen({ navigation, route }) {
         <View style={styles.row}>
           <Text style={styles.label}>Length Purchased (in m): </Text>
           <NumericInput
-          value={fabricObj.lengthPurchased}
-          onChange={value => setFabricObj({...fabricObj, lengthPurchased: value})}
+          value={fabricObj.length_pur}
+          onChange={value => setFabricObj({...fabricObj, length_pur: value})}
           minValue={0}
           totalWidth={screenWidth/3}
           totalHeight={screenHeight/15}
@@ -214,9 +227,10 @@ export default function AddItemScreen({ navigation, route }) {
         <View style={styles.row}>
           <Text style={styles.label}>Length Remaining (in m): </Text>
           <NumericInput
-          value={fabricObj.lengthRemaining}
-          onChange={value => setFabricObj({...fabricObj, lengthRemaining: value})}
+          value={fabricObj.length_rem}
+          onChange={value => setFabricObj({...fabricObj, length_rem: value})}
           minValue={0}
+          maxValue={fabricObj.length_pur}
           totalWidth={screenWidth/3}
           totalHeight={screenHeight/15}
           step={0.5}

@@ -99,7 +99,7 @@ export default function CameraScreen({ navigation, route }) {
       //sends image uri to previous page as param
       navigation.navigate({
         key: prevRoute.key,
-        params: { photoUri: asset.uri },
+        params: { photoUri: asset.uri, data: fabricData },
       });
     } catch (error) {
       console.log('Error: ' + error);

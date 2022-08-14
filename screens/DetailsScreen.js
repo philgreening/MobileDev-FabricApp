@@ -21,7 +21,7 @@ const db = SQLite.openDatabase("fabricDB.db");
 
 export default function DetailsScreen({ navigation, route }) {
   const fabArray = route.params.data;
-  console.log(fabArray);
+  console.log('details fabarray: ', fabArray);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
