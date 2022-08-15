@@ -8,7 +8,8 @@ import {
   Button,
   TextInput,
   TouchableOpacity,
-  Image
+  Image,
+  Dimensions
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -19,9 +20,13 @@ import * as SQLite from "expo-sqlite";
 
 const db = SQLite.openDatabase("fabricDB.db");
 
+const screen = Dimensions.get('window');
+const screenHeight = screen.height;
+const screenWidth = screen.width;
+
 //https://openbase.com/js/react-native-sqlite-2/documentation
 db.transaction((txn) => {
-  txn.executeSql('DROP TABLE IF EXISTS fabrics', [])
+  // txn.executeSql('DROP TABLE IF EXISTS fabrics', [])
   txn.executeSql(
     "CREATE TABLE IF NOT EXISTS fabrics(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(30) NOT NULL, image_uri TEXT, colour VARCHAR(30), woven_knit BOOLEAN, type VARCHAR(30), width FLOAT, length_pur FLOAT, length_rem FLOAT, date_pur TEXT, cost FLOAT, project VARCHAR(255))",
     []
@@ -78,13 +83,17 @@ export default function HomeScreen({ navigation, route }) {
       </SafeAreaView>
     )
   }else {
+
+
+
   return (
     <SafeAreaView styles={styles.container}>
       <ScrollView>
-        <TableView>
+      {/*  <TableView>
           <Section header="" hideSeparator={true} sectionTintColor={"#ccc"}>
             {fabricData.map((i) => (
               <TouchableOpacity
+                style={{flex:1}}
                 key={i.id}
                 onPress={() => navigation.navigate("Details", { data: i })}
               >
@@ -96,7 +105,24 @@ export default function HomeScreen({ navigation, route }) {
               </TouchableOpacity>
             ))}
           </Section>
-        </TableView>
+        </TableView> */}
+
+        <View style={styles.row}>
+          {fabricData.map((i) => (
+            <TouchableOpacity
+              style={styles.cardContainer}
+              key={i.id}
+              onPress={() => navigation.navigate("Details", { data: i })}
+            >
+            <Image
+              style={styles.imageThumb}
+              source={{uri: i.image_uri}}
+            />
+              <Text> {i.name} </Text>
+            </TouchableOpacity>
+          ))}
+          </View>
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -107,11 +133,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+//    alignItems: "center",
+  //  justifyContent: "center",
+  },
+  row:{
+    flexDirection: 'row',
+    backgroundColor: "green",
+    flexWrap: 'wrap',
   },
   imageThumb: {
-    width: 50,
-    height: 50
-  }
+    width: screenWidth /2,
+    height: screenHeight / 5,
+    borderRadius: 10,
+  },
+  cardContainer: {
+  },
 });

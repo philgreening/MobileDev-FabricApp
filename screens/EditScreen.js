@@ -332,7 +332,7 @@ const handleOnChange = (key, value) => {
             title="Edit Fabric"
             onPress={() => {
               updateFabric(editFabricObj),
-                navigation.navigate("Home", { name: editFabricObj.name });
+                navigation.navigate("Details", { data: editFabricObj });
             }}
           />
         </SafeAreaView>
