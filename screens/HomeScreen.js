@@ -88,7 +88,7 @@ export default function HomeScreen({ navigation, route }) {
 
   return (
     <SafeAreaView styles={styles.container}>
-      <ScrollView>
+      <ScrollView styles={styles.scrollContainer}>
       {/*  <TableView>
           <Section header="" hideSeparator={true} sectionTintColor={"#ccc"}>
             {fabricData.map((i) => (
@@ -118,7 +118,8 @@ export default function HomeScreen({ navigation, route }) {
               style={styles.imageThumb}
               source={{uri: i.image_uri}}
             />
-              <Text> {i.name} </Text>
+              <Text> {i.name} {i.length_rem} </Text>
+              <Text> {i.length_rem} </Text>
             </TouchableOpacity>
           ))}
           </View>
@@ -133,19 +134,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    margin: 20
 //    alignItems: "center",
   //  justifyContent: "center",
   },
+  scrollContainer:{
+    flex:1,
+  },
   row:{
     flexDirection: 'row',
-    backgroundColor: "green",
     flexWrap: 'wrap',
+    justifyContent: 'flex-start'
   },
   imageThumb: {
-    width: screenWidth /2,
-    height: screenHeight / 5,
-    borderRadius: 10,
+    flex:2,
   },
   cardContainer: {
+    width: screenWidth /2 -50,
+    height: screenHeight / 5,
+    borderWidth: 1,
+    margin: 10
   },
 });

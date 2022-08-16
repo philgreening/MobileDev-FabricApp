@@ -27,17 +27,22 @@ const screenWidth = screen.width;
 
 
 
+
+
 export default function DetailsScreen({ navigation, route }) {
   const fabricData = route.params.data;
   console.log('details fabricData: ', fabricData);
   console.log(fabricData.image_uri);
 
   const costPerM = () => {
-    let cpm = (fabricData.cost / fabricData.length_pur).tofixed(2);
-    console.log(cpm);
-    return cpm
-
+    const calc = (fabricData.cost / fabricData.length_pur);
+    const cpm = calc.tofixed(2);
+    return;
   }
+
+  const calc = (fabricData.cost / fabricData.length_pur).toFixed(2);
+
+
 
   const wovenKnitOptions = () => {
     if (fabricData.woven_knit == 1){
@@ -65,6 +70,33 @@ export default function DetailsScreen({ navigation, route }) {
     });
   });
 
+  // Custom cell to accept large amount of text for project info
+  const ProjectCell = (props) => (
+  <Cell
+    {...props}
+    cellContentView={
+      <View
+        style={styles.projectContainer}
+      >
+        <Text
+          allowFontScaling
+          numberOfLines={1}
+          style={styles.projectTitleText}
+        >
+          {props.title}
+        </Text>
+        <Text
+          allowFontScaling
+          numberOfLines={5}
+          style={styles.projectDetailText}
+        >
+          {props.detail}
+        </Text>
+      </View>
+    }
+  />
+);
+
   return (
     <SafeAreaView styles={styles.container}>
       <ScrollView>
@@ -75,7 +107,7 @@ export default function DetailsScreen({ navigation, route }) {
         }}
       />
         <TableView>
-          <Section>
+        <Section header='Fabric details'>
             <Cell
                cellStyle="RightDetail"
                title="Name"
@@ -88,9 +120,7 @@ export default function DetailsScreen({ navigation, route }) {
              detail={fabricData.colour}
              rightDetailColor="red"
             />
-          </Section>
 
-          <Section>
             <Cell
                cellStyle="RightDetail"
                title="Textile"
@@ -111,7 +141,7 @@ export default function DetailsScreen({ navigation, route }) {
             />
           </Section>
 
-          <Section>
+          <Section header='Measurements'>
             <Cell
                cellStyle="RightDetail"
                title="Width"
@@ -132,7 +162,7 @@ export default function DetailsScreen({ navigation, route }) {
             />
           </Section>
 
-          <Section>
+          <Section header='Purchase details'>
           <Cell
              cellStyle="RightDetail"
              title="Date purchased"
@@ -148,18 +178,17 @@ export default function DetailsScreen({ navigation, route }) {
             <Cell
              cellStyle="RightDetail"
              title="Cost per meter"
-             detail={'£ ' +  fabricData.cost / fabricData.length_pur}
+             detail={'£ ' +  calc}
              rightDetailColor="red"
             />
           </Section>
-          <Section>
-            <Cell
-             cellStyle="RightDetail"
-             title="project ideas"
-             detail={fabricData.project}
-             rightDetailColor="red"
+          <Section header='Project'>
+            <ProjectCell
+              title='Project ideas'
+              detail={fabricData.project}
             />
           </Section>
+
 
         </TableView>
       </ScrollView>
@@ -174,10 +203,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  imageContainer:{
+    //flex: 0.25,
+    flex:1,
+    margin: 0,
+  },
   image:{
-    width: screenWidth,
     height: screenHeight/4,
-    borderRadius: 5,
-    margin: 0
+    borderRadius: 30,
+    margin: '5%'
+  },
+  projectContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    flex: 1,
+    paddingVertical: 10
+  },
+  projectTitleText: {
+    flex: 1, fontSize: 16
+  },
+  projectDetailText: {
+    flex: 1,
+    textAlign: 'right',
+    color: 'red',
+    fontSize: 16
   }
 });

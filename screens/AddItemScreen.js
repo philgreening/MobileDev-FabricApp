@@ -325,7 +325,7 @@ const styles = StyleSheet.create({
     flex: 3,
     //width: '80%',
     //height: '20%',
-    borderRadius: 4,
+    borderRadius: 30,
     marginRight: '3%',
   },
   takePictureButton: {
