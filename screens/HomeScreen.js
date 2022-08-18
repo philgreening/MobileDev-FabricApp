@@ -9,20 +9,24 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-  Dimensions
+  //Dimensions
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Cell, Section, TableView } from "react-native-tableview-simple";
 import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import * as SQLite from "expo-sqlite";
+import { screenWidth, screenHeight, db } from '../modules/globalVariables.js';
 
-const db = SQLite.openDatabase("fabricDB.db");
+// import * as SQLite from "expo-sqlite";
+//
+// const db = SQLite.openDatabase("fabricDB.db");
 
-const screen = Dimensions.get('window');
-const screenHeight = screen.height;
-const screenWidth = screen.width;
+
+
+// const screen = Dimensions.get('window');
+// const screenHeight = screen.height;
+// const screenWidth = screen.width;
 
 //https://openbase.com/js/react-native-sqlite-2/documentation
 db.transaction((txn) => {
@@ -118,7 +122,7 @@ export default function HomeScreen({ navigation, route }) {
               style={styles.imageThumb}
               source={{uri: i.image_uri}}
             />
-              <Text> {i.name} {i.length_rem} </Text>
+              <Text> {i.name}</Text>
               <Text> {i.length_rem} </Text>
             </TouchableOpacity>
           ))}
