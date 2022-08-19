@@ -9,6 +9,9 @@ import React, { useState, useRef, useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import { GetFabric } from '../modules/getData.js';
 import { screenWidth, screenHeight, db } from '../modules/globalVariables.js';
+import { SearchBar } from '@rneui/base';
+
+
 
 
 // import * as SQLite from 'expo-sqlite';
@@ -21,15 +24,30 @@ import { screenWidth, screenHeight, db } from '../modules/globalVariables.js';
 
 export default function SearchScreen({navigation, route}) {
 
+  const [search, setSearch] = useState('');
+  const [filterData, setFilterData] = useState([]);
+
   const [fabricData, setFabricData] = useState([]);
 
   let dataArray = [];
 
   useEffect(() => {
-    getFabric();
+    getFabric()
     console.log('len: ' + fabricData.length)
 
   }, [route]);
+
+//   useEffect(() => {
+//   fetch('https://jsonplaceholder.typicode.com/posts')
+//     .then((response) => response.json())
+//     .then((responseJson) => {
+//       setFilteredDataSource(responseJson);
+//       setMasterDataSource(responseJson);
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// }, []);
 
   const getFabric = () => {
     db.transaction((txn) => {
@@ -38,16 +56,73 @@ export default function SearchScreen({navigation, route}) {
           dataArray.push(res.rows.item(i));
         }
         setFabricData(dataArray);
+        setFilterData(fabricData);
       });
     });
   };
   console.log('data: ', fabricData.name);
 
+  // const searchFilterFunction = (text) => {
+  //   // Check if searched text is not blank
+  //   if (text) {
+  //     // Inserted text is not blank
+  //     // Filter the masterDataSource
+  //     // Update FilteredDataSource
+  //     const newData = fabricData.filter(function (item) {
+  //       console.log(item);
+  //       const itemData = item.name
+  //         ? item.name.toUpperCase()
+  //       : ''.toUpperCase();
+  //       const textData = text.toUpperCase();
+  //       return itemData.indexOf(textData) > -1;
+  //     });
+  //     setFilterData(newData);
+  //     console.log(filterData);
+  //     setSearch(text);
+  //   } else {
+  //     // Inserted text is blank
+  //     // Update FilteredDataSource with masterDataSource
+  //     setFilterData(fabricData);
+  //     setSearch(text);
+  //   }
+  // };
+
+
+  // handle change event of search input
+const handleChange = value => {
+  setSearch(value);
+  searchFilter(value);
+};
+
+// filter records by search text
+const searchFilter = (value) => {
+  const lowercasedValue = value.toLowerCase().trim();
+  if (lowercasedValue === "") setFilterData(fabricData);
+  else {
+    const filteredData = fabricData.filter(item => {
+      return Object.keys(item).some(key =>
+       item[key].toString().toLowerCase().includes(lowercasedValue)
+      );
+    });
+    setFilterData(filteredData);
+  }
+}
+
+
+
 
   return (
     <SafeAreaView styles={styles.container}>
     <ScrollView>
-    {fabricData.map((i) => (
+    <SearchBar
+       round
+       searchIcon={{ size: 24 }}
+       onChangeText={(text) => handleChange(text)}
+       onClear={(text) => handleChange('')}
+       placeholder="Type Here..."
+       value={search}
+     />
+        {filterData.map((i) => (
       <TouchableOpacity
         style={styles.cardContainer}
         key={i.id}
@@ -57,7 +132,7 @@ export default function SearchScreen({navigation, route}) {
         style={styles.imageThumb}
         source={{uri: i.image_uri}}
       />
-        <Text> {i.name} {i.length_rem} </Text>
+        <Text> {i.name} </Text>
         <Text> {i.length_rem} </Text>
       </TouchableOpacity>
     ))}
