@@ -16,17 +16,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Cell, Section, TableView } from "react-native-tableview-simple";
 import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { screenWidth, screenHeight, db } from '../modules/globalVariables.js';
-
-// import * as SQLite from "expo-sqlite";
-//
-// const db = SQLite.openDatabase("fabricDB.db");
-
-
-
-// const screen = Dimensions.get('window');
-// const screenHeight = screen.height;
-// const screenWidth = screen.width;
+import { screenWidth, screenHeight, db } from "../modules/globalVariables.js";
 
 //https://openbase.com/js/react-native-sqlite-2/documentation
 db.transaction((txn) => {
@@ -38,11 +28,9 @@ db.transaction((txn) => {
 });
 
 export default function HomeScreen({ navigation, route }) {
-
   const [fabricData, setFabricData] = useState([]);
 
   let dataArray = [];
-
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -55,14 +43,12 @@ export default function HomeScreen({ navigation, route }) {
     });
   });
 
-  console.log('fabric db data: ' + getFabric);
+  console.log("fabric db data: " + getFabric);
 
   useEffect(() => {
     getFabric();
-    console.log('len: ' + fabricData.length)
-
+    console.log("len: " + fabricData.length);
   }, [route]);
-
 
   const getFabric = () => {
     db.transaction((txn) => {
@@ -74,9 +60,9 @@ export default function HomeScreen({ navigation, route }) {
       });
     });
   };
-  console.log('data: ' + fabricData);
+  console.log("data: ", fabricData);
 
-  if (fabricData.length < 1){
+  if (fabricData.length < 1) {
     return (
       <SafeAreaView styles={styles.container}>
         <Text>No fabric</Text>
@@ -85,15 +71,12 @@ export default function HomeScreen({ navigation, route }) {
           onPress={() => navigation.navigate("Add fabric")}
         />
       </SafeAreaView>
-    )
-  }else {
-
-
-
-  return (
-    <SafeAreaView styles={styles.container}>
-      <ScrollView styles={styles.scrollContainer}>
-      {/*  <TableView>
+    );
+  } else {
+    return (
+      <SafeAreaView styles={styles.container}>
+        <ScrollView styles={styles.scrollContainer}>
+          {/*  <TableView>
           <Section header="" hideSeparator={true} sectionTintColor={"#ccc"}>
             {fabricData.map((i) => (
               <TouchableOpacity
@@ -111,52 +94,51 @@ export default function HomeScreen({ navigation, route }) {
           </Section>
         </TableView> */}
 
-        <View style={styles.row}>
-          {fabricData.map((i) => (
-            <TouchableOpacity
-              style={styles.cardContainer}
-              key={i.id}
-              onPress={() => navigation.navigate("Details", { data: i })}
-            >
-            <Image
-              style={styles.imageThumb}
-              source={{uri: i.image_uri}}
-            />
-              <Text> {i.name}</Text>
-              <Text> {i.length_rem} </Text>
-            </TouchableOpacity>
-          ))}
+          <View style={styles.row}>
+            {fabricData.map((i) => (
+              <TouchableOpacity
+                style={styles.cardContainer}
+                key={i.id}
+                onPress={() => navigation.navigate("Details", { data: i })}
+              >
+                <Image
+                  style={styles.imageThumb}
+                  source={{ uri: i.image_uri }}
+                />
+                <Text> {i.name}</Text>
+                <Text> {i.length_rem} </Text>
+              </TouchableOpacity>
+            ))}
           </View>
-
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    margin: 20
-//    alignItems: "center",
-  //  justifyContent: "center",
+    margin: 20,
+    //    alignItems: "center",
+    //  justifyContent: "center",
   },
-  scrollContainer:{
-    flex:1,
+  scrollContainer: {
+    flex: 1,
   },
-  row:{
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start'
+  row: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
   },
   imageThumb: {
-    flex:2,
+    flex: 2,
   },
   cardContainer: {
-    width: screenWidth /2 -50,
+    width: screenWidth / 2 - 50,
     height: screenHeight / 5,
     borderWidth: 1,
-    margin: 10
+    margin: 10,
   },
 });

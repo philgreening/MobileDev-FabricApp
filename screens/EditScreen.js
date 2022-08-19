@@ -12,15 +12,6 @@ import NumericInput from 'react-native-numeric-input'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { screenHeight, screenWidth, db } from '../modules/globalVariables.js';
 
-
-// import * as SQLite from 'expo-sqlite';
-//
-// const db = SQLite.openDatabase('fabricDB.db');
-
-// const screen = Dimensions.get('window');
-// const screenHeight = screen.height;
-// const screenWidth = screen.width;
-
 export default function EditScreen({navigation, route}) {
 
 
@@ -52,9 +43,6 @@ export default function EditScreen({navigation, route}) {
         cost: route.params.data.cost,
         project: route.params.data.project
       })
-      //setEditFabricObj(route.params.data);
-      //setEditFabricObj({image_uri: route.params.photoUri});
-       // );
     }
   }, [route.params?.photoUri]);
   console.log("imageUri: ", fabricObj.image_uri);
@@ -63,7 +51,6 @@ export default function EditScreen({navigation, route}) {
     { label: "Woven", value: 0 },
     { label: "Knit", value: 1 },
   ]
-
 
     React.useLayoutEffect(() => {
      navigation.setOptions({
@@ -107,7 +94,6 @@ const deleteAlert = () =>
      console.log('item:', item);
      db.transaction((txn) => {
        txn.executeSql("UPDATE fabrics SET name = ?, image_uri = ?, colour = ?, woven_knit = ?, type = ?, width = ?, length_pur = ?, length_rem = ?, date_pur = ?, cost = ?, project = ? WHERE id = ?",
-        // [item.name, item.id])
         [
           item.name,
           item.image_uri,
@@ -139,27 +125,16 @@ const deleteAlert = () =>
     setDatePicker(true);
   };
 
-//   const updateFieldChanged = index => e => {
-//     console.log('index: ' + index);
-//     console.log('property name: '+ e);
-//     let newArr = [...editFabArray]; // copying the old datas array
-//     consle.log(newArr);
-//     //newArr[index] = e.target.value; // replace e.target.value with whatever you want to change it to
-//
-//     // setEditFabArray(newArr);
-// }
+
 
 const handleOnChange = (key, value) => {
-  // const { name, value } = event.target;
   console.log("key: " +  key + " value: " +  value);
-  // setInputValues({ ...inputValues, [name]: value });
+
   setEditFabricObj(editFabricObj => ({
       ...editFabricObj,
       [key]: value,
     }));
 };
-
-// setName(Prevname => [...Prevname, res.rows.item(i)])
   console.log(editFabricObj.image_uri);
 
   return (
@@ -342,18 +317,7 @@ const handleOnChange = (key, value) => {
 }
 
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   backgroundColor: '#fff',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  // },
-  // inputBar: {
-  //   borderWidth: 2,
-  //   borderColor: 'black',
-  //   margin: '5%',
-  //   padding: '3%'
-  // }
+
   container: {
     flex: 1,
   //  padding: '5%',

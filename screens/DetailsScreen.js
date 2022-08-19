@@ -9,7 +9,6 @@ import {
   TextInput,
   Alert,
   Image,
-//  Dimensions
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -17,18 +16,6 @@ import { Cell, Section, TableView } from "react-native-tableview-simple";
 import React, { useState, useRef, useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { screenHeight, screenWidth } from '../modules/globalVariables.js';
-
-
-// import * as SQLite from "expo-sqlite";
-//
-// const db = SQLite.openDatabase("fabricDB.db");
-
-// const screen = Dimensions.get('window');
-// const screenHeight = screen.height;
-// const screenWidth = screen.width;
-
-
-
 
 
 export default function DetailsScreen({ navigation, route }) {

@@ -1,6 +1,4 @@
-import {
-  Dimensions
-} from "react-native";
+import { Dimensions } from "react-native";
 import * as SQLite from 'expo-sqlite';
 
 const db = SQLite.openDatabase('fabricDB.db')

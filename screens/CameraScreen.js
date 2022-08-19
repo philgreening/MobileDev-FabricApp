@@ -27,8 +27,8 @@ export default function CameraScreen({ navigation, route }) {
   // variables to get previous screen
   const routes = navigation.getState()?.routes;
   const prevRoute = routes[routes.length - 2];
-  // console.log('routes: ', routes);
-  // console.log('prev route: ', prevRoute);
+
+
   const fabricData = route.params.data;
   console.log('fabric data from add item: ' , fabricData);
 
@@ -44,8 +44,7 @@ export default function CameraScreen({ navigation, route }) {
       setHasMediaPermission(mediaLibraryPermission.status === "granted");
     })();
   }, []);
-  // console.log('media permisssion? '+ hasMediaPermission);
-  // console.log('camera permisssion? '+ hasPermission);
+
 
   // Function to display alert if permissions denied. takes a message as input
   const denyAlert = (msg) => {

@@ -26,18 +26,6 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { screenHeight, screenWidth, db } from '../modules/globalVariables.js';
 
 
-// import * as SQLite from "expo-sqlite";
-
-//import HomeScreen from "./HomeScreen";
-// import * as FB from '../modules/getData';
-
-// const screen = Dimensions.get('window');
-// const screenHeight = screen.height;
-// const screenWidth = screen.width;
-
-
-// const db = SQLite.openDatabase("fabricDB.db");
-
 export default function AddItemScreen({ navigation, route }) {
   const [datePicker, setDatePicker] = useState(false);
   const [date, setDate] = useState(new Date());
