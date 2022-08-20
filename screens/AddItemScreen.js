@@ -29,23 +29,23 @@ import { screenHeight, screenWidth, db } from '../modules/globalVariables.js';
 export default function AddItemScreen({ navigation, route }) {
   const [datePicker, setDatePicker] = useState(false);
   const [date, setDate] = useState(new Date());
-  const [dateString, setDateString] = useState(date.toJSON());
+  // const [dateString, setDateString] = useState(date.toJSON());
 
-  const [fabName, setFabName] = useState("");
+  // const [fabName, setFabName] = useState("");
   const [fabricObj, setFabricObj] = useState({
     name: "",
     image_uri: "null",
     colour: "",
     woven_knit: 0,
     type: "Cotton",
-    width: null,
-    length_pur: null,
-    length_rem: null,
-    date_pur: dateString,
-    cost: null,
+    width: 0,
+    length_pur: 0,
+    length_rem: 0,
+    date_pur: date.toDateString(),
+    cost: 0,
     project: "",
   });
-  const [imageUri, setImageUri] = useState("null");
+  // const [imageUri, setImageUri] = useState("null");
   console.log("fabricObject: ", fabricObj);
 
   const switchOptions = [
@@ -96,10 +96,15 @@ export default function AddItemScreen({ navigation, route }) {
   };
 
   const onDateSelected = (event, value) => {
-    setDateString(value.toJSON());
-    setFabricObj({...fabricObj, date_pur: dateString})
-    setDate(new Date(dateString));
-    setDatePicker(false);
+    if (Platform.OS === 'android') {
+      setDatePicker(false);
+    }
+   // setDateString(value.toJSON());
+    // setDate(new Date(dateString));
+    setDate(value);
+    setFabricObj({...fabricObj, date_pur: value.toJSON()})
+    
+    //console.log(fabricObj.date_pur);
  };
 
  const showDatePicker = () => {
@@ -234,11 +239,14 @@ export default function AddItemScreen({ navigation, route }) {
 
         <View style={styles.row}>
           <Text style={styles.label}>Date Purchased:{"\n"}{date.toDateString()}</Text>
-             <Button
-                title="Show Date Picker"
-                color="green" onPress={showDatePicker} />
+          {!datePicker && (
+                        <Button
+                        title="Show Date Picker"
+                        color="green" onPress={showDatePicker} />
+          )}
+         
           {datePicker && (
-          <DateTimePicker value={date} onChange={onDateSelected} />
+          <DateTimePicker value={date} onChange={onDateSelected} style={{ flex:1, backgroundColor: "white"}}/>
           )}
         </View>
 

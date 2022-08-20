@@ -23,7 +23,7 @@ export default function EditScreen({navigation, route}) {
 
   const [datePicker, setDatePicker] = useState(false);
   const [date, setDate] = useState(new Date(editFabricObj.date_pur));
-  const [dateString, setDateString] = useState(date.toJSON());
+  // const [dateString, setDateString] = useState(date.toJSON());
 
   useEffect(() => {
     if (route.params?.photoUri) {
@@ -115,10 +115,14 @@ const deleteAlert = () =>
    };
 
    const onDateSelected = (event, value) => {
-     setDateString(value.toJSON());
-     setEditFabricObj({...editFabricObj, date_pur: dateString})
-     setDate(new Date(dateString));
-     setDatePicker(false);
+
+    if (Platform.OS === 'android') {
+      setDatePicker(false);
+    }
+   // setDateString(value.toJSON());
+    // setDate(new Date(dateString));
+    setDate(value);
+    setEditFabricObj({...editFabricObj, date_pur: value.toJSON()})
   };
 
   const showDatePicker = () => {
@@ -265,13 +269,16 @@ const handleOnChange = (key, value) => {
 
         <View style={styles.row}>
           <Text style={styles.label}>Date Purchased:{"\n"}{date.toDateString()}</Text>
-             <Button
-                title="Show Date Picker"
-                color="green" onPress={showDatePicker} />
+          {!datePicker && (
+                        <Button
+                        title="Show Date Picker"
+                        color="green" onPress={showDatePicker} />
+          )}
           {datePicker && (
           <DateTimePicker
             value={date}
             onChange={onDateSelected}
+            style={{ flex:1, backgroundColor: "white"}}
              />
           )}
         </View>
@@ -309,7 +316,7 @@ const handleOnChange = (key, value) => {
             title="Edit Fabric"
             onPress={() => {
               updateFabric(editFabricObj),
-                navigation.navigate("Details", { data: editFabricObj });
+                navigation.navigate("Home", { data: editFabricObj });
             }}
           />
         </SafeAreaView>

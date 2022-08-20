@@ -23,7 +23,21 @@ export default function DetailsScreen({ navigation, route }) {
   console.log('details fabricData: ', fabricData);
   console.log(fabricData.image_uri);
 
-  const calc = (fabricData.cost / fabricData.length_pur).toFixed(2);
+  //const calc = (fabricData.cost / fabricData.length_pur).toFixed(2);
+ // console.log('calc: ', calc)
+
+  const costPerMeter = () => {
+    const calc = (fabricData.cost / fabricData.length_pur).toFixed(2);
+
+    if (calc == 'NaN' || fabricData.length_pur == 0 ){
+      return 0
+    }
+    else {
+      return calc
+    }
+  }
+
+  
 
   const wovenKnitOptions = () => {
     if (fabricData.woven_knit == 1){
@@ -159,7 +173,7 @@ export default function DetailsScreen({ navigation, route }) {
             <Cell
              cellStyle="RightDetail"
              title="Cost per meter"
-             detail={'£ ' +  calc}
+             detail={'£ ' +  costPerMeter()}
              rightDetailColor="red"
             />
           </Section>
