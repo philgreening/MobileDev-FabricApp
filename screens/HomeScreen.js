@@ -96,6 +96,7 @@ export default function HomeScreen({ navigation, route }) {
 
           <View style={styles.row}>
             {fabricData.map((i) => (
+              <View style={styles.viewContainer} key={i.id}>
               <TouchableOpacity
                 style={styles.cardContainer}
                 key={i.id}
@@ -106,8 +107,9 @@ export default function HomeScreen({ navigation, route }) {
                   source={{ uri: i.image_uri }}
                 />
                 <Text> {i.name}</Text>
-                <Text> {i.length_rem} </Text>
+                <Text> {i.length_rem}m remaining </Text>
               </TouchableOpacity>
+              </View>
             ))}
           </View>
         </ScrollView>
@@ -120,14 +122,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    margin: 20,
-    //    alignItems: "center",
-    //  justifyContent: "center",
+  alignItems: "center",
+    //justifyContent: "center",
+  },
+  viewContainer: {
+  width: '50%',
+  padding: '2%',
   },
   scrollContainer: {
     flex: 1,
   },
   row: {
+    margin: '5%',
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "flex-start",
@@ -136,9 +142,10 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   cardContainer: {
-    width: screenWidth / 2 - 50,
+  //  width: '50%',
     height: screenHeight / 5,
-    borderWidth: 1,
-    margin: 10,
+
+  //  borderWidth: 1,
+    //padding: 5
   },
 });

@@ -88,7 +88,10 @@ export default function SearchScreen({ navigation, route }) {
           placeholder="Type Here..."
           value={search}
         />
+
+        <View style={styles.row}>
         {filterData.map((i) => (
+          <View style={styles.viewContainer} key={i.id}>
           <TouchableOpacity
             style={styles.cardContainer}
             key={i.id}
@@ -96,9 +99,11 @@ export default function SearchScreen({ navigation, route }) {
           >
             <Image style={styles.imageThumb} source={{ uri: i.image_uri }} />
             <Text> {i.name} </Text>
-            <Text> {i.length_rem} </Text>
+            <Text> {i.length_rem}m remaining </Text>
           </TouchableOpacity>
+          </View>
         ))}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -108,14 +113,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    margin: 20,
-    //    alignItems: "center",
-    //  justifyContent: "center",
+  alignItems: "center",
+    //justifyContent: "center",
+  },
+  viewContainer: {
+  width: '50%',
+  padding: 5
   },
   scrollContainer: {
     flex: 1,
   },
   row: {
+    margin: '5%',
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "flex-start",
@@ -124,9 +133,9 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   cardContainer: {
-    width: screenWidth / 2 - 50,
+  //  width: '50%',
     height: screenHeight / 5,
     borderWidth: 1,
-    margin: 10,
+    //padding: 5
   },
 });
