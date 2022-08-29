@@ -24,6 +24,7 @@ import {Picker} from '@react-native-picker/picker';
 import NumericInput from 'react-native-numeric-input'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { screenHeight, screenWidth, db } from '../modules/globalVariables.js';
+import { Feather } from '@expo/vector-icons';
 
 
 export default function AddItemScreen({ navigation, route }) {
@@ -103,7 +104,7 @@ export default function AddItemScreen({ navigation, route }) {
     // setDate(new Date(dateString));
     setDate(value);
     setFabricObj({...fabricObj, date_pur: value.toJSON()})
-    
+
     //console.log(fabricObj.date_pur);
  };
 
@@ -129,9 +130,7 @@ export default function AddItemScreen({ navigation, route }) {
             navigation.navigate("Camera", { data: fabricObj} );
           }}
         >
-          <Text style={styles.takePictureButtonText}>
-            Take picture
-          </Text>
+        <Feather name="camera" size={36} color="#00637f" />
         </TouchableOpacity>
       </View>
 
@@ -149,7 +148,7 @@ export default function AddItemScreen({ navigation, route }) {
         <View style={styles.row}>
         <Text style={styles.label}> Colour:  </Text>
           <TextInput
-            style={styles.inputBar}
+            style={[styles.inputBar, styles.shadowProp]}
             placeholder="Enter fabric colour"
             onChangeText={(value) => setFabricObj({ ...fabricObj, colour: value })}
             value={fabricObj.colour}
@@ -159,6 +158,10 @@ export default function AddItemScreen({ navigation, route }) {
 
           <SwitchSelector
             style={styles.switch}
+            textColor={'#00637f'}
+            selectedColor={'#fff'}
+            buttonColor={'#e4c2ca'}
+            borderColor={'#e4c2ca'}
             options={switchOptions}
             initial = {0}
             value = {0}
@@ -196,10 +199,10 @@ export default function AddItemScreen({ navigation, route }) {
           step={0.5}
           valueType='real'
           rounded
-          textColor='#B0228C'
+          textColor='#00637f'
           iconStyle={{ color: 'white' }}
-          rightButtonBackgroundColor='#EA3788'
-          leftButtonBackgroundColor='#E56B70'/>
+          rightButtonBackgroundColor='#e4c2ca'
+          leftButtonBackgroundColor='#e4c2ca'/>
         </View>
 
         <View style={styles.row}>
@@ -213,38 +216,40 @@ export default function AddItemScreen({ navigation, route }) {
           step={0.5}
           valueType='real'
           rounded
-          textColor='#B0228C'
+          textColor='#00637f'
           iconStyle={{ color: 'white' }}
-          rightButtonBackgroundColor='#EA3788'
-          leftButtonBackgroundColor='#E56B70'/>
+          rightButtonBackgroundColor= '#e4c2ca'
+          leftButtonBackgroundColor='#e4c2ca'/>
         </View>
 
         <View style={styles.row}>
           <Text style={styles.label}>Length Remaining (in m): </Text>
           <NumericInput
-          value={fabricObj.length_rem}
-          onChange={value => setFabricObj({...fabricObj, length_rem: value})}
-          minValue={0}
-          maxValue={fabricObj.length_pur}
-          totalWidth={screenWidth/3}
-          totalHeight={screenHeight/15}
-          step={0.5}
-          valueType='real'
-          rounded
-          textColor='#B0228C'
-          iconStyle={{ color: 'white' }}
-          rightButtonBackgroundColor='#EA3788'
-          leftButtonBackgroundColor='#E56B70'/>
+            value={fabricObj.length_rem}
+            onChange={value => setFabricObj({...fabricObj, length_rem: value})}
+            minValue={0}
+            maxValue={fabricObj.length_pur}
+            totalWidth={screenWidth/3}
+            totalHeight={screenHeight/15}
+            step={0.5}
+            valueType='real'
+            rounded
+            textColor='#00637f'
+            iconStyle={{ color: 'white' }}
+            rightButtonBackgroundColor='#e4c2ca'
+            leftButtonBackgroundColor='#e4c2ca'/>
         </View>
 
         <View style={styles.row}>
           <Text style={styles.label}>Date Purchased:{"\n"}{date.toDateString()}</Text>
           {!datePicker && (
-                        <Button
-                        title="Show Date Picker"
-                        color="green" onPress={showDatePicker} />
+                        <TouchableOpacity
+                           style={styles.datePicker}
+                           onPress={showDatePicker}>
+                          <Feather name="calendar" size={36} color="#00637f" />
+                        </TouchableOpacity>
           )}
-         
+
           {datePicker && (
           <DateTimePicker value={date} onChange={onDateSelected} style={{ flex:1, backgroundColor: "white"}}/>
           )}
@@ -261,14 +266,14 @@ export default function AddItemScreen({ navigation, route }) {
           step={0.5}
           valueType='real'
           rounded
-          textColor='#B0228C'
+          textColor='#00637f'
           iconStyle={{ color: 'white' }}
-          rightButtonBackgroundColor='#EA3788'
-          leftButtonBackgroundColor='#E56B70'/>
+          rightButtonBackgroundColor='#e4c2ca'
+          leftButtonBackgroundColor='#e4c2ca'/>
         </View>
 
         <View style={styles.row}>
-        <Text style={styles.label}>Project ideas: </Text>
+        <Text style={styles.label}>Planned projects: </Text>
           <TextInput
             style={styles.inputBar}
             placeholder="Enter project ideas"
@@ -279,13 +284,14 @@ export default function AddItemScreen({ navigation, route }) {
           </View>
           </ScrollView>
 
-          <Button
-            title="Add Fabric"
+          <TouchableOpacity
+            style = {styles.addFabricButton}
             onPress={() => {
               addFabric(fabricObj),
                 navigation.navigate("Home", { name: fabricObj.name });
-            }}
-          />
+            }}>
+            <Text>Add Fabric</Text>
+          </TouchableOpacity>
         </SafeAreaView>
 
   );
@@ -294,14 +300,15 @@ export default function AddItemScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    //backgroundColor: '#fff',
   //  padding: '5%',
     // flexDirection: 'row',
-    backgroundColor: "#fff",
     //alignItems: 'center',
   },
   scrollContainer :{
     flex: 1,
-    padding: '5%'
+    padding: '5%',
+    //backgroundColor: '#fff',
   },
   imageContainer:{
     //flex: 0.25,
@@ -315,31 +322,24 @@ const styles = StyleSheet.create({
   inputBar: {
     // width: '100%',
     flex: 4,
-    borderWidth: 2,
-    borderColor: "black",
-    padding: "1%"
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: "#e4c2ca",
+    borderRadius: 15,
   },
   imageThumb: {
     flex: 3,
     //width: '80%',
     //height: '20%',
+    backgroundColor: "#e4c2ca",
     borderRadius: 30,
     marginRight: '3%',
   },
   takePictureButton: {
     //width: 130,
     flex: 1,
-    borderRadius: 4,
-    backgroundColor: "#14274e",
     justifyContent: "center",
-    alignItems: "center",
-    marginLeft: '3%',
-    //height: 40,
-  },
-  takePictureButtonText: {
-    color: "#fff",
-    fontWeight: "bold",
-    textAlign: "center",
+    alignItems: "center",    //height: 40,
   },
   row: {
     flexDirection: 'row',
@@ -353,10 +353,31 @@ const styles = StyleSheet.create({
   },
   switch: {
     flex: 1,
-    marginBottom: '5%'
+    marginBottom: '5%',
   },
   picker: {
     flex: 2,
-  }
+    backgroundColor: "#e4c2ca",
+  },
+  datePicker: {
+    flex: 0.5,
+    alignItems: "center",
+  },
+  shadowProp: {
+   shadowColor: '#171717',
+   shadowOffset: {width: -2, height: 4},
+   shadowOpacity: 0.2,
+   shadowRadius: 3,
+ },
+ addFabricButton: {
+   alignSelf: 'center',
+   alignItems: 'center',
+   justifyContent: 'center',
+   width: screenWidth/2,
+   height: screenHeight/17,
+   backgroundColor: '#e4c2ca',
+   borderRadius: 10,
+   margin: '3%',
+ }
 
 });

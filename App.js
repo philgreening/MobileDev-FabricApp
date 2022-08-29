@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Cell, Section, TableView } from 'react-native-tableview-simple';
 import React, { useState, useRef, useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Octicons } from '@expo/vector-icons';
+
 
 // Import screens
 import HomeScreen from './screens/HomeScreen';
@@ -21,8 +23,20 @@ const Tab = createBottomTabNavigator();
 function BottomTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Search" component={SearchScreen} />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+                tabBarIcon: ({size, color}) => (<Octicons name="home" size={24} color="black" />)
+            }}
+        />
+      <Tab.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+                tabBarIcon: ({size, color}) => (<Octicons name="search" size={24} color="black" />)
+            }}
+         />
     </Tab.Navigator>
   );
 }

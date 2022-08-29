@@ -11,6 +11,7 @@ import {Picker} from '@react-native-picker/picker';
 import NumericInput from 'react-native-numeric-input'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { screenHeight, screenWidth, db } from '../modules/globalVariables.js';
+import { Feather } from '@expo/vector-icons';
 
 export default function EditScreen({navigation, route}) {
 
@@ -55,10 +56,12 @@ export default function EditScreen({navigation, route}) {
     React.useLayoutEffect(() => {
      navigation.setOptions({
        headerRight: () => (
-         <Button
-         title="Delete fabric"
-         onPress={() => deleteAlert()}
-         />
+         <TouchableOpacity
+            onPress={() => deleteAlert()}
+         >
+            <Feather name="trash-2" size={32} color="#e4c2ca" />
+         </TouchableOpacity>
+
        ),
      });
    });
@@ -156,12 +159,10 @@ const handleOnChange = (key, value) => {
         <TouchableOpacity
           style={styles.takePictureButton}
           onPress={() => {
-            navigation.navigate("Camera", { data: editFabricObj} );
+            navigation.navigate("Camera", { data: editfabricObj} );
           }}
         >
-          <Text style={styles.takePictureButtonText}>
-            Take picture
-          </Text>
+          <Feather name="camera" size={36} color="#00637f" />
         </TouchableOpacity>
       </View>
 
@@ -189,6 +190,10 @@ const handleOnChange = (key, value) => {
 
           <SwitchSelector
             style={styles.switch}
+            textColor={'#00637f'}
+            selectedColor={'#fff'}
+            buttonColor={'#e4c2ca'}
+            borderColor={'#e4c2ca'}
             options={switchOptions}
             initial = {editFabricObj.woven_knit}
             value = {editFabricObj.woven_knit}
@@ -226,10 +231,10 @@ const handleOnChange = (key, value) => {
           step={0.5}
           valueType='real'
           rounded
-          textColor='#B0228C'
+          textColor='#00637f'
           iconStyle={{ color: 'white' }}
-          rightButtonBackgroundColor='#EA3788'
-          leftButtonBackgroundColor='#E56B70'/>
+          rightButtonBackgroundColor='#e4c2ca'
+          leftButtonBackgroundColor='#e4c2ca'/>
         </View>
 
         <View style={styles.row}>
@@ -243,10 +248,10 @@ const handleOnChange = (key, value) => {
           step={0.5}
           valueType='real'
           rounded
-          textColor='#B0228C'
+          textColor='#00637f'
           iconStyle={{ color: 'white' }}
-          rightButtonBackgroundColor='#EA3788'
-          leftButtonBackgroundColor='#E56B70'/>
+          rightButtonBackgroundColor='#e4c2ca'
+          leftButtonBackgroundColor='#e4c2ca'/>
         </View>
 
         <View style={styles.row}>
@@ -261,18 +266,20 @@ const handleOnChange = (key, value) => {
           step={0.5}
           valueType='real'
           rounded
-          textColor='#B0228C'
+          textColor='#00637f'
           iconStyle={{ color: 'white' }}
-          rightButtonBackgroundColor='#EA3788'
-          leftButtonBackgroundColor='#E56B70'/>
+          rightButtonBackgroundColor='#e4c2ca'
+          leftButtonBackgroundColor='#e4c2ca'/>
         </View>
 
         <View style={styles.row}>
           <Text style={styles.label}>Date Purchased:{"\n"}{date.toDateString()}</Text>
           {!datePicker && (
-                        <Button
-                        title="Show Date Picker"
-                        color="green" onPress={showDatePicker} />
+            <TouchableOpacity
+               style={styles.datePicker}
+               onPress={showDatePicker}>
+              <Feather name="calendar" size={36} color="#00637f" />
+            </TouchableOpacity>
           )}
           {datePicker && (
           <DateTimePicker
@@ -294,10 +301,10 @@ const handleOnChange = (key, value) => {
           step={0.5}
           valueType='real'
           rounded
-          textColor='#B0228C'
+          textColor='#00637f'
           iconStyle={{ color: 'white' }}
-          rightButtonBackgroundColor='#EA3788'
-          leftButtonBackgroundColor='#E56B70'/>
+          rightButtonBackgroundColor='#e4c2ca'
+          leftButtonBackgroundColor='#e4c2ca'/>
         </View>
 
         <View style={styles.row}>
@@ -311,14 +318,14 @@ const handleOnChange = (key, value) => {
           <Text> {editFabricObj.project} </Text>
           </View>
           </ScrollView>
-
-          <Button
-            title="Edit Fabric"
+          <TouchableOpacity
+            style = {styles.editFabricButton}
             onPress={() => {
               updateFabric(editFabricObj),
-                navigation.navigate("Home", { data: editFabricObj });
-            }}
-          />
+              navigation.navigate("Home", { data: editFabricObj });
+            }}>
+            <Text>Edit Fabric</Text>
+          </TouchableOpacity>
         </SafeAreaView>
   )
 }
@@ -348,26 +355,23 @@ const styles = StyleSheet.create({
   inputBar: {
     // width: '100%',
     flex: 4,
-    borderWidth: 2,
-    borderColor: "black",
-    padding: "1%"
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: "#e4c2ca",
+    borderRadius: 15,
   },
   imageThumb: {
     flex: 3,
     //width: '80%',
     //height: '20%',
+    backgroundColor: "#e4c2ca",
     borderRadius: 30,
     marginRight: '3%',
   },
   takePictureButton: {
-    //width: 130,
     flex: 1,
-    borderRadius: 4,
-    backgroundColor: "#14274e",
     justifyContent: "center",
     alignItems: "center",
-    marginLeft: '3%',
-    //height: 40,
   },
   takePictureButtonText: {
     color: "#fff",
@@ -384,11 +388,26 @@ const styles = StyleSheet.create({
   label: {
     flex: 1,
   },
-  switch: {
+  switch : {
     flex: 1,
     marginBottom: '5%'
   },
   picker: {
     flex: 2,
+    backgroundColor: "#e4c2ca",
+  },
+  datePicker: {
+    flex: 0.5,
+    alignItems: "center",
+  },
+  editFabricButton: {
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: screenWidth/2,
+    height: screenHeight/17,
+    backgroundColor: '#e4c2ca',
+    borderRadius: 10,
+    margin: '3%',
   }
 });

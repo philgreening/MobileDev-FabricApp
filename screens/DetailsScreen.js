@@ -9,6 +9,7 @@ import {
   TextInput,
   Alert,
   Image,
+  TouchableOpacity
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -16,7 +17,7 @@ import { Cell, Section, TableView } from "react-native-tableview-simple";
 import React, { useState, useRef, useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { screenHeight, screenWidth } from '../modules/globalVariables.js';
-
+import { Feather } from '@expo/vector-icons';
 
 export default function DetailsScreen({ navigation, route }) {
   const fabricData = route.params.data;
@@ -37,8 +38,6 @@ export default function DetailsScreen({ navigation, route }) {
     }
   }
 
-  
-
   const wovenKnitOptions = () => {
     if (fabricData.woven_knit == 1){
       return 'Knit'
@@ -57,10 +56,11 @@ export default function DetailsScreen({ navigation, route }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button
-          title="Edit fabric"
-          onPress={() => navigation.navigate("Edit fabric", { data: fabricData })}
-        />
+        <TouchableOpacity
+        onPress={() => navigation.navigate("Edit fabric", { data: fabricData })}
+        >
+        <Feather name="edit-3" size={32} color="#e4c2ca" />
+        </TouchableOpacity>
       ),
     });
   });
@@ -107,32 +107,32 @@ export default function DetailsScreen({ navigation, route }) {
                cellStyle="RightDetail"
                title="Name"
                detail={fabricData.name}
-               rightDetailColor="red"
+               rightDetailColor="#86ae99"
             />
             <Cell
              cellStyle="RightDetail"
              title="Colour"
              detail={fabricData.colour}
-             rightDetailColor="red"
+             rightDetailColor="#86ae99"
             />
 
             <Cell
                cellStyle="RightDetail"
                title="Textile"
                detail={wovenKnitOptions()}
-               rightDetailColor="red"
+               rightDetailColor="#86ae99"
             />
             <Cell
              cellStyle="RightDetail"
              title="Colour"
              detail={fabricData.colour}
-             rightDetailColor="red"
+             rightDetailColor="#86ae99"
             />
             <Cell
              cellStyle="RightDetail"
              title="Type"
              detail={fabricData.type}
-             rightDetailColor="red"
+             rightDetailColor="#86ae99"
             />
           </Section>
 
@@ -141,19 +141,19 @@ export default function DetailsScreen({ navigation, route }) {
                cellStyle="RightDetail"
                title="Width"
                detail={fabricData.width + ' m'}
-               rightDetailColor="red"
+               rightDetailColor="#86ae99"
             />
             <Cell
              cellStyle="RightDetail"
              title="Length purchased"
              detail={fabricData.length_pur + ' m'}
-             rightDetailColor="red"
+             rightDetailColor="#86ae99"
             />
             <Cell
              cellStyle="RightDetail"
              title="Length remaining"
              detail={fabricData.length_rem + ' m'}
-             rightDetailColor="red"
+             rightDetailColor="#86ae99"
             />
           </Section>
 
@@ -162,19 +162,19 @@ export default function DetailsScreen({ navigation, route }) {
              cellStyle="RightDetail"
              title="Date purchased"
              detail={convertDate()}
-             rightDetailColor="red"
+             rightDetailColor="#86ae99"
           />
             <Cell
                cellStyle="RightDetail"
                title="Cost"
                detail={'£ ' + fabricData.cost}
-               rightDetailColor="red"
+               rightDetailColor="#86ae99"
             />
             <Cell
              cellStyle="RightDetail"
              title="Cost per meter"
              detail={'£ ' +  costPerMeter()}
-             rightDetailColor="red"
+             rightDetailColor="#86ae99"
             />
           </Section>
           <Section header='Project'>
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
   projectDetailText: {
     flex: 1,
     textAlign: 'right',
-    color: 'red',
+    color: '#86ae99',
     fontSize: 16
   }
 });

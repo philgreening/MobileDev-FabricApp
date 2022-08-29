@@ -65,6 +65,19 @@ export default function SearchScreen({ navigation, route }) {
 
   // filter records by search text
   const searchFilter = (value) => {
+  //   const lowercasedValue = value.toLowerCase().trim();
+  //   if (lowercasedValue === "") setFilterData(fabricData);
+  //   else {
+  //     const filteredData = fabricData.filter((item) => {
+  //       return Object.keys(item).some((key) =>
+  //         item[key].toString().toLowerCase().includes(lowercasedValue)
+  //       );
+  //     });
+  //     setFilterData(filteredData);
+  //   }
+  // };
+
+  try {
     const lowercasedValue = value.toLowerCase().trim();
     if (lowercasedValue === "") setFilterData(fabricData);
     else {
@@ -75,7 +88,11 @@ export default function SearchScreen({ navigation, route }) {
       });
       setFilterData(filteredData);
     }
-  };
+
+  } catch (error) {
+      console.log(error);
+  }
+};
 
   return (
     <SafeAreaView styles={styles.container}>

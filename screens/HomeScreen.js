@@ -17,6 +17,7 @@ import { Cell, Section, TableView } from "react-native-tableview-simple";
 import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { screenWidth, screenHeight, db } from "../modules/globalVariables.js";
+import { MaterialIcons } from '@expo/vector-icons';
 
 //https://openbase.com/js/react-native-sqlite-2/documentation
 db.transaction((txn) => {
@@ -35,10 +36,12 @@ export default function HomeScreen({ navigation, route }) {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button
-          title="Add fabric"
-          onPress={() => navigation.navigate("Add fabric")}
+        <TouchableOpacity
+        onPress={() => navigation.navigate("Add fabric")}
+        >
+        <MaterialIcons name="add-circle-outline" size={32} color="#e4c2ca"
         />
+        </TouchableOpacity>
       ),
     });
   });
@@ -70,6 +73,7 @@ export default function HomeScreen({ navigation, route }) {
           title="Add fabric"
           onPress={() => navigation.navigate("Add fabric")}
         />
+
       </SafeAreaView>
     );
   } else {
@@ -122,7 +126,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-  alignItems: "center",
+    //alignItems: "center",
     //justifyContent: "center",
   },
   viewContainer: {
