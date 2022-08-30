@@ -3,10 +3,13 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView, Button, TextInput } f
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Cell, Section, TableView } from 'react-native-tableview-simple';
-import React, { useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Octicons } from '@expo/vector-icons';
+import { screenWidth, screenHeight, db } from "./modules/globalVariables.js";
 
+import * as SplashScreen from 'expo-splash-screen';
+import { useFonts } from 'expo-font';
 
 // Import screens
 import HomeScreen from './screens/HomeScreen';
@@ -22,19 +25,34 @@ const Tab = createBottomTabNavigator();
 
 function BottomTabs() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#00637f',
+        },
+        headerTintColor: '#e4c2ca',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        tabBarShowLabel: false,
+        tabBarStyle:{
+          height: screenHeight/12,
+          backgroundColor:'#e4c2ca',
+        },
+      }}
+    >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-                tabBarIcon: ({size, color}) => (<Octicons name="home" size={24} color="black" />)
+                tabBarIcon: ({size, color}) => (<Octicons name="home" size={32} color="#00637f" />),
             }}
         />
       <Tab.Screen
         name="Search"
         component={SearchScreen}
         options={{
-                tabBarIcon: ({size, color}) => (<Octicons name="search" size={24} color="black" />)
+                tabBarIcon: ({size, color}) => (<Octicons name="search" size={32} color="#00637f" />)
             }}
          />
     </Tab.Navigator>
@@ -42,10 +60,42 @@ function BottomTabs() {
 }
 
 export default function App() {
+//   const [fontsLoaded] = useFonts({
+//    'Karla-Regular': require('./assets/fonts/Karla-Regular.ttf'),
+//    'Reikna-Regular': require('./assets/fonts/Reikna-Regular.otf'),
+//  });
+//
+//  useEffect(() => {
+//   async function prepare() {
+//     await SplashScreen.preventAutoHideAsync();
+//   }
+//
+//   prepare();
+// }, []);
+//
+// const onLayoutRootView = useCallback(async () => {
+//   if (fontsLoaded) {
+//     await SplashScreen.hideAsync();
+//   }
+// }, [fontsLoaded]);
+//
+// if (!fontsLoaded) {
+//   return null;
+// }
 
   return (
-    <NavigationContainer style={styles.container}>
-      <Stack.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#00637f',
+          },
+          headerTintColor: '#e4c2ca',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            //fontFamily: 'Reikna-Regular'
+          }
+        }}>
         <Stack.Screen
           name="Tabs"
           component={BottomTabs}
@@ -59,12 +109,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

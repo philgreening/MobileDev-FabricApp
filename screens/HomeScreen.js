@@ -19,6 +19,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { screenWidth, screenHeight, db } from "../modules/globalVariables.js";
 import { MaterialIcons } from '@expo/vector-icons';
 
+import { itemStyles } from '../styles/itemStyles';
+import { headerStyles } from '../styles/headerStyles';
+import { textStyles } from '../styles/textStyles';
+
 //https://openbase.com/js/react-native-sqlite-2/documentation
 db.transaction((txn) => {
   // txn.executeSql('DROP TABLE IF EXISTS fabrics', [])
@@ -38,6 +42,7 @@ export default function HomeScreen({ navigation, route }) {
       headerRight: () => (
         <TouchableOpacity
         onPress={() => navigation.navigate("Add fabric")}
+        style = {headerStyles.headerRight}
         >
         <MaterialIcons name="add-circle-outline" size={32} color="#e4c2ca"
         />
@@ -67,51 +72,40 @@ export default function HomeScreen({ navigation, route }) {
 
   if (fabricData.length < 1) {
     return (
-      <SafeAreaView styles={styles.container}>
-        <Text>No fabric</Text>
-        <Button
-          title="Add fabric"
+      <SafeAreaView style={styles.containerNoContent}>
+        <TouchableOpacity
+          style ={styles.addFabricButton}
           onPress={() => navigation.navigate("Add fabric")}
+        >
+        <Text style ={[styles.addFabricButtonContent, textStyles.text]}>
+          Please add a fabric to get started</Text>
+        <MaterialIcons
+          style ={styles.addFabricButtonContent}
+          name="add-circle-outline"
+          size={32}
+          color="#00637f"
         />
-
+        </TouchableOpacity>
       </SafeAreaView>
     );
   } else {
     return (
-      <SafeAreaView styles={styles.container}>
-        <ScrollView styles={styles.scrollContainer}>
-          {/*  <TableView>
-          <Section header="" hideSeparator={true} sectionTintColor={"#ccc"}>
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
+          <View style={itemStyles.row}>
             {fabricData.map((i) => (
+              <View style={itemStyles.cardViewContainer} key={i.id}>
               <TouchableOpacity
-                style={{flex:1}}
-                key={i.id}
-                onPress={() => navigation.navigate("Details", { data: i })}
-              >
-              <Image
-                style={styles.imageThumb}
-                source={{uri: i.image_uri}}
-              />
-                <Text> {i.name} </Text>
-              </TouchableOpacity>
-            ))}
-          </Section>
-        </TableView> */}
-
-          <View style={styles.row}>
-            {fabricData.map((i) => (
-              <View style={styles.viewContainer} key={i.id}>
-              <TouchableOpacity
-                style={styles.cardContainer}
+                style={itemStyles.cardContainer}
                 key={i.id}
                 onPress={() => navigation.navigate("Details", { data: i })}
               >
                 <Image
-                  style={styles.imageThumb}
+                  style={itemStyles.imageThumb}
                   source={{ uri: i.image_uri }}
                 />
-                <Text> {i.name}</Text>
-                <Text> {i.length_rem}m remaining </Text>
+                <Text style={itemStyles.cardText}> {i.name}</Text>
+                <Text style={itemStyles.cardText}> {i.length_rem}m remaining </Text>
               </TouchableOpacity>
               </View>
             ))}
@@ -126,30 +120,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    //alignItems: "center",
-    //justifyContent: "center",
+   // alignItems: "center",
+   // justifyContent: "center",
   },
-  viewContainer: {
-  width: '50%',
-  padding: '2%',
-  },
-  scrollContainer: {
+  containerNoContent: {
     flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  //  flexDirection: 'row',
   },
-  row: {
+  addFabricButton: {
+    flexDirection: 'row',
+    backgroundColor:'#e4c2ca',
     margin: '5%',
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "flex-start",
+    padding: '2%',
+    borderColor: "#00637f",
+    borderRadius: 30
   },
-  imageThumb: {
-    flex: 2,
-  },
-  cardContainer: {
-  //  width: '50%',
-    height: screenHeight / 5,
-
-  //  borderWidth: 1,
-    //padding: 5
-  },
+  addFabricButtonContent:{
+    alignSelf: 'center',
+    padding: '2%',
+  }
 });

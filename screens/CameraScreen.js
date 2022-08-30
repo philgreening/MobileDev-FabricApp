@@ -12,6 +12,10 @@ import {
 import React, { useState, useRef, useEffect } from "react";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
+import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+import { textStyles } from '../styles/textStyles';
 
 export default function CameraScreen({ navigation, route }) {
   // Variables to handle camera & media library permissions
@@ -117,14 +121,16 @@ export default function CameraScreen({ navigation, route }) {
         />
         <View style={styles.previewContainer}>
           <TouchableOpacity onPress={retakePicture} style={styles.retakeButton}>
-            <Text style={styles.retakeButtonText}>Re-take</Text>
+            <MaterialCommunityIcons name="camera-retake-outline" size={32} color="#00637f" />
+            <Text style={textStyles.text}>Re-take</Text>
           </TouchableOpacity>
           {hasMediaPermission ? (
             <TouchableOpacity
               style={styles.saveButton}
               onPress={() => savePhoto()}
             >
-              <Text style={styles.saveButtonText}>Save photo</Text>
+              <Ionicons name="save-outline" size={32} color="#00637f" />
+              <Text style={textStyles.text}>Save photo</Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
@@ -170,7 +176,7 @@ export default function CameraScreen({ navigation, route }) {
                 );
               }}
             >
-              <Text>Flip</Text>
+            <Ionicons name="camera-reverse-outline" size={32} color="#00637f" />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.shutterButton}
@@ -183,7 +189,7 @@ export default function CameraScreen({ navigation, route }) {
                 styles.flashButton,
                 {
                   backgroundColor:
-                    flash === Camera.Constants.FlashMode.off ? "#000" : "#fff",
+                    flash === Camera.Constants.FlashMode.off ? "#00637f" : "#e4c2ca",
                 },
               ]}
               onPress={() => {
@@ -194,7 +200,7 @@ export default function CameraScreen({ navigation, route }) {
                 );
               }}
             >
-              <Text style={{ fontSize: 20 }}>⚡️</Text>
+              <Ionicons name="flash" size={32} color="gold" />
             </TouchableOpacity>
           </Camera>
         )}
@@ -207,14 +213,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "transparent",
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
   previewContainer: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    backgroundColor: "#e4c2ca",
   },
   imageBackground: {
     flex: 5,
@@ -224,7 +229,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   flipButton: {
-    backgroundColor: "white",
+    backgroundColor: "#e4c2ca",
     position: "absolute",
     bottom: "10%",
     right: "10%",
@@ -239,11 +244,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 50,
-    height: 40,
-    width: 40,
+    height: 50,
+    width: 50,
   },
   shutterButton: {
-    backgroundColor: "white",
+    backgroundColor: "#e4c2ca",
     position: "absolute",
     bottom: "10%",
     width: 70,
@@ -251,23 +256,11 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   saveButton: {
-    width: 130,
-    height: 40,
+    flex:1,
     alignItems: "center",
-    borderRadius: 4,
-  },
-  saveButtonText: {
-    color: "black",
-    fontSize: 20,
   },
   retakeButton: {
-    width: 130,
-    height: 40,
+    flex:1,
     alignItems: "center",
-    borderRadius: 4,
-  },
-  retakeButtonText: {
-    color: "black",
-    fontSize: 20,
   },
 });

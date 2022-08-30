@@ -13,6 +13,10 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { screenHeight, screenWidth, db } from '../modules/globalVariables.js';
 import { Feather } from '@expo/vector-icons';
 
+import { addEditStyles } from '../styles/addEditStyles';
+import { headerStyles } from '../styles/headerStyles';
+import { textStyles } from '../styles/textStyles';
+
 export default function EditScreen({navigation, route}) {
 
 
@@ -58,6 +62,7 @@ export default function EditScreen({navigation, route}) {
        headerRight: () => (
          <TouchableOpacity
             onPress={() => deleteAlert()}
+            style = {headerStyles.headerRight}
          >
             <Feather name="trash-2" size={32} color="#e4c2ca" />
          </TouchableOpacity>
@@ -132,8 +137,6 @@ const deleteAlert = () =>
     setDatePicker(true);
   };
 
-
-
 const handleOnChange = (key, value) => {
   console.log("key: " +  key + " value: " +  value);
 
@@ -144,56 +147,73 @@ const handleOnChange = (key, value) => {
 };
   console.log(editFabricObj.image_uri);
 
+  const numericInputProps = {
+    minValue: 0,
+    totalWidth:screenWidth/3,
+    totalHeight:screenHeight/15,
+    step:0.5,
+    valueType:'real',
+    textColor:'#00637f',
+    iconStyle:{ color: 'white' },
+    rightButtonBackgroundColor:'#e4c2ca',
+    leftButtonBackgroundColor:'#e4c2ca'
+  };
+
   return (
 
-    <SafeAreaView style={styles.container}>
-    <ScrollView style={styles.scrollContainer}>
+    <SafeAreaView style={addEditStyles.container}>
+    <ScrollView style={addEditStyles.scrollContainer}>
 
-      <View style={styles.imageContainer}>
+      <View style={addEditStyles.imageContainer}>
         <Image
-          style={styles.imageThumb}
+          style={addEditStyles.imageThumb}
           source={{
             uri: editFabricObj.image_uri,
           }}
         />
         <TouchableOpacity
-          style={styles.takePictureButton}
+          style={addEditStyles.takePictureButton}
           onPress={() => {
-            navigation.navigate("Camera", { data: editfabricObj} );
+            navigation.navigate("Camera", { data: editFabricObj} );
           }}
         >
           <Feather name="camera" size={36} color="#00637f" />
         </TouchableOpacity>
       </View>
 
-        <View style={styles.row}>
-        <Text style={styles.label}> Name:  </Text>
+        <View style={addEditStyles.row}>
+        <Text style={[addEditStyles.label, textStyles.text]}> Name:  </Text>
           <TextInput
-            style={styles.inputBar}
+            style={addEditStyles.inputBar}
             placeholder="Enter fabric name"
+            placeholderTextColor = '#00637f'
+            color = '#00637f'
             onChangeText={(value) => setEditFabricObj({ ...editFabricObj, name: value })}
             value={editFabricObj.name}
           />
-          <Text> {editFabricObj.name} </Text>
         </View>
 
-        <View style={styles.row}>
-        <Text style={styles.label}> Colour:  </Text>
+        <View style={addEditStyles.row}>
+        <Text style={[addEditStyles.label, textStyles.text]}> Colour:  </Text>
           <TextInput
-            style={styles.inputBar}
+            style={addEditStyles.inputBar}
             placeholder="Enter fabric colour"
+            placeholderTextColor = '#00637f'
+            color = '#00637f'
             onChangeText={(value) => setEditFabricObj({ ...editFabricObj, colour: value })}
             value={editFabricObj.colour}
           />
-          <Text> {editFabricObj.colour} </Text>
           </View>
 
           <SwitchSelector
-            style={styles.switch}
+            style={addEditStyles.switch}
             textColor={'#00637f'}
             selectedColor={'#fff'}
             buttonColor={'#e4c2ca'}
             borderColor={'#e4c2ca'}
+            fontSize={screenWidth * 0.045}
+            hasPadding
+            bold={true}
             options={switchOptions}
             initial = {editFabricObj.woven_knit}
             value = {editFabricObj.woven_knit}
@@ -201,11 +221,11 @@ const handleOnChange = (key, value) => {
           >
           </SwitchSelector>
 
-          <View style={styles.row}>
-            <Text style={styles.label} > Fabric type: </Text>
+          <View style={addEditStyles.row}>
+            <Text style={[addEditStyles.label, textStyles.text]} > Fabric type: </Text>
             <Picker
               selectedValue={editFabricObj.type}
-              style={styles.picker}
+              style={addEditStyles.picker}
               onValueChange={(value, itemIndex) =>
               setEditFabricObj({ ...editFabricObj, type: value })
               }>
@@ -220,63 +240,42 @@ const handleOnChange = (key, value) => {
             </Picker>
           </View>
 
-        <View style={styles.row}>
-          <Text style={styles.label}>Fabric Width (in m): </Text>
+        <View style={addEditStyles.row}>
+          <Text style={[addEditStyles.label, textStyles.text]}>Fabric Width (in m): </Text>
           <NumericInput
+          {...numericInputProps}
           value={editFabricObj.width}
           onChange={value => setEditFabricObj({...editFabricObj, width: value})}
-          minValue={0}
-          totalWidth={screenWidth/3}
-          totalHeight={screenHeight/15}
-          step={0.5}
-          valueType='real'
           rounded
-          textColor='#00637f'
-          iconStyle={{ color: 'white' }}
-          rightButtonBackgroundColor='#e4c2ca'
-          leftButtonBackgroundColor='#e4c2ca'/>
+          />
         </View>
 
-        <View style={styles.row}>
-          <Text style={styles.label}>Length Purchased (in m): </Text>
+        <View style={addEditStyles.row}>
+          <Text style={[addEditStyles.label, textStyles.text]}>Length Purchased (in m): </Text>
           <NumericInput
+          {...numericInputProps}
           value={editFabricObj.length_pur}
           onChange={value => setEditFabricObj({...editFabricObj, length_pur: value})}
-          minValue={0}
-          totalWidth={screenWidth/3}
-          totalHeight={screenHeight/15}
-          step={0.5}
-          valueType='real'
           rounded
-          textColor='#00637f'
-          iconStyle={{ color: 'white' }}
-          rightButtonBackgroundColor='#e4c2ca'
-          leftButtonBackgroundColor='#e4c2ca'/>
+          />
         </View>
 
-        <View style={styles.row}>
-          <Text style={styles.label}>Length Remaining (in m): </Text>
+        <View style={addEditStyles.row}>
+          <Text style={[addEditStyles.label, textStyles.text]}>Length Remaining (in m): </Text>
           <NumericInput
+          {...numericInputProps}
           value={editFabricObj.length_rem}
           onChange={value => setEditFabricObj({...editFabricObj, length_rem: value})}
-          minValue={0}
           maxValue={editFabricObj.length_pur}
-          totalWidth={screenWidth/3}
-          totalHeight={screenHeight/15}
-          step={0.5}
-          valueType='real'
           rounded
-          textColor='#00637f'
-          iconStyle={{ color: 'white' }}
-          rightButtonBackgroundColor='#e4c2ca'
-          leftButtonBackgroundColor='#e4c2ca'/>
+          />
         </View>
 
-        <View style={styles.row}>
-          <Text style={styles.label}>Date Purchased:{"\n"}{date.toDateString()}</Text>
+        <View style={addEditStyles.row}>
+          <Text style={[addEditStyles.label, textStyles.text]}>Date Purchased:{"\n"}{date.toDateString()}</Text>
           {!datePicker && (
             <TouchableOpacity
-               style={styles.datePicker}
+               style={addEditStyles.datePicker}
                onPress={showDatePicker}>
               <Feather name="calendar" size={36} color="#00637f" />
             </TouchableOpacity>
@@ -290,124 +289,36 @@ const handleOnChange = (key, value) => {
           )}
         </View>
 
-        <View style={styles.row}>
-          <Text style={styles.label}>Cost (in £): </Text>
+        <View style={addEditStyles.row}>
+          <Text style={[addEditStyles.label, textStyles.text]}>Cost (in £): </Text>
           <NumericInput
+          {...numericInputProps}
           value={editFabricObj.cost}
           onChange={value => setEditFabricObj({...editFabricObj, cost: value})}
-          minValue={0}
-          totalWidth={screenWidth/3}
-          totalHeight={screenHeight/15}
-          step={0.5}
-          valueType='real'
           rounded
-          textColor='#00637f'
-          iconStyle={{ color: 'white' }}
-          rightButtonBackgroundColor='#e4c2ca'
-          leftButtonBackgroundColor='#e4c2ca'/>
+          />
         </View>
 
-        <View style={styles.row}>
-        <Text style={styles.label}>Project ideas: </Text>
+        <View style={addEditStyles.row}>
+        <Text style={[addEditStyles.label, textStyles.text]}>Planned projects: </Text>
           <TextInput
-            style={styles.inputBar}
+            style={addEditStyles.inputBar}
             placeholder="Enter project ideas"
+            placeholderTextColor = '#00637f'
+            color = '#00637f'
             onChangeText={(value) => setEditFabricObj({ ...editFabricObj, project: value })}
             value={editFabricObj.project}
           />
-          <Text> {editFabricObj.project} </Text>
           </View>
           </ScrollView>
           <TouchableOpacity
-            style = {styles.editFabricButton}
+            style={addEditStyles.submitButton}
             onPress={() => {
               updateFabric(editFabricObj),
               navigation.navigate("Home", { data: editFabricObj });
             }}>
-            <Text>Edit Fabric</Text>
+            <Text style={addEditStyles.submitButtonText}>Submit</Text>
           </TouchableOpacity>
         </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-
-  container: {
-    flex: 1,
-  //  padding: '5%',
-    // flexDirection: 'row',
-    backgroundColor: "#fff",
-    //alignItems: 'center',
-  },
-  scrollContainer :{
-    flex: 1,
-    padding: '5%'
-  },
-  imageContainer:{
-    //flex: 0.25,
-    height: screenHeight/5,
-    flexDirection: 'row',
-    marginBottom: '10%',
-  //  padding: '5%'
-
-  //  flexWrap: 'wrap',
-  },
-  inputBar: {
-    // width: '100%',
-    flex: 4,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    backgroundColor: "#e4c2ca",
-    borderRadius: 15,
-  },
-  imageThumb: {
-    flex: 3,
-    //width: '80%',
-    //height: '20%',
-    backgroundColor: "#e4c2ca",
-    borderRadius: 30,
-    marginRight: '3%',
-  },
-  takePictureButton: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  takePictureButtonText: {
-    color: "#fff",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  row: {
-    flexDirection: 'row',
-    flex: 1,
-    marginBottom: '10%',
-    alignItems: "center",
-    //justifyContent: 'center'
-  },
-  label: {
-    flex: 1,
-  },
-  switch : {
-    flex: 1,
-    marginBottom: '5%'
-  },
-  picker: {
-    flex: 2,
-    backgroundColor: "#e4c2ca",
-  },
-  datePicker: {
-    flex: 0.5,
-    alignItems: "center",
-  },
-  editFabricButton: {
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: screenWidth/2,
-    height: screenHeight/17,
-    backgroundColor: '#e4c2ca',
-    borderRadius: 10,
-    margin: '3%',
-  }
-});

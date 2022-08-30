@@ -19,6 +19,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { screenHeight, screenWidth } from '../modules/globalVariables.js';
 import { Feather } from '@expo/vector-icons';
 
+import { headerStyles } from '../styles/headerStyles';
+import { textStyles } from '../styles/textStyles';
+
 export default function DetailsScreen({ navigation, route }) {
   const fabricData = route.params.data;
   console.log('details fabricData: ', fabricData);
@@ -58,12 +61,19 @@ export default function DetailsScreen({ navigation, route }) {
       headerRight: () => (
         <TouchableOpacity
         onPress={() => navigation.navigate("Edit fabric", { data: fabricData })}
+        style = {headerStyles.headerRight}
         >
         <Feather name="edit-3" size={32} color="#e4c2ca" />
         </TouchableOpacity>
       ),
     });
   });
+
+  const cellPropsCustom = {
+    cellStyle: 'RightDetail',
+    rightDetailColor: '#86ae99',
+    titleTextColor: '#00637f',
+};
 
   // Custom cell to accept large amount of text for project info
   const ProjectCell = (props) => (
@@ -104,86 +114,69 @@ export default function DetailsScreen({ navigation, route }) {
         <TableView>
         <Section header='Fabric details'>
             <Cell
-               cellStyle="RightDetail"
+               {...cellPropsCustom}
                title="Name"
                detail={fabricData.name}
-               rightDetailColor="#86ae99"
             />
             <Cell
-             cellStyle="RightDetail"
+            {...cellPropsCustom}
              title="Colour"
              detail={fabricData.colour}
-             rightDetailColor="#86ae99"
             />
 
             <Cell
-               cellStyle="RightDetail"
+              {...cellPropsCustom}
                title="Textile"
                detail={wovenKnitOptions()}
-               rightDetailColor="#86ae99"
             />
             <Cell
-             cellStyle="RightDetail"
-             title="Colour"
-             detail={fabricData.colour}
-             rightDetailColor="#86ae99"
-            />
-            <Cell
-             cellStyle="RightDetail"
-             title="Type"
-             detail={fabricData.type}
-             rightDetailColor="#86ae99"
+              {...cellPropsCustom}
+              title="Type"
+              detail={fabricData.type}
             />
           </Section>
 
           <Section header='Measurements'>
             <Cell
-               cellStyle="RightDetail"
-               title="Width"
-               detail={fabricData.width + ' m'}
-               rightDetailColor="#86ae99"
+              {...cellPropsCustom}
+              title="Width"
+              detail={fabricData.width + ' m'}
             />
             <Cell
-             cellStyle="RightDetail"
-             title="Length purchased"
-             detail={fabricData.length_pur + ' m'}
-             rightDetailColor="#86ae99"
+              {...cellPropsCustom}
+              title="Length purchased"
+              detail={fabricData.length_pur + ' m'}
             />
             <Cell
-             cellStyle="RightDetail"
-             title="Length remaining"
-             detail={fabricData.length_rem + ' m'}
-             rightDetailColor="#86ae99"
+              {...cellPropsCustom}
+              title="Length remaining"
+              detail={fabricData.length_rem + ' m'}
             />
           </Section>
 
           <Section header='Purchase details'>
           <Cell
-             cellStyle="RightDetail"
-             title="Date purchased"
-             detail={convertDate()}
-             rightDetailColor="#86ae99"
+            {...cellPropsCustom}
+            title="Date purchased"
+            detail={convertDate()}
           />
             <Cell
-               cellStyle="RightDetail"
-               title="Cost"
-               detail={'£ ' + fabricData.cost}
-               rightDetailColor="#86ae99"
+              {...cellPropsCustom}
+              title="Cost"
+              detail={'£ ' + fabricData.cost}
             />
             <Cell
-             cellStyle="RightDetail"
-             title="Cost per meter"
-             detail={'£ ' +  costPerMeter()}
-             rightDetailColor="#86ae99"
+              {...cellPropsCustom}
+              title="Cost per meter"
+              detail={'£ ' +  costPerMeter()}
             />
           </Section>
           <Section header='Project'>
             <ProjectCell
-              title='Project ideas'
+              title='Planned projects'
               detail={fabricData.project}
             />
           </Section>
-
 
         </TableView>
       </ScrollView>
@@ -206,7 +199,8 @@ const styles = StyleSheet.create({
   image:{
     height: screenHeight/4,
     borderRadius: 30,
-    margin: '5%'
+    margin: '5%',
+    backgroundColor: "#e4c2ca",
   },
   projectContainer: {
     alignItems: 'center',
@@ -215,7 +209,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10
   },
   projectTitleText: {
-    flex: 1, fontSize: 16
+    flex: 1,
+    fontSize: 16,
+    color: '#00637f',
   },
   projectDetailText: {
     flex: 1,

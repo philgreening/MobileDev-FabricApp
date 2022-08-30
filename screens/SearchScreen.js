@@ -20,6 +20,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { screenWidth, screenHeight, db } from "../modules/globalVariables.js";
 import { SearchBar } from "@rneui/base";
 
+import { itemStyles } from '../styles/itemStyles';
+
+
 export default function SearchScreen({ navigation, route }) {
   const [search, setSearch] = useState("");
   const [filterData, setFilterData] = useState([]);
@@ -95,7 +98,7 @@ export default function SearchScreen({ navigation, route }) {
 };
 
   return (
-    <SafeAreaView styles={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
         <SearchBar
           round
@@ -106,17 +109,17 @@ export default function SearchScreen({ navigation, route }) {
           value={search}
         />
 
-        <View style={styles.row}>
+        <View style={itemStyles.row}>
         {filterData.map((i) => (
-          <View style={styles.viewContainer} key={i.id}>
+          <View style={itemStyles.cardViewContainer} key={i.id}>
           <TouchableOpacity
-            style={styles.cardContainer}
+            style={itemStyles.cardContainer}
             key={i.id}
             onPress={() => navigation.navigate("Details", { data: i })}
           >
-            <Image style={styles.imageThumb} source={{ uri: i.image_uri }} />
-            <Text> {i.name} </Text>
-            <Text> {i.length_rem}m remaining </Text>
+            <Image style={itemStyles.imageThumb} source={{ uri: i.image_uri }} />
+            <Text style={itemStyles.cardText}> {i.name} </Text>
+            <Text style={itemStyles.cardText}> {i.length_rem}m remaining </Text>
           </TouchableOpacity>
           </View>
         ))}
@@ -130,29 +133,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-  alignItems: "center",
-    //justifyContent: "center",
-  },
-  viewContainer: {
-  width: '50%',
-  padding: 5
-  },
-  scrollContainer: {
-    flex: 1,
-  },
-  row: {
-    margin: '5%',
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "flex-start",
-  },
-  imageThumb: {
-    flex: 2,
-  },
-  cardContainer: {
-  //  width: '50%',
-    height: screenHeight / 5,
-    borderWidth: 1,
-    //padding: 5
   },
 });
