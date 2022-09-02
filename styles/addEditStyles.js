@@ -50,7 +50,7 @@ export const addEditStyles = StyleSheet.create({
   picker: {
     flex: 2,
     backgroundColor: "#e4c2ca",
-    color: '#00637f',
+    color: '#00637f'
   },
   datePicker: {
     flex: 1,
