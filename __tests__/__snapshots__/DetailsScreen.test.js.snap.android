@@ -1,0 +1,1518 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DetailsScreen /> should match snapshot 1`] = `
+<View
+  styles={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#fff",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <RCTScrollView>
+    <View>
+      <Image
+        source={
+          Object {
+            "uri": undefined,
+          }
+        }
+        style={
+          Object {
+            "backgroundColor": "#e4c2ca",
+            "borderRadius": 30,
+            "height": 333.5,
+            "margin": "5%",
+          }
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "flexDirection": "column",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {},
+              Object {
+                "backgroundColor": undefined,
+                "paddingBottom": 15,
+                "paddingTop": 15,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "paddingBottom": 5,
+                "paddingLeft": 15,
+                "paddingRight": 15,
+              }
+            }
+          >
+            <View>
+              <Text
+                allowFontScaling={true}
+                style={
+                  Array [
+                    Object {
+                      "fontSize": 13,
+                      "letterSpacing": -0.078,
+                    },
+                    Object {
+                      "color": "#8E8E93",
+                    },
+                    Object {},
+                  ]
+                }
+              >
+                Fabric details
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {},
+                Object {
+                  "backgroundColor": "#FFF",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 0.5,
+                  },
+                  Object {
+                    "backgroundColor": "#C8C7CC",
+                    "marginLeft": 0,
+                    "marginRight": 0,
+                  },
+                ]
+              }
+            />
+          </View>
+          <View
+            style={
+              Array [
+                Object {},
+                false,
+              ]
+            }
+          >
+            <View>
+              <View>
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "#FFF",
+                      },
+                      Object {
+                        "flexGrow": 1,
+                      },
+                    ]
+                  }
+                >
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "minHeight": 44,
+                          "paddingLeft": 15,
+                          "paddingRight": 20,
+                        },
+                        Object {},
+                      ]
+                    }
+                  >
+                    <View
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "flexBasis": 0,
+                          "flexDirection": "row",
+                          "flexGrow": 1,
+                          "justifyContent": "center",
+                          "paddingVertical": 10,
+                        }
+                      }
+                    >
+                      <Text
+                        allowFontScaling={true}
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "flexGrow": 1,
+                              "fontSize": 16,
+                              "letterSpacing": -0.32,
+                            },
+                            Object {
+                              "color": "#00637f",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        Name
+                      </Text>
+                      <Text
+                        allowFontScaling={true}
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "alignSelf": "center",
+                              "color": "#8E8E93",
+                              "fontSize": 16,
+                              "letterSpacing": -0.32,
+                            },
+                            Object {
+                              "color": "#86ae99",
+                            },
+                            Object {},
+                          ]
+                        }
+                      />
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {},
+                    Object {
+                      "backgroundColor": "#FFF",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "height": 0.5,
+                      },
+                      Object {
+                        "backgroundColor": "#C8C7CC",
+                        "marginLeft": 15,
+                        "marginRight": 0,
+                      },
+                    ]
+                  }
+                />
+              </View>
+            </View>
+            <View>
+              <View>
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "#FFF",
+                      },
+                      Object {
+                        "flexGrow": 1,
+                      },
+                    ]
+                  }
+                >
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "minHeight": 44,
+                          "paddingLeft": 15,
+                          "paddingRight": 20,
+                        },
+                        Object {},
+                      ]
+                    }
+                  >
+                    <View
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "flexBasis": 0,
+                          "flexDirection": "row",
+                          "flexGrow": 1,
+                          "justifyContent": "center",
+                          "paddingVertical": 10,
+                        }
+                      }
+                    >
+                      <Text
+                        allowFontScaling={true}
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "flexGrow": 1,
+                              "fontSize": 16,
+                              "letterSpacing": -0.32,
+                            },
+                            Object {
+                              "color": "#00637f",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        Colour
+                      </Text>
+                      <Text
+                        allowFontScaling={true}
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "alignSelf": "center",
+                              "color": "#8E8E93",
+                              "fontSize": 16,
+                              "letterSpacing": -0.32,
+                            },
+                            Object {
+                              "color": "#86ae99",
+                            },
+                            Object {},
+                          ]
+                        }
+                      />
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {},
+                    Object {
+                      "backgroundColor": "#FFF",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "height": 0.5,
+                      },
+                      Object {
+                        "backgroundColor": "#C8C7CC",
+                        "marginLeft": 15,
+                        "marginRight": 0,
+                      },
+                    ]
+                  }
+                />
+              </View>
+            </View>
+            <View>
+              <View>
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "#FFF",
+                      },
+                      Object {
+                        "flexGrow": 1,
+                      },
+                    ]
+                  }
+                >
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "minHeight": 44,
+                          "paddingLeft": 15,
+                          "paddingRight": 20,
+                        },
+                        Object {},
+                      ]
+                    }
+                  >
+                    <View
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "flexBasis": 0,
+                          "flexDirection": "row",
+                          "flexGrow": 1,
+                          "justifyContent": "center",
+                          "paddingVertical": 10,
+                        }
+                      }
+                    >
+                      <Text
+                        allowFontScaling={true}
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "flexGrow": 1,
+                              "fontSize": 16,
+                              "letterSpacing": -0.32,
+                            },
+                            Object {
+                              "color": "#00637f",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        Textile
+                      </Text>
+                      <Text
+                        allowFontScaling={true}
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "alignSelf": "center",
+                              "color": "#8E8E93",
+                              "fontSize": 16,
+                              "letterSpacing": -0.32,
+                            },
+                            Object {
+                              "color": "#86ae99",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        Woven
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {},
+                    Object {
+                      "backgroundColor": "#FFF",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "height": 0.5,
+                      },
+                      Object {
+                        "backgroundColor": "#C8C7CC",
+                        "marginLeft": 15,
+                        "marginRight": 0,
+                      },
+                    ]
+                  }
+                />
+              </View>
+            </View>
+            <View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "#FFF",
+                    },
+                    Object {
+                      "flexGrow": 1,
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "minHeight": 44,
+                        "paddingLeft": 15,
+                        "paddingRight": 20,
+                      },
+                      Object {},
+                    ]
+                  }
+                >
+                  <View
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "flexBasis": 0,
+                        "flexDirection": "row",
+                        "flexGrow": 1,
+                        "justifyContent": "center",
+                        "paddingVertical": 10,
+                      }
+                    }
+                  >
+                    <Text
+                      allowFontScaling={true}
+                      numberOfLines={1}
+                      style={
+                        Array [
+                          Object {
+                            "flexGrow": 1,
+                            "fontSize": 16,
+                            "letterSpacing": -0.32,
+                          },
+                          Object {
+                            "color": "#00637f",
+                          },
+                          Object {},
+                        ]
+                      }
+                    >
+                      Type
+                    </Text>
+                    <Text
+                      allowFontScaling={true}
+                      numberOfLines={1}
+                      style={
+                        Array [
+                          Object {
+                            "alignSelf": "center",
+                            "color": "#8E8E93",
+                            "fontSize": 16,
+                            "letterSpacing": -0.32,
+                          },
+                          Object {
+                            "color": "#86ae99",
+                          },
+                          Object {},
+                        ]
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {},
+                Object {
+                  "backgroundColor": "#FFF",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 0.5,
+                  },
+                  Object {
+                    "backgroundColor": "#C8C7CC",
+                    "marginLeft": 0,
+                    "marginRight": 0,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          style={
+            Array [
+              Object {},
+              Object {
+                "backgroundColor": undefined,
+                "paddingBottom": 15,
+                "paddingTop": 15,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "paddingBottom": 5,
+                "paddingLeft": 15,
+                "paddingRight": 15,
+              }
+            }
+          >
+            <View>
+              <Text
+                allowFontScaling={true}
+                style={
+                  Array [
+                    Object {
+                      "fontSize": 13,
+                      "letterSpacing": -0.078,
+                    },
+                    Object {
+                      "color": "#8E8E93",
+                    },
+                    Object {},
+                  ]
+                }
+              >
+                Measurements
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {},
+                Object {
+                  "backgroundColor": "#FFF",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 0.5,
+                  },
+                  Object {
+                    "backgroundColor": "#C8C7CC",
+                    "marginLeft": 0,
+                    "marginRight": 0,
+                  },
+                ]
+              }
+            />
+          </View>
+          <View
+            style={
+              Array [
+                Object {},
+                false,
+              ]
+            }
+          >
+            <View>
+              <View>
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "#FFF",
+                      },
+                      Object {
+                        "flexGrow": 1,
+                      },
+                    ]
+                  }
+                >
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "minHeight": 44,
+                          "paddingLeft": 15,
+                          "paddingRight": 20,
+                        },
+                        Object {},
+                      ]
+                    }
+                  >
+                    <View
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "flexBasis": 0,
+                          "flexDirection": "row",
+                          "flexGrow": 1,
+                          "justifyContent": "center",
+                          "paddingVertical": 10,
+                        }
+                      }
+                    >
+                      <Text
+                        allowFontScaling={true}
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "flexGrow": 1,
+                              "fontSize": 16,
+                              "letterSpacing": -0.32,
+                            },
+                            Object {
+                              "color": "#00637f",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        Width
+                      </Text>
+                      <Text
+                        allowFontScaling={true}
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "alignSelf": "center",
+                              "color": "#8E8E93",
+                              "fontSize": 16,
+                              "letterSpacing": -0.32,
+                            },
+                            Object {
+                              "color": "#86ae99",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        undefined m
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {},
+                    Object {
+                      "backgroundColor": "#FFF",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "height": 0.5,
+                      },
+                      Object {
+                        "backgroundColor": "#C8C7CC",
+                        "marginLeft": 15,
+                        "marginRight": 0,
+                      },
+                    ]
+                  }
+                />
+              </View>
+            </View>
+            <View>
+              <View>
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "#FFF",
+                      },
+                      Object {
+                        "flexGrow": 1,
+                      },
+                    ]
+                  }
+                >
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "minHeight": 44,
+                          "paddingLeft": 15,
+                          "paddingRight": 20,
+                        },
+                        Object {},
+                      ]
+                    }
+                  >
+                    <View
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "flexBasis": 0,
+                          "flexDirection": "row",
+                          "flexGrow": 1,
+                          "justifyContent": "center",
+                          "paddingVertical": 10,
+                        }
+                      }
+                    >
+                      <Text
+                        allowFontScaling={true}
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "flexGrow": 1,
+                              "fontSize": 16,
+                              "letterSpacing": -0.32,
+                            },
+                            Object {
+                              "color": "#00637f",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        Length purchased
+                      </Text>
+                      <Text
+                        allowFontScaling={true}
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "alignSelf": "center",
+                              "color": "#8E8E93",
+                              "fontSize": 16,
+                              "letterSpacing": -0.32,
+                            },
+                            Object {
+                              "color": "#86ae99",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        undefined m
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {},
+                    Object {
+                      "backgroundColor": "#FFF",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "height": 0.5,
+                      },
+                      Object {
+                        "backgroundColor": "#C8C7CC",
+                        "marginLeft": 15,
+                        "marginRight": 0,
+                      },
+                    ]
+                  }
+                />
+              </View>
+            </View>
+            <View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "#FFF",
+                    },
+                    Object {
+                      "flexGrow": 1,
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "minHeight": 44,
+                        "paddingLeft": 15,
+                        "paddingRight": 20,
+                      },
+                      Object {},
+                    ]
+                  }
+                >
+                  <View
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "flexBasis": 0,
+                        "flexDirection": "row",
+                        "flexGrow": 1,
+                        "justifyContent": "center",
+                        "paddingVertical": 10,
+                      }
+                    }
+                  >
+                    <Text
+                      allowFontScaling={true}
+                      numberOfLines={1}
+                      style={
+                        Array [
+                          Object {
+                            "flexGrow": 1,
+                            "fontSize": 16,
+                            "letterSpacing": -0.32,
+                          },
+                          Object {
+                            "color": "#00637f",
+                          },
+                          Object {},
+                        ]
+                      }
+                    >
+                      Length remaining
+                    </Text>
+                    <Text
+                      allowFontScaling={true}
+                      numberOfLines={1}
+                      style={
+                        Array [
+                          Object {
+                            "alignSelf": "center",
+                            "color": "#8E8E93",
+                            "fontSize": 16,
+                            "letterSpacing": -0.32,
+                          },
+                          Object {
+                            "color": "#86ae99",
+                          },
+                          Object {},
+                        ]
+                      }
+                    >
+                      undefined m
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {},
+                Object {
+                  "backgroundColor": "#FFF",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 0.5,
+                  },
+                  Object {
+                    "backgroundColor": "#C8C7CC",
+                    "marginLeft": 0,
+                    "marginRight": 0,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          style={
+            Array [
+              Object {},
+              Object {
+                "backgroundColor": undefined,
+                "paddingBottom": 15,
+                "paddingTop": 15,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "paddingBottom": 5,
+                "paddingLeft": 15,
+                "paddingRight": 15,
+              }
+            }
+          >
+            <View>
+              <Text
+                allowFontScaling={true}
+                style={
+                  Array [
+                    Object {
+                      "fontSize": 13,
+                      "letterSpacing": -0.078,
+                    },
+                    Object {
+                      "color": "#8E8E93",
+                    },
+                    Object {},
+                  ]
+                }
+              >
+                Purchase details
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {},
+                Object {
+                  "backgroundColor": "#FFF",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 0.5,
+                  },
+                  Object {
+                    "backgroundColor": "#C8C7CC",
+                    "marginLeft": 0,
+                    "marginRight": 0,
+                  },
+                ]
+              }
+            />
+          </View>
+          <View
+            style={
+              Array [
+                Object {},
+                false,
+              ]
+            }
+          >
+            <View>
+              <View>
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "#FFF",
+                      },
+                      Object {
+                        "flexGrow": 1,
+                      },
+                    ]
+                  }
+                >
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "minHeight": 44,
+                          "paddingLeft": 15,
+                          "paddingRight": 20,
+                        },
+                        Object {},
+                      ]
+                    }
+                  >
+                    <View
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "flexBasis": 0,
+                          "flexDirection": "row",
+                          "flexGrow": 1,
+                          "justifyContent": "center",
+                          "paddingVertical": 10,
+                        }
+                      }
+                    >
+                      <Text
+                        allowFontScaling={true}
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "flexGrow": 1,
+                              "fontSize": 16,
+                              "letterSpacing": -0.32,
+                            },
+                            Object {
+                              "color": "#00637f",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        Date purchased
+                      </Text>
+                      <Text
+                        allowFontScaling={true}
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "alignSelf": "center",
+                              "color": "#8E8E93",
+                              "fontSize": 16,
+                              "letterSpacing": -0.32,
+                            },
+                            Object {
+                              "color": "#86ae99",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        Invalid Date
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {},
+                    Object {
+                      "backgroundColor": "#FFF",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "height": 0.5,
+                      },
+                      Object {
+                        "backgroundColor": "#C8C7CC",
+                        "marginLeft": 15,
+                        "marginRight": 0,
+                      },
+                    ]
+                  }
+                />
+              </View>
+            </View>
+            <View>
+              <View>
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "#FFF",
+                      },
+                      Object {
+                        "flexGrow": 1,
+                      },
+                    ]
+                  }
+                >
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "minHeight": 44,
+                          "paddingLeft": 15,
+                          "paddingRight": 20,
+                        },
+                        Object {},
+                      ]
+                    }
+                  >
+                    <View
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "flexBasis": 0,
+                          "flexDirection": "row",
+                          "flexGrow": 1,
+                          "justifyContent": "center",
+                          "paddingVertical": 10,
+                        }
+                      }
+                    >
+                      <Text
+                        allowFontScaling={true}
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "flexGrow": 1,
+                              "fontSize": 16,
+                              "letterSpacing": -0.32,
+                            },
+                            Object {
+                              "color": "#00637f",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        Cost
+                      </Text>
+                      <Text
+                        allowFontScaling={true}
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "alignSelf": "center",
+                              "color": "#8E8E93",
+                              "fontSize": 16,
+                              "letterSpacing": -0.32,
+                            },
+                            Object {
+                              "color": "#86ae99",
+                            },
+                            Object {},
+                          ]
+                        }
+                      >
+                        £ undefined
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {},
+                    Object {
+                      "backgroundColor": "#FFF",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "height": 0.5,
+                      },
+                      Object {
+                        "backgroundColor": "#C8C7CC",
+                        "marginLeft": 15,
+                        "marginRight": 0,
+                      },
+                    ]
+                  }
+                />
+              </View>
+            </View>
+            <View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "#FFF",
+                    },
+                    Object {
+                      "flexGrow": 1,
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "minHeight": 44,
+                        "paddingLeft": 15,
+                        "paddingRight": 20,
+                      },
+                      Object {},
+                    ]
+                  }
+                >
+                  <View
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "flexBasis": 0,
+                        "flexDirection": "row",
+                        "flexGrow": 1,
+                        "justifyContent": "center",
+                        "paddingVertical": 10,
+                      }
+                    }
+                  >
+                    <Text
+                      allowFontScaling={true}
+                      numberOfLines={1}
+                      style={
+                        Array [
+                          Object {
+                            "flexGrow": 1,
+                            "fontSize": 16,
+                            "letterSpacing": -0.32,
+                          },
+                          Object {
+                            "color": "#00637f",
+                          },
+                          Object {},
+                        ]
+                      }
+                    >
+                      Cost per meter
+                    </Text>
+                    <Text
+                      allowFontScaling={true}
+                      numberOfLines={1}
+                      style={
+                        Array [
+                          Object {
+                            "alignSelf": "center",
+                            "color": "#8E8E93",
+                            "fontSize": 16,
+                            "letterSpacing": -0.32,
+                          },
+                          Object {
+                            "color": "#86ae99",
+                          },
+                          Object {},
+                        ]
+                      }
+                    >
+                      £ 0
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {},
+                Object {
+                  "backgroundColor": "#FFF",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 0.5,
+                  },
+                  Object {
+                    "backgroundColor": "#C8C7CC",
+                    "marginLeft": 0,
+                    "marginRight": 0,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          style={
+            Array [
+              Object {},
+              Object {
+                "backgroundColor": undefined,
+                "paddingBottom": 15,
+                "paddingTop": 15,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "paddingBottom": 5,
+                "paddingLeft": 15,
+                "paddingRight": 15,
+              }
+            }
+          >
+            <View>
+              <Text
+                allowFontScaling={true}
+                style={
+                  Array [
+                    Object {
+                      "fontSize": 13,
+                      "letterSpacing": -0.078,
+                    },
+                    Object {
+                      "color": "#8E8E93",
+                    },
+                    Object {},
+                  ]
+                }
+              >
+                Project
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {},
+                Object {
+                  "backgroundColor": "#FFF",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 0.5,
+                  },
+                  Object {
+                    "backgroundColor": "#C8C7CC",
+                    "marginLeft": 0,
+                    "marginRight": 0,
+                  },
+                ]
+              }
+            />
+          </View>
+          <View
+            style={
+              Array [
+                Object {},
+                false,
+              ]
+            }
+          >
+            <View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "#FFF",
+                    },
+                    Object {
+                      "flexGrow": 1,
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "minHeight": 44,
+                        "paddingLeft": 15,
+                        "paddingRight": 20,
+                      },
+                      Object {},
+                    ]
+                  }
+                >
+                  <View
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "flex": 1,
+                        "flexDirection": "row",
+                        "paddingVertical": 10,
+                      }
+                    }
+                  >
+                    <Text
+                      allowFontScaling={true}
+                      numberOfLines={1}
+                      style={
+                        Object {
+                          "color": "#00637f",
+                          "flex": 1,
+                          "fontSize": 16,
+                        }
+                      }
+                    >
+                      Planned projects
+                    </Text>
+                    <Text
+                      allowFontScaling={true}
+                      numberOfLines={5}
+                      style={
+                        Object {
+                          "color": "#86ae99",
+                          "flex": 1,
+                          "fontSize": 16,
+                          "textAlign": "right",
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {},
+                Object {
+                  "backgroundColor": "#FFF",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 0.5,
+                  },
+                  Object {
+                    "backgroundColor": "#C8C7CC",
+                    "marginLeft": 0,
+                    "marginRight": 0,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;

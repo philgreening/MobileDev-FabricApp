@@ -178,7 +178,7 @@ export default function AddItemScreen({ navigation, route }) {
             selectedColor={'#fff'}
             buttonColor={'#e4c2ca'}
             borderColor={'#e4c2ca'}
-            fontSize={screenWidth * 0.045}
+            fontSize={screenWidth * 0.04}
             hasPadding
             bold={true}
             options={switchOptions}

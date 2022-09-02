@@ -7,4 +7,6 @@ const screen = Dimensions.get('window');
 const screenHeight = screen.height;
 const screenWidth = screen.width;
 
-export { screenHeight, screenWidth, db }
+const iconSize = screenWidth * 0.082;
+
+export { screenHeight, screenWidth, db, iconSize }

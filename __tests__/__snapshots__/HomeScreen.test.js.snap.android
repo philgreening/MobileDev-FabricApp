@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HomeScreen /> should match snapshot 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#fff",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#e4c2ca",
+        "borderColor": "#00637f",
+        "borderRadius": 30,
+        "flexDirection": "row",
+        "margin": "5%",
+        "opacity": 1,
+        "padding": "2%",
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "alignSelf": "center",
+            "padding": "2%",
+          },
+          Object {
+            "color": "#00637f",
+            "fontSize": 33.75,
+            "fontWeight": "bold",
+          },
+        ]
+      }
+    >
+      Please add a fabric to get started
+    </Text>
+    <Text />
+  </View>
+</View>
+`;

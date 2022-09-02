@@ -1,6 +1,6 @@
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Button, TextInput, Alert, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Platform, Text, View, SafeAreaView, ScrollView, Button, TextInput, Alert, Image, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Cell, Section, TableView } from 'react-native-tableview-simple';
@@ -19,9 +19,16 @@ import { textStyles } from '../styles/textStyles';
 
 export default function EditScreen({navigation, route}) {
 
-
   const fabricObj = route.params.data;
   console.log('from route: ', fabricObj);
+
+  if(fabricObj.woven_knit === 'Knit'){
+      fabricObj.woven_knit = 1;
+  }else if (fabricObj.woven_knit === 'Woven') {
+      fabricObj.woven_knit = 0;
+      console.log('no')
+  }
+
 
   const [editFabricObj, setEditFabricObj] = useState( fabricObj );
   console.log('edit fabric obj: ', editFabricObj);
@@ -49,8 +56,10 @@ export default function EditScreen({navigation, route}) {
         project: route.params.data.project
       })
     }
+
+    console.log("fabob: ", fabricObj);
   }, [route.params?.photoUri]);
-  console.log("imageUri: ", fabricObj.image_uri);
+  console.log("imageUri: ", fabricObj);
 
   const switchOptions = [
     { label: "Woven", value: 0 },
@@ -127,8 +136,6 @@ const deleteAlert = () =>
     if (Platform.OS === 'android') {
       setDatePicker(false);
     }
-   // setDateString(value.toJSON());
-    // setDate(new Date(dateString));
     setDate(value);
     setEditFabricObj({...editFabricObj, date_pur: value.toJSON()})
   };
