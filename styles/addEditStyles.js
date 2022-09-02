@@ -21,6 +21,7 @@ export const addEditStyles = StyleSheet.create({
     paddingHorizontal: "5%",
     backgroundColor: "#e4c2ca",
     borderRadius: 15,
+    fontFamily: "Karla-Regular",
   },
   imageThumb: {
     flex: 3,
@@ -67,8 +68,8 @@ export const addEditStyles = StyleSheet.create({
     margin: "3%",
   },
   submitButtonText: {
-    fontSize: screenWidth * 0.045,
-    fontWeight: "bold",
+    fontSize: Math.round(screenWidth * 0.075),
+    fontFamily: "Reikna-Regular",
     color: "#e4c2ca",
   },
 });

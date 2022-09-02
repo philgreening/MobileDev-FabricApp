@@ -9,7 +9,7 @@ import {
   Image,
 } from "react-native";
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import { db } from "../modules/globalVariables.js";
+import { screenHeight, db } from "../modules/globalVariables.js";
 import { SearchBar } from "@rneui/base";
 import Constants from "expo-constants";
 
@@ -42,7 +42,6 @@ export default function SearchScreen({ navigation, route }) {
         setFilterData(fabricData);
       });
     });
-    console.log("getfab called");
   };
 
   // handle change event of search input
@@ -65,13 +64,23 @@ export default function SearchScreen({ navigation, route }) {
               color: "#e4c2ca",
               borderBottomColor: "transparent",
               borderTopColor: "transparent",
+              height: screenHeight / 10,
             }}
-            inputContainerStyle={{ backgroundColor: "#e4c2ca" }}
+            inputContainerStyle={{
+              backgroundColor: "#e4c2ca",
+              height: screenHeight / 20,
+            }}
             inputStyle={{ color: "#00637f90" }}
             placeholder="Search..."
             placeholderTextColor={"#00637f90"}
-            searchIcon={{ color: "#00637f", size: textStyles.icon.fontSize }}
-            clearIcon={{ color: "#00637f", size: textStyles.icon.fontSize }}
+            searchIcon={{
+              color: "#00637f",
+              size: textStyles.icon.fontSize / 1.7,
+            }}
+            clearIcon={{
+              color: "#00637f",
+              size: textStyles.icon.fontSize / 1.7,
+            }}
             value={search}
           />
         </View>

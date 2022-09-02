@@ -21,7 +21,6 @@ import { textStyles } from "../styles/textStyles";
 export default function DetailsScreen({ navigation, route }) {
   // Store params sent from previous root
   const fabricData = route.params.data;
-  console.log(fabricData);
 
   useEffect(() => {}, [route]);
 
@@ -77,8 +76,14 @@ export default function DetailsScreen({ navigation, route }) {
     cellStyle: "RightDetail",
     rightDetailColor: "#86ae99",
     titleTextColor: "#00637f",
-    titleTextStyle: { fontSize: textStyles.text.fontSize },
-    detailTextStyle: { fontSize: textStyles.text.fontSize },
+    titleTextStyle: {
+      fontSize: textStyles.text.fontSize,
+      fontFamily: textStyles.text.fontFamily,
+    },
+    detailTextStyle: {
+      fontSize: textStyles.text.fontSize,
+      fontFamily: textStyles.text.fontFamily,
+    },
   };
 
   // Custom cell to accept large amount of text for project info

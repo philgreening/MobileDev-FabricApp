@@ -86,7 +86,7 @@ export default function CameraScreen({ navigation, route }) {
       setPreview(true);
       setPhoto(photoData);
     } catch (error) {
-      console.log("Error: " + error);
+      console.log(error);
     }
   };
 
@@ -106,7 +106,7 @@ export default function CameraScreen({ navigation, route }) {
         params: { photoUri: asset.uri, data: fabricData },
       });
     } catch (error) {
-      console.log("Error: " + error);
+      console.log(error);
     }
   };
 

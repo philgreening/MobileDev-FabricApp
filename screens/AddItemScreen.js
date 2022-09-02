@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import {
+  Platform,
   StyleSheet,
   Text,
   View,
@@ -16,6 +17,7 @@ import SwitchSelector from "react-native-switch-selector";
 import { Picker } from "@react-native-picker/picker";
 import NumericInput from "react-native-numeric-input";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import Toast from "react-native-toast-message";
 // Import global variables
 import { screenHeight, screenWidth, db } from "../modules/globalVariables.js";
 // Import icons and stylesheets
@@ -40,7 +42,6 @@ export default function AddItemScreen({ navigation, route }) {
     cost: 0,
     project: "",
   });
-  console.log("fabricObject: ", fabricObj);
 
   // Options for switch
   const switchOptions = [
@@ -51,7 +52,6 @@ export default function AddItemScreen({ navigation, route }) {
   // Sets fabric object when returning from camera page with image
   useEffect(() => {
     if (route.params?.photoUri) {
-      console.log("succes: ", route);
       setFabricObj({
         name: route.params.data.name,
         image_uri: route.params.photoUri,
@@ -67,7 +67,6 @@ export default function AddItemScreen({ navigation, route }) {
       });
     }
   }, [route.params?.photoUri]);
-  console.log("imageUri: ", fabricObj.image_uri);
 
   // Valudates that name and colour have input befor submit
   const textValidation = (param) => {
@@ -110,6 +109,11 @@ export default function AddItemScreen({ navigation, route }) {
     } else {
       addFabric(fabricObj),
         navigation.navigate("Home", { name: fabricObj.name });
+      // Shows confirmation of success
+      Toast.show({
+        type: "success",
+        text1: `${fabricObj.name} added successfully`,
+      });
     }
   };
 
@@ -206,7 +210,10 @@ export default function AddItemScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}> Name: </Text>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
+            {" "}
+            Name:{" "}
+          </Text>
           <TextInput
             {...textInputProps}
             placeholder="Enter fabric name"
@@ -218,7 +225,10 @@ export default function AddItemScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}> Colour: </Text>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
+            {" "}
+            Colour:{" "}
+          </Text>
           <TextInput
             {...textInputProps}
             placeholder="Enter fabric colour"
@@ -236,6 +246,7 @@ export default function AddItemScreen({ navigation, route }) {
           buttonColor={"#e4c2ca"}
           borderColor={"#e4c2ca"}
           fontSize={textStyles.text.fontSize}
+          height={screenHeight / 20}
           hasPadding
           bold={true}
           options={switchOptions}
@@ -245,12 +256,13 @@ export default function AddItemScreen({ navigation, route }) {
         ></SwitchSelector>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
             Fabric type:
           </Text>
           <Picker
             selectedValue={fabricObj.type}
             style={addEditStyles.picker}
+            fontFamily={textStyles.labelText.fontFamily}
             onValueChange={(value, itemIndex) =>
               setFabricObj({ ...fabricObj, type: value })
             }
@@ -267,7 +279,7 @@ export default function AddItemScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
             Fabric Width (in m):
           </Text>
           <NumericInput
@@ -279,7 +291,7 @@ export default function AddItemScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
             Length Purchased (in m):
           </Text>
           <NumericInput
@@ -293,7 +305,7 @@ export default function AddItemScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
             Length Remaining (in m):
           </Text>
           <NumericInput
@@ -308,7 +320,7 @@ export default function AddItemScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
             Date Purchased:{"\n"}
             {date.toDateString()}
           </Text>
@@ -335,7 +347,7 @@ export default function AddItemScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
             Cost (in £):
           </Text>
           <NumericInput
@@ -347,7 +359,7 @@ export default function AddItemScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
             Planned projects:
           </Text>
           <TextInput

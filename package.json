@@ -19,7 +19,9 @@
     "@rneui/base": "^4.0.0-rc.6",
     "@rneui/themed": "^4.0.0-rc.6",
     "expo": "~45.0.0",
+    "expo-app-loading": "~2.0.0",
     "expo-camera": "~12.2.0",
+    "expo-constants": "~13.1.1",
     "expo-dev-client": "~1.0.1",
     "expo-font": "~10.1.0",
     "expo-media-library": "~14.1.0",
@@ -40,9 +42,9 @@
     "react-native-sqlite-storage": "^6.0.1",
     "react-native-switch-selector": "^2.2.1",
     "react-native-tableview-simple": "^4.3.1",
+    "react-native-toast-message": "^2.1.5",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-web": "0.17.7",
-    "expo-constants": "~13.1.1"
+    "react-native-web": "0.17.7"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

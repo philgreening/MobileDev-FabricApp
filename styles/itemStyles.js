@@ -32,6 +32,6 @@ export const itemStyles = StyleSheet.create({
     alignSelf: "center",
     color: "#e4c2ca",
     fontSize: Math.round(screenWidth * 0.04),
-    fontWeight: "bold",
+    fontFamily: "Karla-Regular",
   },
 });

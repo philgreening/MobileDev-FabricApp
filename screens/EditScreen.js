@@ -15,35 +15,32 @@ import SwitchSelector from "react-native-switch-selector";
 import { Picker } from "@react-native-picker/picker";
 import NumericInput from "react-native-numeric-input";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import Toast from "react-native-toast-message";
+// import global variables
 import { screenHeight, screenWidth, db } from "../modules/globalVariables.js";
+// import icons and stylesheets
 import { Feather } from "@expo/vector-icons";
-
 import { addEditStyles } from "../styles/addEditStyles";
 import { headerStyles } from "../styles/headerStyles";
 import { textStyles } from "../styles/textStyles";
 
 export default function EditScreen({ navigation, route }) {
   const fabricObj = route.params.data;
-  console.log("from route: ", fabricObj);
 
   if (fabricObj.woven_knit === "Knit") {
     fabricObj.woven_knit = 1;
   } else if (fabricObj.woven_knit === "Woven") {
     fabricObj.woven_knit = 0;
-    console.log("no");
   }
 
   const [editFabricObj, setEditFabricObj] = useState(fabricObj);
-  console.log("edit fabric obj: ", editFabricObj);
 
   const [datePicker, setDatePicker] = useState(false);
   const [date, setDate] = useState(new Date(editFabricObj.date_pur));
   // const [dateString, setDateString] = useState(date.toJSON());
 
   useEffect(() => {
-    console.log(textStyles.icon.fontSize);
     if (route.params?.photoUri) {
-      console.log("succes: ", route);
       setEditFabricObj({
         id: route.params.data.id,
         name: route.params.data.name,
@@ -60,9 +57,7 @@ export default function EditScreen({ navigation, route }) {
       });
     }
 
-    console.log("fabob: ", fabricObj);
   }, [route.params?.photoUri]);
-  console.log("imageUri: ", fabricObj);
 
   const switchOptions = [
     { label: "Woven", value: 0 },
@@ -102,6 +97,11 @@ export default function EditScreen({ navigation, route }) {
           onPress: () => {
             deleteFabric(editFabricObj.id),
               navigation.navigate("Home", { name: editFabricObj.name });
+            // Show confirmation message
+            Toast.show({
+              type: "success",
+              text1: `${editFabricObj.name} deleted successfully`,
+            });
           },
         },
       ],
@@ -156,11 +156,15 @@ export default function EditScreen({ navigation, route }) {
     } else {
       updateFabric(editFabricObj);
       navigation.navigate("Home", { data: editFabricObj });
+      // Show confirmation message
+      Toast.show({
+        type: "success",
+        text1: `${editFabricObj.name} changed successfully`,
+      });
     }
   };
 
   const updateFabric = (item) => {
-    console.log("item:", item);
     db.transaction((txn) => {
       txn.executeSql(
         `UPDATE fabrics SET name = ?,
@@ -189,7 +193,6 @@ export default function EditScreen({ navigation, route }) {
           item.id,
         ]
       );
-      console.log("id", item.id);
     });
   };
 
@@ -205,8 +208,6 @@ export default function EditScreen({ navigation, route }) {
   const showDatePicker = () => {
     setDatePicker(true);
   };
-
-  console.log(editFabricObj.image_uri);
 
   //shared props for numeric input
   const numericInputProps = {
@@ -254,7 +255,10 @@ export default function EditScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}> Name: </Text>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
+            {" "}
+            Name:{" "}
+          </Text>
           <TextInput
             {...textInputProps}
             placeholder="Enter fabric name"
@@ -266,7 +270,10 @@ export default function EditScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}> Colour: </Text>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
+            {" "}
+            Colour:{" "}
+          </Text>
           <TextInput
             {...textInputProps}
             placeholder="Enter fabric colour"
@@ -284,6 +291,7 @@ export default function EditScreen({ navigation, route }) {
           buttonColor={"#e4c2ca"}
           borderColor={"#e4c2ca"}
           fontSize={textStyles.text.fontSize}
+          height={screenHeight / 20}
           hasPadding
           bold={true}
           options={switchOptions}
@@ -295,7 +303,7 @@ export default function EditScreen({ navigation, route }) {
         ></SwitchSelector>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
             Fabric type:
           </Text>
           <Picker
@@ -317,7 +325,7 @@ export default function EditScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
             Fabric Width (in m):
           </Text>
           <NumericInput
@@ -331,7 +339,7 @@ export default function EditScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
             Length Purchased (in m):
           </Text>
           <NumericInput
@@ -345,7 +353,7 @@ export default function EditScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
             Length Remaining (in m):
           </Text>
           <NumericInput
@@ -360,7 +368,7 @@ export default function EditScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
             Date Purchased:{"\n"}
             {date.toDateString()}
           </Text>
@@ -386,7 +394,7 @@ export default function EditScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
             Cost (in £):
           </Text>
           <NumericInput
@@ -400,7 +408,7 @@ export default function EditScreen({ navigation, route }) {
         </View>
 
         <View style={addEditStyles.row}>
-          <Text style={[addEditStyles.label, textStyles.text]}>
+          <Text style={[addEditStyles.label, textStyles.labelText]}>
             Planned projects:
           </Text>
           <TextInput
