@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export const headerStyles = StyleSheet.create({
-  headerRight:{
-    marginRight: '5%'
+  headerRight: {
+    marginRight: "5%",
   },
 });

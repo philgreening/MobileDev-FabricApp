@@ -9,17 +9,17 @@ import {
   Image,
 } from "react-native";
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import { db, iconSize } from "../modules/globalVariables.js";
+import { db } from "../modules/globalVariables.js";
 import { SearchBar } from "@rneui/base";
 import Constants from "expo-constants";
 
 // import style sheets
 import { itemStyles } from "../styles/itemStyles";
+import { textStyles } from "../styles/textStyles";
 
 export default function SearchScreen({ navigation, route }) {
   const [search, setSearch] = useState("");
   const [filterData, setFilterData] = useState([]);
-
   const [fabricData, setFabricData] = useState([]);
 
   // Array to hold db records
@@ -33,7 +33,7 @@ export default function SearchScreen({ navigation, route }) {
   // Retreives records from db and creates an array of objects
   const getFabric = () => {
     db.transaction((txn) => {
-      txn.executeSql("SELECT * FROM `fabrics`", [], (tx, res) => {
+      txn.executeSql("SELECT * FROM fabrics", [], (tx, res) => {
         for (let i = 0; i < res.rows.length; ++i) {
           dataArray.push(res.rows.item(i));
         }
@@ -42,7 +42,7 @@ export default function SearchScreen({ navigation, route }) {
         setFilterData(fabricData);
       });
     });
-    console.log('getfab called');
+    console.log("getfab called");
   };
 
   // handle change event of search input
@@ -58,7 +58,6 @@ export default function SearchScreen({ navigation, route }) {
         <View style={styles.header}>
           <SearchBar
             round
-            searchIcon={{ size: 24 }}
             onChangeText={(text) => handleChange(text)}
             onClear={(text) => handleChange("")}
             containerStyle={{
@@ -71,8 +70,8 @@ export default function SearchScreen({ navigation, route }) {
             inputStyle={{ color: "#00637f90" }}
             placeholder="Search..."
             placeholderTextColor={"#00637f90"}
-            searchIcon={{ color: "#00637f", size: iconSize }}
-            clearIcon={{ color: "#00637f", size: iconSize }}
+            searchIcon={{ color: "#00637f", size: textStyles.icon.fontSize }}
+            clearIcon={{ color: "#00637f", size: textStyles.icon.fontSize }}
             value={search}
           />
         </View>

@@ -24,17 +24,17 @@ import { textStyles } from "../styles/textStyles";
 
 export default function EditScreen({ navigation, route }) {
   const fabricObj = route.params.data;
-  console.log('from route: ', fabricObj);
+  console.log("from route: ", fabricObj);
 
-  if (fabricObj.woven_knit === 'Knit') {
+  if (fabricObj.woven_knit === "Knit") {
     fabricObj.woven_knit = 1;
-  } else if (fabricObj.woven_knit === 'Woven') {
+  } else if (fabricObj.woven_knit === "Woven") {
     fabricObj.woven_knit = 0;
-    console.log('no');
+    console.log("no");
   }
 
   const [editFabricObj, setEditFabricObj] = useState(fabricObj);
-  console.log('edit fabric obj: ', editFabricObj);
+  console.log("edit fabric obj: ", editFabricObj);
 
   const [datePicker, setDatePicker] = useState(false);
   const [date, setDate] = useState(new Date(editFabricObj.date_pur));
@@ -43,7 +43,7 @@ export default function EditScreen({ navigation, route }) {
   useEffect(() => {
     console.log(textStyles.icon.fontSize);
     if (route.params?.photoUri) {
-      console.log('succes: ', route);
+      console.log("succes: ", route);
       setEditFabricObj({
         id: route.params.data.id,
         name: route.params.data.name,
@@ -60,13 +60,13 @@ export default function EditScreen({ navigation, route }) {
       });
     }
 
-    console.log('fabob: ', fabricObj);
+    console.log("fabob: ", fabricObj);
   }, [route.params?.photoUri]);
-  console.log('imageUri: ', fabricObj);
+  console.log("imageUri: ", fabricObj);
 
   const switchOptions = [
-    { label: 'Woven', value: 0 },
-    { label: 'Knit', value: 1 },
+    { label: "Woven", value: 0 },
+    { label: "Knit", value: 1 },
   ];
 
   React.useLayoutEffect(() => {
@@ -76,7 +76,11 @@ export default function EditScreen({ navigation, route }) {
           onPress={() => deleteAlert()}
           style={headerStyles.headerRight}
         >
-          <Feather name='trash-2' size={textStyles.icon.fontSize} color='#e4c2ca' />
+          <Feather
+            name="trash-2"
+            size={textStyles.icon.fontSize}
+            color="#e4c2ca"
+          />
         </TouchableOpacity>
       ),
     });
@@ -85,19 +89,19 @@ export default function EditScreen({ navigation, route }) {
   // ALert to confirm delete
   const deleteAlert = () =>
     Alert.alert(
-      'Delete Fabric',
+      "Delete Fabric",
       `Do you wish to remove ${editFabricObj.name} ?`,
       [
         {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
         },
         {
-          text: 'OK',
+          text: "OK",
           onPress: () => {
             deleteFabric(editFabricObj.id),
-              navigation.navigate('Home', { name: editFabricObj.name });
+              navigation.navigate("Home", { name: editFabricObj.name });
           },
         },
       ],
@@ -115,48 +119,48 @@ export default function EditScreen({ navigation, route }) {
   const textValidation = (param) => {
     if (param.name.length < 1 && param.colour.length < 1) {
       Alert.alert(
-        'Name and Colour must not be empty',
-        'Please enter a name and colour',
+        "Name and Colour must not be empty",
+        "Please enter a name and colour",
         [
           {
-            text: 'Go back',
-            style: 'Cancel',
+            text: "Go back",
+            style: "Cancel",
           },
         ],
         { cancelable: true }
       );
     } else if (param.name.length < 1) {
       Alert.alert(
-        'Name must not be empty',
-        'Please enter a name',
+        "Name must not be empty",
+        "Please enter a name",
         [
           {
-            text: 'Go back',
-            style: 'Cancel',
+            text: "Go back",
+            style: "Cancel",
           },
         ],
         { cancelable: true }
       );
     } else if (param.colour.length < 1) {
       Alert.alert(
-        'Colour must not be empty',
-        'Please enter a colour',
+        "Colour must not be empty",
+        "Please enter a colour",
         [
           {
-            text: 'Go back',
-            style: 'Cancel',
+            text: "Go back",
+            style: "Cancel",
           },
         ],
         { cancelable: true }
       );
     } else {
       updateFabric(editFabricObj);
-      navigation.navigate('Home', { data: editFabricObj });
+      navigation.navigate("Home", { data: editFabricObj });
     }
   };
 
   const updateFabric = (item) => {
-    console.log('item:', item);
+    console.log("item:", item);
     db.transaction((txn) => {
       txn.executeSql(
         `UPDATE fabrics SET name = ?,
@@ -185,12 +189,13 @@ export default function EditScreen({ navigation, route }) {
           item.id,
         ]
       );
-      console.log('id', item.id);
+      console.log("id", item.id);
     });
   };
 
+  // Logic to select and store date on datepicker
   const onDateSelected = (event, value) => {
-    if (Platform.OS === 'android') {
+    if (Platform.OS === "android") {
       setDatePicker(false);
     }
     setDate(value);
@@ -201,14 +206,6 @@ export default function EditScreen({ navigation, route }) {
     setDatePicker(true);
   };
 
-  const handleOnChange = (key, value) => {
-    console.log('key: ' + key + ' value: ' + value);
-
-    setEditFabricObj((editFabricObj) => ({
-      ...editFabricObj,
-      [key]: value,
-    }));
-  };
   console.log(editFabricObj.image_uri);
 
   //shared props for numeric input
@@ -217,19 +214,19 @@ export default function EditScreen({ navigation, route }) {
     totalWidth: screenWidth / 3,
     totalHeight: screenHeight / 15,
     step: 0.5,
-    valueType: 'real',
-    textColor: '#00637f',
-    iconStyle: { color: 'white' },
-    rightButtonBackgroundColor: '#e4c2ca',
-    leftButtonBackgroundColor: '#e4c2ca',
+    valueType: "real",
+    textColor: "#00637f",
+    iconStyle: { color: "white" },
+    rightButtonBackgroundColor: "#e4c2ca",
+    leftButtonBackgroundColor: "#e4c2ca",
   };
 
   //shared props for text input
   const textInputProps = {
-    style:addEditStyles.inputBar,
-    placeholderTextColor:'#00637f',
-    color:'#00637f',
-    fontSize:textStyles.text.fontSize
+    style: addEditStyles.inputBar,
+    placeholderTextColor: "#00637f",
+    color: "#00637f",
+    fontSize: textStyles.text.fontSize,
   };
 
   return (
@@ -245,10 +242,14 @@ export default function EditScreen({ navigation, route }) {
           <TouchableOpacity
             style={addEditStyles.takePictureButton}
             onPress={() => {
-              navigation.navigate('Camera', { data: editFabricObj });
+              navigation.navigate("Camera", { data: editFabricObj });
             }}
           >
-            <Feather name='camera' size={textStyles.largeIcon.fontSize} color='#00637f' />
+            <Feather
+              name="camera"
+              size={textStyles.largeIcon.fontSize}
+              color="#00637f"
+            />
           </TouchableOpacity>
         </View>
 
@@ -256,7 +257,7 @@ export default function EditScreen({ navigation, route }) {
           <Text style={[addEditStyles.label, textStyles.text]}> Name: </Text>
           <TextInput
             {...textInputProps}
-            placeholder='Enter fabric name'
+            placeholder="Enter fabric name"
             onChangeText={(value) =>
               setEditFabricObj({ ...editFabricObj, name: value })
             }
@@ -268,7 +269,7 @@ export default function EditScreen({ navigation, route }) {
           <Text style={[addEditStyles.label, textStyles.text]}> Colour: </Text>
           <TextInput
             {...textInputProps}
-            placeholder='Enter fabric colour'
+            placeholder="Enter fabric colour"
             onChangeText={(value) =>
               setEditFabricObj({ ...editFabricObj, colour: value })
             }
@@ -278,10 +279,10 @@ export default function EditScreen({ navigation, route }) {
 
         <SwitchSelector
           style={addEditStyles.switch}
-          textColor={'#00637f'}
-          selectedColor={'#fff'}
-          buttonColor={'#e4c2ca'}
-          borderColor={'#e4c2ca'}
+          textColor={"#00637f"}
+          selectedColor={"#fff"}
+          buttonColor={"#e4c2ca"}
+          borderColor={"#e4c2ca"}
           fontSize={textStyles.text.fontSize}
           hasPadding
           bold={true}
@@ -304,14 +305,14 @@ export default function EditScreen({ navigation, route }) {
               setEditFabricObj({ ...editFabricObj, type: value })
             }
           >
-            <Picker.Item label='Cotton' value='Cotton' />
-            <Picker.Item label='Wool' value='Wool' />
-            <Picker.Item label='Linen' value='Linen' />
-            <Picker.Item label='Jersey' value='Jersey' />
-            <Picker.Item label='Synthetic' value='Synthetic' />
-            <Picker.Item label='Swim Suiting' value='Swim Suiting' />
-            <Picker.Item label='Lycra' value='Lycra' />
-            <Picker.Item label='Denim' value='Denim' />
+            <Picker.Item label="Cotton" value="Cotton" />
+            <Picker.Item label="Wool" value="Wool" />
+            <Picker.Item label="Linen" value="Linen" />
+            <Picker.Item label="Jersey" value="Jersey" />
+            <Picker.Item label="Synthetic" value="Synthetic" />
+            <Picker.Item label="Swim Suiting" value="Swim Suiting" />
+            <Picker.Item label="Lycra" value="Lycra" />
+            <Picker.Item label="Denim" value="Denim" />
           </Picker>
         </View>
 
@@ -368,14 +369,18 @@ export default function EditScreen({ navigation, route }) {
               style={addEditStyles.datePicker}
               onPress={showDatePicker}
             >
-              <Feather name='calendar' size={textStyles.largeIcon.fontSize} color='#00637f' />
+              <Feather
+                name="calendar"
+                size={textStyles.largeIcon.fontSize}
+                color="#00637f"
+              />
             </TouchableOpacity>
           )}
           {datePicker && (
             <DateTimePicker
               value={date}
               onChange={onDateSelected}
-              style={{ flex: 1, backgroundColor: 'white' }}
+              style={{ flex: 1, backgroundColor: "white" }}
             />
           )}
         </View>
@@ -400,7 +405,7 @@ export default function EditScreen({ navigation, route }) {
           </Text>
           <TextInput
             {...textInputProps}
-            placeholder='Enter project ideas'
+            placeholder="Enter project ideas"
             onChangeText={(value) =>
               setEditFabricObj({ ...editFabricObj, project: value })
             }

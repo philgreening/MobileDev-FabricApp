@@ -9,9 +9,10 @@ import {
   Image,
 } from "react-native";
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import { db, iconSize } from "../modules/globalVariables.js";
-import { MaterialIcons } from "@expo/vector-icons";
+import { db } from "../modules/globalVariables.js";
 
+// Imprt icons and stylesheets
+import { MaterialIcons } from "@expo/vector-icons";
 import { itemStyles } from "../styles/itemStyles";
 import { headerStyles } from "../styles/headerStyles";
 import { textStyles } from "../styles/textStyles";
@@ -20,7 +21,7 @@ import { textStyles } from "../styles/textStyles";
 
 // Creates sqllite database
 db.transaction((txn) => {
-//  txn.executeSql('DROP TABLE IF EXISTS fabrics', [])
+  //  txn.executeSql('DROP TABLE IF EXISTS fabrics', [])
   txn.executeSql(
     `CREATE TABLE IF NOT EXISTS fabrics(id INTEGER PRIMARY KEY AUTOINCREMENT,
       name VARCHAR(30) NOT NULL,
@@ -50,10 +51,14 @@ export default function HomeScreen({ navigation, route }) {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity
-          onPress={() => navigation.navigate('Add fabric')}
+          onPress={() => navigation.navigate("Add fabric")}
           style={headerStyles.headerRight}
         >
-          <MaterialIcons name='add-circle-outline' size={iconSize} color='#e4c2ca' />
+          <MaterialIcons
+            name="add-circle-outline"
+            size={textStyles.icon.fontSize}
+            color="#e4c2ca"
+          />
         </TouchableOpacity>
       ),
     });
@@ -84,16 +89,16 @@ export default function HomeScreen({ navigation, route }) {
       <SafeAreaView style={styles.containerNoContent}>
         <TouchableOpacity
           style={styles.addFabricButton}
-          onPress={() => navigation.navigate('Add fabric')}
+          onPress={() => navigation.navigate("Add fabric")}
         >
           <Text style={[styles.addFabricButtonContent, textStyles.text]}>
             Please add a fabric to get started
           </Text>
           <MaterialIcons
             style={styles.addFabricButtonContent}
-            name='add-circle-outline'
+            name="add-circle-outline"
             size={32}
-            color='#00637f'
+            color="#00637f"
           />
         </TouchableOpacity>
       </SafeAreaView>
@@ -109,7 +114,7 @@ export default function HomeScreen({ navigation, route }) {
                 <TouchableOpacity
                   style={itemStyles.cardContainer}
                   key={i.id}
-                  onPress={() => navigation.navigate('Details', { data: i })}
+                  onPress={() => navigation.navigate("Details", { data: i })}
                 >
                   <Image
                     style={itemStyles.imageThumb}
@@ -132,24 +137,24 @@ export default function HomeScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   containerNoContent: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    },
-    addFabricButton: {
-    flexDirection: 'row',
-    backgroundColor: '#e4c2ca',
-    margin: '5%',
-    padding: '2%',
-    borderColor: '#00637f',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  addFabricButton: {
+    flexDirection: "row",
+    backgroundColor: "#e4c2ca",
+    margin: "5%",
+    padding: "2%",
+    borderColor: "#00637f",
     borderRadius: 30,
   },
   addFabricButtonContent: {
-    alignSelf: 'center',
-    padding: '2%',
+    alignSelf: "center",
+    padding: "2%",
   },
 });

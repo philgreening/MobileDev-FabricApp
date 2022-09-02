@@ -31,7 +31,7 @@ export const itemStyles = StyleSheet.create({
     paddingHorizontal: "5%",
     alignSelf: "center",
     color: "#e4c2ca",
-    fontSize: screenWidth * 0.04,
+    fontSize: Math.round(screenWidth * 0.04),
     fontWeight: "bold",
   },
 });

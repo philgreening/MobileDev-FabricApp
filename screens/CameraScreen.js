@@ -12,10 +12,11 @@ import {
 import React, { useState, useRef, useEffect } from "react";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { textStyles } from '../styles/textStyles';
+// Import icons and StyleSheets
+import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { textStyles } from "../styles/textStyles";
 
 export default function CameraScreen({ navigation, route }) {
   // Variables to handle camera & media library permissions
@@ -32,9 +33,8 @@ export default function CameraScreen({ navigation, route }) {
   const routes = navigation.getState()?.routes;
   const prevRoute = routes[routes.length - 2];
 
-
+  // Stores data recieved from previous route
   const fabricData = route.params.data;
-  console.log('fabric data from add item: ' , fabricData);
 
   let camera = useRef(null);
 
@@ -48,7 +48,6 @@ export default function CameraScreen({ navigation, route }) {
       setHasMediaPermission(mediaLibraryPermission.status === "granted");
     })();
   }, []);
-
 
   // Function to display alert if permissions denied. takes a message as input
   const denyAlert = (msg) => {
@@ -78,6 +77,7 @@ export default function CameraScreen({ navigation, route }) {
       );
     }
   };
+
   //function to take photo and set preview image
   const takePhoto = async () => {
     try {
@@ -89,6 +89,7 @@ export default function CameraScreen({ navigation, route }) {
       console.log("Error: " + error);
     }
   };
+
   // function to clear photo variables to retake picture
   const retakePicture = () => {
     setPhoto(null);
@@ -105,14 +106,12 @@ export default function CameraScreen({ navigation, route }) {
         params: { photoUri: asset.uri, data: fabricData },
       });
     } catch (error) {
-      console.log('Error: ' + error);
+      console.log("Error: " + error);
     }
   };
 
-
   // Camera preview component view
   const CameraPreview = ({ photo }: any) => {
-    // console.log("sdsfds", photo);
     return (
       <View style={styles.container}>
         <ImageBackground
@@ -121,7 +120,11 @@ export default function CameraScreen({ navigation, route }) {
         />
         <View style={styles.previewContainer}>
           <TouchableOpacity onPress={retakePicture} style={styles.retakeButton}>
-            <MaterialCommunityIcons name="camera-retake-outline" size={32} color="#00637f" />
+            <MaterialCommunityIcons
+              name="camera-retake-outline"
+              size={textStyles.icon.fontSize}
+              color="#00637f"
+            />
             <Text style={textStyles.text}>Re-take</Text>
           </TouchableOpacity>
           {hasMediaPermission ? (
@@ -129,7 +132,11 @@ export default function CameraScreen({ navigation, route }) {
               style={styles.saveButton}
               onPress={() => savePhoto()}
             >
-              <Ionicons name="save-outline" size={32} color="#00637f" />
+              <Ionicons
+                name="save-outline"
+                size={textStyles.icon.fontSize}
+                color="#00637f"
+              />
               <Text style={textStyles.text}>Save photo</Text>
             </TouchableOpacity>
           ) : (
@@ -176,7 +183,11 @@ export default function CameraScreen({ navigation, route }) {
                 );
               }}
             >
-            <Ionicons name="camera-reverse-outline" size={32} color="#00637f" />
+              <Ionicons
+                name="camera-reverse-outline"
+                size={32}
+                color="#00637f"
+              />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.shutterButton}
@@ -189,7 +200,9 @@ export default function CameraScreen({ navigation, route }) {
                 styles.flashButton,
                 {
                   backgroundColor:
-                    flash === Camera.Constants.FlashMode.off ? "#00637f" : "#e4c2ca",
+                    flash === Camera.Constants.FlashMode.off
+                      ? "#00637f"
+                      : "#e4c2ca",
                 },
               ]}
               onPress={() => {
@@ -256,11 +269,11 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   saveButton: {
-    flex:1,
+    flex: 1,
     alignItems: "center",
   },
   retakeButton: {
-    flex:1,
+    flex: 1,
     alignItems: "center",
   },
 });

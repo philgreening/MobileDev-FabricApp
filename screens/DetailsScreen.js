@@ -8,24 +8,22 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-//import { NavigationContainer } from "@react-navigation/native";
-//import { createStackNavigator } from "@react-navigation/stack";
+
 import { Cell, Section, TableView } from "react-native-tableview-simple";
 import React, { useState, useRef, useEffect } from "react";
-//import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { screenHeight, screenWidth } from "../modules/globalVariables.js";
-import { Feather } from "@expo/vector-icons";
 
+// Import icons and stylesheets
+import { Feather } from "@expo/vector-icons";
 import { headerStyles } from "../styles/headerStyles";
 import { textStyles } from "../styles/textStyles";
 
 export default function DetailsScreen({ navigation, route }) {
+  // Store params sent from previous root
   const fabricData = route.params.data;
-  console.log(fabricData);;
+  console.log(fabricData);
 
-  useEffect(() => {
-    // fabricData = route.params.data
-  }, [route]);
+  useEffect(() => {}, [route]);
 
   // Caculates cost per meter.
   // Returns zero if NaN, interger if > 0
@@ -48,12 +46,13 @@ export default function DetailsScreen({ navigation, route }) {
     }
   };
 
+  // Coverst date saved to string
   const convertDate = () => {
     const date = new Date(fabricData.date_pur);
     return date.toDateString();
   };
 
-  //
+  // Custom header to include edit icon
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -63,16 +62,23 @@ export default function DetailsScreen({ navigation, route }) {
           }
           style={headerStyles.headerRight}
         >
-          <Feather name="edit-3" size={32} color="#e4c2ca" />
+          <Feather
+            name="edit-3"
+            size={textStyles.icon.fontSize}
+            color="#e4c2ca"
+          />
         </TouchableOpacity>
       ),
     });
   });
 
+  // shared cell proerties
   const cellPropsCustom = {
     cellStyle: "RightDetail",
     rightDetailColor: "#86ae99",
     titleTextColor: "#00637f",
+    titleTextStyle: { fontSize: textStyles.text.fontSize },
+    detailTextStyle: { fontSize: textStyles.text.fontSize },
   };
 
   // Custom cell to accept large amount of text for project info
@@ -184,20 +190,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#e4c2ca",
   },
   projectContainer: {
+    flex: 1,
     alignItems: "center",
     flexDirection: "row",
-    flex: 1,
-    paddingVertical: 10,
+    paddingVertical: "3%",
   },
   projectTitleText: {
     flex: 1,
-    fontSize: 16,
     color: "#00637f",
+    fontSize: Math.round(screenWidth * 0.04),
   },
   projectDetailText: {
     flex: 1,
     textAlign: "right",
     color: "#86ae99",
-    fontSize: 16,
+    fontSize: Math.round(screenWidth * 0.04),
   },
 });

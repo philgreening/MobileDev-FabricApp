@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Octicons } from "@expo/vector-icons";
 import { screenHeight, db, iconSize } from "./modules/globalVariables.js";
 
 import * as SplashScreen from "expo-splash-screen";
@@ -16,6 +15,9 @@ import SearchScreen from "./screens/SearchScreen";
 import DetailsScreen from "./screens/DetailsScreen";
 import EditScreen from "./screens/EditScreen";
 import CameraScreen from "./screens/CameraScreen";
+// Import icons and StyleSheets
+import { Octicons } from "@expo/vector-icons";
+import { textStyles } from "./styles/textStyles";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -44,8 +46,13 @@ function BottomTabs() {
         component={HomeScreen}
         options={{
           tabBarIcon: ({ size, color }) => (
-            <Octicons name="home" size={iconSize} color="#00637f" />
-          ),unmountOnBlur: true,
+            <Octicons
+              name="home"
+              size={textStyles.icon.fontSize}
+              color="#00637f"
+            />
+          ),
+          unmountOnBlur: true,
         }}
       />
       <Tab.Screen
@@ -53,8 +60,13 @@ function BottomTabs() {
         component={SearchScreen}
         options={{
           tabBarIcon: ({ size, color }) => (
-            <Octicons name="search" size={iconSize} color="#00637f" />
-          ),unmountOnBlur: true,
+            <Octicons
+              name="search"
+              size={textStyles.icon.fontSize}
+              color="#00637f"
+            />
+          ),
+          unmountOnBlur: true,
         }}
       />
     </Tab.Navigator>

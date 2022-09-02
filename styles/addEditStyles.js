@@ -1,24 +1,24 @@
-import { StyleSheet } from 'react-native';
-import { screenHeight, screenWidth } from '../modules/globalVariables.js';
+import { StyleSheet } from "react-native";
+import { screenHeight, screenWidth } from "../modules/globalVariables.js";
 
 export const addEditStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
   },
-  scrollContainer :{
+  scrollContainer: {
     flex: 1,
-    padding: '5%',
+    padding: "5%",
   },
-  imageContainer:{
-    height: screenHeight/5,
-    flexDirection: 'row',
-    marginBottom: '5%',
+  imageContainer: {
+    height: screenHeight / 5,
+    flexDirection: "row",
+    marginBottom: "5%",
   },
   inputBar: {
     flex: 6,
-    paddingVertical: '2%',
-    paddingHorizontal: '5%',
+    paddingVertical: "2%",
+    paddingHorizontal: "5%",
     backgroundColor: "#e4c2ca",
     borderRadius: 15,
   },
@@ -26,7 +26,7 @@ export const addEditStyles = StyleSheet.create({
     flex: 3,
     backgroundColor: "#e4c2ca",
     borderRadius: 30,
-    marginRight: '3%',
+    marginRight: "3%",
   },
   takePictureButton: {
     flex: 1,
@@ -34,41 +34,41 @@ export const addEditStyles = StyleSheet.create({
     alignItems: "center",
   },
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
     flex: 1,
-    marginBottom: '10%',
+    marginBottom: "10%",
     alignItems: "center",
   },
   label: {
     flex: 2,
-    marginRight: 20
+    marginRight: 20,
   },
   switch: {
     flex: 1,
-    marginBottom: '5%',
+    marginBottom: "5%",
   },
   picker: {
     flex: 2,
     backgroundColor: "#e4c2ca",
-    color: '#00637f'
+    color: "#00637f",
   },
   datePicker: {
     flex: 1,
     alignItems: "center",
   },
   submitButton: {
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: screenWidth/2,
-    height: screenHeight/17,
-    backgroundColor: '#00637f',
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    width: screenWidth / 2,
+    height: screenHeight / 17,
+    backgroundColor: "#00637f",
     borderRadius: 15,
-    margin: '3%',
+    margin: "3%",
   },
-  submitButtonText:{
+  submitButtonText: {
     fontSize: screenWidth * 0.045,
-    fontWeight: 'bold',
-    color: '#e4c2ca'
-  }
+    fontWeight: "bold",
+    color: "#e4c2ca",
+  },
 });

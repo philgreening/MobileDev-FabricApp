@@ -10,16 +10,16 @@ import {
   Alert,
   Image,
 } from "react-native";
-
 import React, { useState, useEffect } from "react";
 import { Camera } from "expo-camera";
 import SwitchSelector from "react-native-switch-selector";
 import { Picker } from "@react-native-picker/picker";
 import NumericInput from "react-native-numeric-input";
 import DateTimePicker from "@react-native-community/datetimepicker";
+// Import global variables
 import { screenHeight, screenWidth, db } from "../modules/globalVariables.js";
+// Import icons and stylesheets
 import { Feather } from "@expo/vector-icons";
-
 import { addEditStyles } from "../styles/addEditStyles";
 import { textStyles } from "../styles/textStyles";
 
@@ -40,16 +40,18 @@ export default function AddItemScreen({ navigation, route }) {
     cost: 0,
     project: "",
   });
-  console.log('fabricObject: ', fabricObj);
+  console.log("fabricObject: ", fabricObj);
 
+  // Options for switch
   const switchOptions = [
-    { label: 'Woven', value: 0 },
-    { label: 'Knit', value: 1 },
+    { label: "Woven", value: 0 },
+    { label: "Knit", value: 1 },
   ];
 
+  // Sets fabric object when returning from camera page with image
   useEffect(() => {
     if (route.params?.photoUri) {
-      console.log('succes: ', route);
+      console.log("succes: ", route);
       setFabricObj({
         name: route.params.data.name,
         image_uri: route.params.photoUri,
@@ -65,52 +67,53 @@ export default function AddItemScreen({ navigation, route }) {
       });
     }
   }, [route.params?.photoUri]);
-  console.log('imageUri: ', fabricObj.image_uri);
+  console.log("imageUri: ", fabricObj.image_uri);
 
   // Valudates that name and colour have input befor submit
   const textValidation = (param) => {
     if (param.name.length < 1 && param.colour.length < 1) {
       Alert.alert(
-        'Name and Colour must not be empty',
-        'Please enter a name and colour',
+        "Name and Colour must not be empty",
+        "Please enter a name and colour",
         [
           {
-            text: 'Go back',
-            style: 'Cancel',
+            text: "Go back",
+            style: "Cancel",
           },
         ],
         { cancelable: true }
       );
     } else if (param.name.length < 1) {
       Alert.alert(
-        'Name must not be empty',
-        'Please enter a name',
+        "Name must not be empty",
+        "Please enter a name",
         [
           {
-            text: 'Go back',
-            style: 'Cancel',
+            text: "Go back",
+            style: "Cancel",
           },
         ],
         { cancelable: true }
       );
     } else if (param.colour.length < 1) {
       Alert.alert(
-        'Colour must not be empty',
-        'Please enter a colour',
+        "Colour must not be empty",
+        "Please enter a colour",
         [
           {
-            text: 'Go back',
-            style: 'Cancel',
+            text: "Go back",
+            style: "Cancel",
           },
         ],
         { cancelable: true }
       );
     } else {
       addFabric(fabricObj),
-        navigation.navigate('Home', { name: fabricObj.name });
+        navigation.navigate("Home", { name: fabricObj.name });
     }
   };
 
+  //  Inserts values into db
   const addFabric = (item) => {
     db.transaction((txn) => {
       txn.executeSql(
@@ -144,8 +147,9 @@ export default function AddItemScreen({ navigation, route }) {
     });
   };
 
+  // Logic to select and store date on datepicker
   const onDateSelected = (event, value) => {
-    if (Platform.OS === 'android') {
+    if (Platform.OS === "android") {
       setDatePicker(false);
     }
     setDate(value);
@@ -156,23 +160,24 @@ export default function AddItemScreen({ navigation, route }) {
     setDatePicker(true);
   };
 
+  // Shared properties for numeric Input
   const numericInputProps = {
     minValue: 0,
     totalWidth: screenWidth / 3,
     totalHeight: screenHeight / 15,
     step: 0.5,
-    valueType: 'real',
-    textColor: '#00637f',
-    iconStyle: { color: 'white' },
-    rightButtonBackgroundColor: '#e4c2ca',
-    leftButtonBackgroundColor: '#e4c2ca',
+    valueType: "real",
+    textColor: "#00637f",
+    iconStyle: { color: "white" },
+    rightButtonBackgroundColor: "#e4c2ca",
+    leftButtonBackgroundColor: "#e4c2ca",
   };
 
   //shared props for text input
   const textInputProps = {
     style: addEditStyles.inputBar,
-    placeholderTextColor: '#00637f',
-    color: '#00637f',
+    placeholderTextColor: "#00637f",
+    color: "#00637f",
     fontSize: textStyles.text.fontSize,
   };
 
@@ -189,13 +194,13 @@ export default function AddItemScreen({ navigation, route }) {
           <TouchableOpacity
             style={addEditStyles.takePictureButton}
             onPress={() => {
-              navigation.navigate('Camera', { data: fabricObj });
+              navigation.navigate("Camera", { data: fabricObj });
             }}
           >
             <Feather
-              name='camera'
+              name="camera"
               size={textStyles.largeIcon.fontSize}
-              color='#00637f'
+              color="#00637f"
             />
           </TouchableOpacity>
         </View>
@@ -204,7 +209,7 @@ export default function AddItemScreen({ navigation, route }) {
           <Text style={[addEditStyles.label, textStyles.text]}> Name: </Text>
           <TextInput
             {...textInputProps}
-            placeholder='Enter fabric name'
+            placeholder="Enter fabric name"
             onChangeText={(value) =>
               setFabricObj({ ...fabricObj, name: value })
             }
@@ -216,7 +221,7 @@ export default function AddItemScreen({ navigation, route }) {
           <Text style={[addEditStyles.label, textStyles.text]}> Colour: </Text>
           <TextInput
             {...textInputProps}
-            placeholder='Enter fabric colour'
+            placeholder="Enter fabric colour"
             onChangeText={(value) =>
               setFabricObj({ ...fabricObj, colour: value })
             }
@@ -226,10 +231,10 @@ export default function AddItemScreen({ navigation, route }) {
 
         <SwitchSelector
           style={addEditStyles.switch}
-          textColor={'#00637f'}
-          selectedColor={'#fff'}
-          buttonColor={'#e4c2ca'}
-          borderColor={'#e4c2ca'}
+          textColor={"#00637f"}
+          selectedColor={"#fff"}
+          buttonColor={"#e4c2ca"}
+          borderColor={"#e4c2ca"}
           fontSize={textStyles.text.fontSize}
           hasPadding
           bold={true}
@@ -250,14 +255,14 @@ export default function AddItemScreen({ navigation, route }) {
               setFabricObj({ ...fabricObj, type: value })
             }
           >
-            <Picker.Item label='Cotton' value='Cotton' />
-            <Picker.Item label='Wool' value='Wool' />
-            <Picker.Item label='Linen' value='Linen' />
-            <Picker.Item label='Jersey' value='Jersey' />
-            <Picker.Item label='Synthetic' value='Synthetic' />
-            <Picker.Item label='Swim Suiting' value='Swim Suiting' />
-            <Picker.Item label='Lycra' value='Lycra' />
-            <Picker.Item label='Denim' value='Denim' />
+            <Picker.Item label="Cotton" value="Cotton" />
+            <Picker.Item label="Wool" value="Wool" />
+            <Picker.Item label="Linen" value="Linen" />
+            <Picker.Item label="Jersey" value="Jersey" />
+            <Picker.Item label="Synthetic" value="Synthetic" />
+            <Picker.Item label="Swim Suiting" value="Swim Suiting" />
+            <Picker.Item label="Lycra" value="Lycra" />
+            <Picker.Item label="Denim" value="Denim" />
           </Picker>
         </View>
 
@@ -313,9 +318,9 @@ export default function AddItemScreen({ navigation, route }) {
               onPress={showDatePicker}
             >
               <Feather
-                name='calendar'
+                name="calendar"
                 size={textStyles.largeIcon.fontSize}
-                color='#00637f'
+                color="#00637f"
               />
             </TouchableOpacity>
           )}
@@ -324,7 +329,7 @@ export default function AddItemScreen({ navigation, route }) {
             <DateTimePicker
               value={date}
               onChange={onDateSelected}
-              style={{ flex: 1, backgroundColor: 'white' }}
+              style={{ flex: 1, backgroundColor: "white" }}
             />
           )}
         </View>
@@ -347,7 +352,7 @@ export default function AddItemScreen({ navigation, route }) {
           </Text>
           <TextInput
             {...textInputProps}
-            placeholder='Enter project ideas'
+            placeholder="Enter project ideas"
             onChangeText={(value) =>
               setFabricObj({ ...fabricObj, project: value })
             }
