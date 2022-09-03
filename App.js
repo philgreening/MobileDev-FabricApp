@@ -6,8 +6,8 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { screenHeight, db, iconSize } from "./modules/globalVariables.js";
 import * as SplashScreen from "expo-splash-screen";
-import * as Font from 'expo-font';
-import Toast from 'react-native-toast-message';
+import * as Font from "expo-font";
+import Toast, { BaseToast } from "react-native-toast-message";
 
 // Import screens
 import HomeScreen from "./screens/HomeScreen";
@@ -32,33 +32,30 @@ function BottomTabs() {
       screenOptions={{
         headerStyle: {
           backgroundColor: "#00637f",
-          height: screenHeight / 10
+          height: screenHeight / 10,
         },
         headerTintColor: "#e4c2ca",
         headerTitleStyle: {
-          fontSize:textStyles.headerText.fontSize,
-          fontFamily:textStyles.headerText.fontFamily
+          fontSize: textStyles.headerText.fontSize,
+          fontFamily: textStyles.headerText.fontFamily,
         },
         headerBackTitleVisible: false,
         tabBarShowLabel: false,
         tabBarStyle: {
           height: screenHeight / 10,
           backgroundColor: "#e4c2ca",
-          },
+        },
       }}
     >
       <Tab.Screen
-        name="Fabric Stash"
+        name="Home"
         component={HomeScreen}
         options={{
           tabBarIcon: ({ size, color }) => (
-            <Octicons
-              name="home"
-              size={28}
-              color="#00637f"
-            />
+            <Octicons name="home" size={28} color="#00637f" />
           ),
           unmountOnBlur: true,
+          title: "Fabric Stash",
         }}
       />
       <Tab.Screen
@@ -66,11 +63,7 @@ function BottomTabs() {
         component={SearchScreen}
         options={{
           tabBarIcon: ({ size, color }) => (
-            <Octicons
-              name="search"
-              size={28}
-              color="#00637f"
-            />
+            <Octicons name="search" size={28} color="#00637f" />
           ),
           unmountOnBlur: true,
         }}
@@ -79,8 +72,22 @@ function BottomTabs() {
   );
 }
 
-export default function App() {
+const toastConfig = {
+  success: (props) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: "#e4c2ca" }}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{
+        fontSize: textStyles.text.fontSize,
+        fontFamily: textStyles.text.fontFamily,
+        color: textStyles.text.color,
+      }}
+    />
+  ),
+};
 
+export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
   // load fonts and diplay spash screen
   useEffect(() => {
@@ -90,8 +97,8 @@ export default function App() {
         await Font.loadAsync({
           "Karla-Regular": require("./assets/fonts/Karla-Regular.ttf"),
           "Reikna-Regular": require("./assets/fonts/Reikna-Regular.otf"),
-         })
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        });
+        await new Promise((resolve) => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -109,33 +116,33 @@ export default function App() {
 
   return (
     <>
-    <NavigationContainer >
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: "#00637f",
-            height: screenHeight / 10,
-          },
-          headerTintColor: "#e4c2ca",
-          headerTitleStyle: {
-            fontSize:textStyles.headerText.fontSize,
-            fontFamily:textStyles.headerText.fontFamily
-          },
-          headerBackTitleVisible: false,
-        }}
-      >
-        <Stack.Screen
-          name="Tabs"
-          component={BottomTabs}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Add fabric" component={AddItemScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-        <Stack.Screen name="Edit fabric" component={EditScreen} />
-        <Stack.Screen name="Camera" component={CameraScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-    <Toast/>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#00637f",
+              height: screenHeight / 10,
+            },
+            headerTintColor: "#e4c2ca",
+            headerTitleStyle: {
+              fontSize: textStyles.headerText.fontSize,
+              fontFamily: textStyles.headerText.fontFamily,
+            },
+            headerBackTitleVisible: false,
+          }}
+        >
+          <Stack.Screen
+            name="Tabs"
+            component={BottomTabs}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="Add fabric" component={AddItemScreen} />
+          <Stack.Screen name="Details" component={DetailsScreen} />
+          <Stack.Screen name="Edit fabric" component={EditScreen} />
+          <Stack.Screen name="Camera" component={CameraScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+      <Toast position="bottom" bottomOffset={100} config={toastConfig} />
     </>
   );
 }
