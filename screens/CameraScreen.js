@@ -159,7 +159,7 @@ export default function CameraScreen({ navigation, route }) {
     return <View {...denyAlert("cameraDeny")}></View>;
   } else {
     return (
-      <SafeAreaView style={[styles.container]}>
+      <SafeAreaView style={styles.container}>
         {preview && photo ? (
           <CameraPreview
             photo={photo}
