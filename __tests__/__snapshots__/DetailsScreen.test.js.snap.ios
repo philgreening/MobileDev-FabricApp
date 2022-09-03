@@ -169,7 +169,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                             Object {
                               "color": "#00637f",
                             },
-                            Object {},
+                            Object {
+                              "fontFamily": "Karla-Regular",
+                              "fontSize": 30,
+                            },
                           ]
                         }
                       >
@@ -189,7 +192,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                             Object {
                               "color": "#86ae99",
                             },
-                            Object {},
+                            Object {
+                              "fontFamily": "Karla-Regular",
+                              "fontSize": 30,
+                            },
                           ]
                         }
                       />
@@ -278,7 +284,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                             Object {
                               "color": "#00637f",
                             },
-                            Object {},
+                            Object {
+                              "fontFamily": "Karla-Regular",
+                              "fontSize": 30,
+                            },
                           ]
                         }
                       >
@@ -298,7 +307,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                             Object {
                               "color": "#86ae99",
                             },
-                            Object {},
+                            Object {
+                              "fontFamily": "Karla-Regular",
+                              "fontSize": 30,
+                            },
                           ]
                         }
                       />
@@ -387,7 +399,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                             Object {
                               "color": "#00637f",
                             },
-                            Object {},
+                            Object {
+                              "fontFamily": "Karla-Regular",
+                              "fontSize": 30,
+                            },
                           ]
                         }
                       >
@@ -407,7 +422,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                             Object {
                               "color": "#86ae99",
                             },
-                            Object {},
+                            Object {
+                              "fontFamily": "Karla-Regular",
+                              "fontSize": 30,
+                            },
                           ]
                         }
                       >
@@ -497,7 +515,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                           Object {
                             "color": "#00637f",
                           },
-                          Object {},
+                          Object {
+                            "fontFamily": "Karla-Regular",
+                            "fontSize": 30,
+                          },
                         ]
                       }
                     >
@@ -517,7 +538,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                           Object {
                             "color": "#86ae99",
                           },
-                          Object {},
+                          Object {
+                            "fontFamily": "Karla-Regular",
+                            "fontSize": 30,
+                          },
                         ]
                       }
                     />
@@ -682,7 +706,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                             Object {
                               "color": "#00637f",
                             },
-                            Object {},
+                            Object {
+                              "fontFamily": "Karla-Regular",
+                              "fontSize": 30,
+                            },
                           ]
                         }
                       >
@@ -702,7 +729,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                             Object {
                               "color": "#86ae99",
                             },
-                            Object {},
+                            Object {
+                              "fontFamily": "Karla-Regular",
+                              "fontSize": 30,
+                            },
                           ]
                         }
                       >
@@ -793,7 +823,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                             Object {
                               "color": "#00637f",
                             },
-                            Object {},
+                            Object {
+                              "fontFamily": "Karla-Regular",
+                              "fontSize": 30,
+                            },
                           ]
                         }
                       >
@@ -813,7 +846,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                             Object {
                               "color": "#86ae99",
                             },
-                            Object {},
+                            Object {
+                              "fontFamily": "Karla-Regular",
+                              "fontSize": 30,
+                            },
                           ]
                         }
                       >
@@ -903,7 +939,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                           Object {
                             "color": "#00637f",
                           },
-                          Object {},
+                          Object {
+                            "fontFamily": "Karla-Regular",
+                            "fontSize": 30,
+                          },
                         ]
                       }
                     >
@@ -923,7 +962,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                           Object {
                             "color": "#86ae99",
                           },
-                          Object {},
+                          Object {
+                            "fontFamily": "Karla-Regular",
+                            "fontSize": 30,
+                          },
                         ]
                       }
                     >
@@ -1090,7 +1132,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                             Object {
                               "color": "#00637f",
                             },
-                            Object {},
+                            Object {
+                              "fontFamily": "Karla-Regular",
+                              "fontSize": 30,
+                            },
                           ]
                         }
                       >
@@ -1110,7 +1155,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                             Object {
                               "color": "#86ae99",
                             },
-                            Object {},
+                            Object {
+                              "fontFamily": "Karla-Regular",
+                              "fontSize": 30,
+                            },
                           ]
                         }
                       >
@@ -1201,7 +1249,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                             Object {
                               "color": "#00637f",
                             },
-                            Object {},
+                            Object {
+                              "fontFamily": "Karla-Regular",
+                              "fontSize": 30,
+                            },
                           ]
                         }
                       >
@@ -1221,7 +1272,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                             Object {
                               "color": "#86ae99",
                             },
-                            Object {},
+                            Object {
+                              "fontFamily": "Karla-Regular",
+                              "fontSize": 30,
+                            },
                           ]
                         }
                       >
@@ -1311,7 +1365,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                           Object {
                             "color": "#00637f",
                           },
-                          Object {},
+                          Object {
+                            "fontFamily": "Karla-Regular",
+                            "fontSize": 30,
+                          },
                         ]
                       }
                     >
@@ -1331,7 +1388,10 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                           Object {
                             "color": "#86ae99",
                           },
-                          Object {},
+                          Object {
+                            "fontFamily": "Karla-Regular",
+                            "fontSize": 30,
+                          },
                         ]
                       }
                     >
@@ -1478,7 +1538,7 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                         "alignItems": "center",
                         "flex": 1,
                         "flexDirection": "row",
-                        "paddingVertical": 10,
+                        "paddingVertical": "3%",
                       }
                     }
                   >
@@ -1489,7 +1549,7 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                         Object {
                           "color": "#00637f",
                           "flex": 1,
-                          "fontSize": 16,
+                          "fontSize": 30,
                         }
                       }
                     >
@@ -1502,7 +1562,7 @@ exports[`<DetailsScreen /> should match snapshot 1`] = `
                         Object {
                           "color": "#86ae99",
                           "flex": 1,
-                          "fontSize": 16,
+                          "fontSize": 30,
                           "textAlign": "right",
                         }
                       }

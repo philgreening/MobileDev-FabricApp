@@ -1,19 +1,16 @@
-import DetailsScreen from "../screens/DetailsScreen";
+import CameraScreen from "../screens/CameraScreen";
 import { render } from "@testing-library/react-native";
 
 const navOptions = {
   navigation: {
-    setOptions: () => {},
+    getState: () => {},
   },
 };
 
-describe("<DetailsScreen />", () => {
+describe("<CameraScreen />", () => {
   it("should match snapshot", () => {
     const snap = render(
-      <DetailsScreen
-        route={{ params: { data: { uri: "data" } } }}
-        {...navOptions}
-      />
+      <CameraScreen route={{ params: { data: "somedata" } }} {...navOptions} />
     ).toJSON();
     expect(snap).toMatchSnapshot();
   });

@@ -43,8 +43,8 @@ exports[`<HomeScreen /> should match snapshot 1`] = `
           },
           Object {
             "color": "#00637f",
-            "fontSize": 33.75,
-            "fontWeight": "bold",
+            "fontFamily": "Karla-Regular",
+            "fontSize": 30,
           },
         ]
       }

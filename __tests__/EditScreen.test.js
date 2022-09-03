@@ -1,4 +1,4 @@
-import DetailsScreen from "../screens/DetailsScreen";
+import EditScreen from "../screens/EditScreen";
 import { render } from "@testing-library/react-native";
 
 const navOptions = {
@@ -7,13 +7,10 @@ const navOptions = {
   },
 };
 
-describe("<DetailsScreen />", () => {
+describe("<EditScreen />", () => {
   it("should match snapshot", () => {
     const snap = render(
-      <DetailsScreen
-        route={{ params: { data: { uri: "data" } } }}
-        {...navOptions}
-      />
+      <EditScreen route={{ params: { data: "somedata" } }} {...navOptions} />
     ).toJSON();
     expect(snap).toMatchSnapshot();
   });

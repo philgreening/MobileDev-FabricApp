@@ -48,7 +48,7 @@ function BottomTabs() {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="Fabric Stash"
         component={HomeScreen}
         options={{
           tabBarIcon: ({ size, color }) => (
