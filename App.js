@@ -8,6 +8,7 @@ import { screenHeight, db, iconSize } from "./modules/globalVariables.js";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import Toast, { BaseToast } from "react-native-toast-message";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 // Import screens
 import HomeScreen from "./screens/HomeScreen";
@@ -88,6 +89,8 @@ const toastConfig = {
 };
 
 export default function App() {
+  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+
   const [appIsReady, setAppIsReady] = useState(false);
   // load fonts and diplay spash screen
   useEffect(() => {
