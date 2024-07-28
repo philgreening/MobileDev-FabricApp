@@ -20,7 +20,7 @@ import { textStyles } from "../styles/textStyles";
 //https://openbase.com/js/react-native-sqlite-2/documentation
 
 // Creates sqllite database
-db.transaction((txn) => {
+db.withTransactionAsync((txn) => {
   //  txn.executeSql('DROP TABLE IF EXISTS fabrics', [])
   txn.executeSql(
     `CREATE TABLE IF NOT EXISTS fabrics(id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -71,7 +71,7 @@ export default function HomeScreen({ navigation, route }) {
 
   // Retreives records from db and creates an array of objects
   const getFabric = () => {
-    db.transaction((txn) => {
+    db.withTransactionAsync((txn) => {
       txn.executeSql("SELECT * FROM fabrics", [], (tx, res) => {
         // pushes items into array
         for (let i = 0; i < res.rows.length; ++i) {

@@ -11,7 +11,10 @@ export default {
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff",
+      "plugins": [
+        "expo-font"
+      ]
     },
     "updates": {
       "fallbackToCacheTimeout": 0
