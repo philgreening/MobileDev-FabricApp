@@ -111,7 +111,7 @@ export default function CameraScreen({ navigation, route }) {
   };
 
   // Camera preview component view
-  const CameraPreview = ({ photo }: any) => {
+  const CameraPreview = ({ photo }) => {
     return (
       <View style={styles.container}>
         <ImageBackground
