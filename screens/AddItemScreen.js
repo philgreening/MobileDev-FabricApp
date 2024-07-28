@@ -12,7 +12,7 @@ import {
   Image,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { Camera } from "expo-camera";
+// import { Camera } from "expo-camera/legacy";
 import SwitchSelector from "react-native-switch-selector";
 import { Picker } from "@react-native-picker/picker";
 import NumericInput from "react-native-numeric-input";

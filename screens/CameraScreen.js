@@ -10,7 +10,7 @@ import {
   Image,
 } from "react-native";
 import React, { useState, useRef, useEffect } from "react";
-import { Camera } from "expo-camera";
+import { Camera } from "expo-camera/legacy";
 import * as MediaLibrary from "expo-media-library";
 
 // Import icons and StyleSheets
